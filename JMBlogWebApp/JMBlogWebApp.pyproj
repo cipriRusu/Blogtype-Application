@@ -36,6 +36,13 @@
     <Folder Include="templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="static\AddItemStyle.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\ContentStyle.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\IndexStyle.css" />
     <Content Include="templates\AddItem.html" />
     <Content Include="templates\Content.html" />
     <Content Include="templates\Index.html" />

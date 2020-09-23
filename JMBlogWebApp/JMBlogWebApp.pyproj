@@ -36,6 +36,7 @@
     <Folder Include="templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="templates\AddItem.html" />
     <Content Include="templates\Content.html" />
     <Content Include="templates\Index.html" />
   </ItemGroup>

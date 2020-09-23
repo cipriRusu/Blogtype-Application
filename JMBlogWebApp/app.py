@@ -1,31 +1,18 @@
 from flask import Flask, render_template
-import json
 
 app = Flask(__name__)
 
-@app.route('/')
+db = [{"Title":"FirstTitle", "Author":"FirstAuthor", "Content": "xx"},
+      {"Title":"SecondTitle", "Author":"SecondAuthor", "Content" : "aa"},
+      {"Title":"ThirdTitle", "Author":"ThirdAuthor", "Content" : "bbc"}]
+
+@app.route('/', methods=["GET"])
 def index():
-    #render basic index page with received server variable
-    return render_template("index.html",
-    message = "Demo text message sent by server side")
+    return render_template("index.html", database=db)
 
-@app.route('/test')
-def test():
-    #return string value from server
-    return "Some other Page"
-
-@app.route('/secondTest')
-def secondTest():
-    #render basic page with multiple received server variables
-    mockNameValue = "MockName"
-    mockAgeValue = 30
-    return render_template("secondTest.html", name=mockNameValue, age=mockAgeValue)
-
-@app.route('/thirdTest')
-def thirdTest():
-    #render basic page with values loaded from json file
-    data = json.load(open("mock.json"))
-    return render_template("thirdTest.html", jsonData=data)
+@app.route('/item/<int:index>')
+def content(index):
+    return render_template("Content.html", current=db[index])
 
 if __name__ == '__main__':
     app.run('localhost', 4449)

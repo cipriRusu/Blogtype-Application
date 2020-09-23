@@ -11,5 +11,11 @@ def index():
 def test():
     return "Some other Page"
 
+@app.route('/secondTest')
+def secondTest():
+    mockNameValue = "MockName"
+    mockAgeValue = 30
+    return render_template("secondTest.html", name=mockNameValue, age=mockAgeValue)
+
 if __name__ == '__main__':
     app.run('localhost', 4449)

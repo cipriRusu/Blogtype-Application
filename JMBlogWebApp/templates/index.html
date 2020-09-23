@@ -3,10 +3,13 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" 
+          href="{{ url_for('static', filename='IndexStyle.css') }}" />
     <title></title>
 </head>
 <body>
     <h1>Blog App</h1>
+    <button><a href="{{ url_for('addItem') }}">New Item</a></button>
     <ul>
         {% for element in database %}
         <li>

@@ -14,5 +14,9 @@ def index():
 def content(index):
     return render_template("Content.html", current=db[index])
 
+@app.route('/addItem', methods=["GET", "POST"])
+def addItem():
+    return render_template("AddItem.html");
+
 if __name__ == '__main__':
     app.run('localhost', 4449)

@@ -1,0 +1,12 @@
+body
+{
+    background-color: burlywood;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+body > ul
+{
+    list-style: none;
+    padding-left: 0;
+}

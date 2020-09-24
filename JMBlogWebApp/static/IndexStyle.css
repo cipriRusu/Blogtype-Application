@@ -1,6 +1,5 @@
 body
 {
-    background-color: burlywood;
     padding-left: 5%;
     padding-right: 5%;
 }
@@ -9,7 +8,6 @@ body > ul
 {
     list-style: none;
     padding-left: 0;
-    background-color: darkgray;
     padding-bottom: 0;
 }
 
@@ -19,17 +17,18 @@ body > ul
     display: list-item;
     text-decoration: none;
     list-style-type: none;
-    padding-left: 1%;
+    padding: 2em;
+    background-color:cadetblue;
+    margin-bottom: 1em;
+    border-left: solid;
 }
 
-.ArticleGroup:hover
-{
-    background-color:blanchedalmond;
-    text-align:center;
+.ArticleGroup:hover {
+    box-shadow: 0 4px 4px 0;
+    border-radius: 15px;
 }
 
-.NewContentButton > a
-{
-    text-decoration: none;
-    color: black;
-}
+    .NewContentButton > a {
+        text-decoration: none;
+        color: black;
+    }

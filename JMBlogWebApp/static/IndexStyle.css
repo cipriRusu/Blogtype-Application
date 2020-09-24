@@ -19,11 +19,13 @@ body > ul
     display: list-item;
     text-decoration: none;
     list-style-type: none;
+    padding-left: 1%;
 }
 
 .ArticleGroup:hover
 {
-    background-color:aqua;
+    background-color:blanchedalmond;
+    text-align:center;
 }
 
 .NewContentButton > a

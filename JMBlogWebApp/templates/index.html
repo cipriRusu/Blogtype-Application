@@ -9,16 +9,16 @@
 </head>
 <body>
     <h1>Blog App</h1>
-    <button><a href="{{ url_for('addItem') }}">New Item</a></button>
-    <ul>
+    <button class="NewContentButton"><a href="{{ url_for('addItem') }}">New Item</a></button>
+    <ul class="ArticlesList">
         {% for element in database %}
-        <li>
+        <li class="ArticleGroup">
             <a href="
             {{ url_for('content', index=loop.index0) }}">
             Article Title : {{ element.Title }}<br />
             Article Author : {{ element.Author }}
             </a>
-        </li><br/>
+        </li>
         {% endfor %}
     </ul>
 </body>

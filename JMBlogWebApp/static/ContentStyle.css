@@ -1,4 +1,4 @@
-html
+html, body
 {
     height: 100%;
     background-color: aquamarine;
@@ -8,4 +8,28 @@ body
 {
     padding-left: 5%;
     padding-right: 5%;
+}
+
+.ArticleTitle
+{
+    font-weight: bold;
+    font-size: xx-large;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.ArticleAuthor
+{
+    font-weight: bold;
+    font-size: larger;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.ArticleContent
+{
+    padding-top: 1%;
+    border-top:inset;
+    margin-top: 0;
+    margin-bottom: 0;
 }

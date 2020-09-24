@@ -1,5 +1,22 @@
-body
-{
-    padding-left: 5%;
+body, html {
+    height: 100%;
     padding-right: 5%;
+    padding-left: 5%;
+}
+
+.Form {
+    width: 100%;
+    height: 60%;
+}
+
+    .Form > input {
+        width: 100%;
+        box-sizing: padding-box;
+    }
+
+textarea {
+    box-sizing:padding-box;
+    width: 100%;
+    height: 90%;
+    resize: none;
 }

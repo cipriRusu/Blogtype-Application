@@ -9,10 +9,11 @@
     <title></title>
 </head>
 <body>
-    <button class="ReturnButton"><a href=" {{ url_for('index') }}">Return to List</a></button>
+    <a href=" {{ url_for('index') }}">Return to List</a>
     <p class="ArticleTitle"> Article Title : {{ current.title }} </p><br />
     <hr />
     <p class="ArticleAuthor"> Article Author : {{ current.author }}</p><br />
     <p class="ArticleContent"> {{ current.content }}</p><br />
+    <a href=" {{ url_for('remove_item', current_index=current.id) }}">Remove</a>
 </body>
 </html>

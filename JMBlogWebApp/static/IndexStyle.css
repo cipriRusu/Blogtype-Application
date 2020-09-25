@@ -18,7 +18,7 @@ body > ul
     text-decoration: none;
     list-style-type: none;
     padding: 2em;
-    background-color:cadetblue;
+    background-color:darkolivegreen;
     margin-bottom: 1em;
     border-left: solid;
     border-radius: 5px;
@@ -31,7 +31,7 @@ body > ul
 
 .MainTitle {
     background: border-box;
-    background-color: cadetblue;
+    background-color: beige;
     padding: 1em;
     grid-column-start: 1;
     grid-column-end: 4;
@@ -43,7 +43,7 @@ body > ul
 }
 
 .NewItemButton {
-    background-color: cadetblue;
+    background-color: blanchedalmond;
     vertical-align: middle;
     box-sizing: border-box;
     display: table;
@@ -67,6 +67,5 @@ body > ul
 .MainHeader {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    border-left: solid;
     border-radius: 5px;
 }

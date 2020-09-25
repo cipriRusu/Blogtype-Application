@@ -4,28 +4,28 @@ from models.BlogPost import BlogPost
 
 app = Flask(__name__)
 
-db = [{"title":"FirstTitle", "author":"FirstAuthor", "content": "Lorem Ipsum is simply dummy , \
+db = [BlogPost("FirstTitle", "FirstAuthor", "Lorem Ipsum is simply dummy , \
        'text of the printing and typesetting industry. Lorem Ipsum has been the industry's , \
        standard dummy text ever since the 1500s, when an unknown printer took a galley of , \
        type and scrambled it to make a type specimen book. It has survived not only five centuries, , \
        but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised, in the, \
        1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop , \
-       publishing software like Aldus PageMaker including versions of Lorem Ipsum."},
+       publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
 
-      {"title":"SecondTitle", "author":"SecondAuthor", "content" : "Lorem Ipsum is simply dummy text of the, \
+      BlogPost("SecondTitle", "SecondAuthor", "Lorem Ipsum is simply dummy text of the, \
         printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since, \
         the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen , \
         book. It has survived not only five centuries, but also the leap into electronic typesetting, , \
         remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets , \
         containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker , \
-        including versions of Lorem Ipsum."},
+        including versions of Lorem Ipsum."),
 
-      {"title":"ThirdTitle", "author":"ThirdAuthor", "content" : "Lorem Ipsum is simply dummy text of the printing , \
+      BlogPost("ThirdTitle", "ThirdAuthor", "Lorem Ipsum is simply dummy text of the printing , \
       and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, , \
       when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived , \
       not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was, \
       popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently , \
-      with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}]
+      with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")]
 
 @app.route('/', methods=["GET"])
 def index():
@@ -42,6 +42,15 @@ def add_item():
         return redirect('/')
 
     return render_template("AddItem.html")
+
+@app.route('/removeItem/<uuid:current_index>')
+def remove_item(current_index):
+    for element in db:
+        if element.id == current_index:
+            db.remove(element)
+            return redirect('/')
+
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run('localhost', 4449)

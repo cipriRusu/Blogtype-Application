@@ -9,12 +9,14 @@ body
     padding-right: 5%;
 }
 
-.ArticleTitle
-{
+.ArticleTitle {
     font-weight: bold;
     font-size: xx-large;
-    padding-bottom: 0;
-    margin-bottom: 0;
+    background-color: beige;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-top: 2%;
+    margin-bottom: 0%;
 }
 
 .ArticleAuthor
@@ -33,8 +35,16 @@ body
     margin-bottom: 0;
 }
 
-.ReturnButton > a
-{
+.ReturnButton > a {
     text-decoration: none;
     color: black;
+    padding: 1%;
+    background-color: beige;
+}
+
+.RemoveButton > a {
+    text-decoration: none;
+    color: black;
+    padding: 1%;
+    background-color: beige;
 }

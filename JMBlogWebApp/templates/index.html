@@ -9,8 +9,12 @@
     <title></title>
 </head>
 <body>
-    <h1>Blog App</h1>
-    <button class="NewContentButton"><a href="{{ url_for('addItem') }}">New Item</a></button>
+    <header class="MainHeader">
+        <h1 class="MainTitle">Blog App</h1>
+        <div class="NewItemButton">
+            <a href="{{ url_for('addItem') }}">New Item</a>
+        </div>
+    </header>
     <ul class="ArticlesList">
         {% for element in database|reverse %}
         <li class="ArticleGroup">

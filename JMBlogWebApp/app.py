@@ -38,7 +38,10 @@ def content(current_index):
 @app.route('/addItem', methods=["GET", "POST"])
 def add_item():
     if request.method == "POST":
-        db.append(BlogPost(request.form['NameInput'], request.form['AuthorInput'], request.form['ContentInput']))
+        db.append(BlogPost(
+            request.form['NameInput'], 
+            request.form['AuthorInput'], 
+            request.form['ContentInput']))
         return redirect('/')
 
     return render_template("AddItem.html")

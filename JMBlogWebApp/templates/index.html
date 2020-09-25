@@ -12,16 +12,16 @@
     <header class="MainHeader">
         <h1 class="MainTitle">Blog App</h1>
         <div class="NewItemButton">
-            <a href="{{ url_for('addItem') }}">New Item</a>
+            <a href="{{ url_for('add_item') }}">New Item</a>
         </div>
     </header>
     <ul class="ArticlesList">
         {% for element in database|reverse %}
         <li class="ArticleGroup">
             <a href="
-            {{ url_for('content', index=database|length - 1  - loop.index0) }}">
-            Article Title : {{ element.Title }}<br />
-            Article Author : {{ element.Author }}
+            {{ url_for('content', current_index=database|length - 1  - loop.index0) }}">
+            Article Title : {{ element.title }}<br />
+            Article Author : {{ element.author }}
             </a>
         </li>
         {% endfor %}

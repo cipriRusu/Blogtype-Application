@@ -30,8 +30,12 @@
     <Compile Include="app.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="models\BlogPost.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="models\" />
     <Folder Include="static\" />
     <Folder Include="templates\" />
   </ItemGroup>

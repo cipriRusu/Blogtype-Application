@@ -20,3 +20,8 @@ textarea {
     height: 90%;
     resize: none;
 }
+
+.ReturnButton > a {
+    text-decoration: none;
+    color: black;
+}

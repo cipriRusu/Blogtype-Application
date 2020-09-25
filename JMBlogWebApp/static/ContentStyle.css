@@ -34,6 +34,8 @@ body
     border-top:inset;
     margin-top: 0;
     margin-bottom: 0;
+    white-space: pre-line;
+    white-space: pre-wrap;
 }
 
 .ReturnButton > a {

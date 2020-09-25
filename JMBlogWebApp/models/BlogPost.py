@@ -2,7 +2,7 @@
 import uuid
 
 class BlogPost:
-    def __init__(self, author, title, content):
+    def __init__(self, title, author, content):
         self.id = uuid.uuid4()
         self.author = author
         self.title = title

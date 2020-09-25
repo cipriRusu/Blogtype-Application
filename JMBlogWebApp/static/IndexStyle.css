@@ -44,23 +44,24 @@ body > ul
 
 .NewItemButton {
     background-color: cadetblue;
+    vertical-align: middle;
+    box-sizing: border-box;
+    display: table;
+    height:100%;
 }
-
-    .NewItemButton:hover {
-        box-shadow: 0 4px 4px 0;
-    }
 
     .NewItemButton > a {
         grid-column-start: 2;
         grid-row-start: 2;
         text-decoration: none;
         color: black;
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-        display: block;
-        margin: 0 auto;
-        width: 150px;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .NewItemButton:hover {
+        box-shadow: 0 4px 4px 0;
     }
 
 .MainHeader {

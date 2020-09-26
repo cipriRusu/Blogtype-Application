@@ -1,4 +1,5 @@
 from models.blog_post import BlogPost
+
 class MockDatabase:
     def __init__(self):
         self.db = [BlogPost("FirstTitle", "FirstAuthor", "Lorem Ipsum is simply dummy , \
@@ -24,11 +25,8 @@ class MockDatabase:
         popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently , \
         with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")]
 
-    def Add(self, blog_post):
+    def AddPost(self, blog_post):
         self.db.append(blog_post)
-
-    def Get(self, count_index):
-        return self.db[count_index]
     
     def GetByIndex(self, post_id):
         for element in self.db:

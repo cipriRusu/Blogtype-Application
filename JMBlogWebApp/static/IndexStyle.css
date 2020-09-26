@@ -18,9 +18,10 @@ body > ul
     text-decoration: none;
     list-style-type: none;
     padding: 2em;
-    background-color:darkkhaki;
+    background-color:floralwhite;
     margin-bottom: 1em;
     border-left: solid;
+    border-left-color: aliceblue;
     border-radius: 5px;
 }
 

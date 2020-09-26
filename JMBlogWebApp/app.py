@@ -1,76 +1,46 @@
 from flask import Flask, render_template, request, redirect
 from models.blog_post import BlogPost
+from mock_db import MockDatabase
 
 app = Flask(__name__)
-
-db = [BlogPost("FirstTitle", "FirstAuthor", "Lorem Ipsum is simply dummy , \
-       'text of the printing and typesetting industry. Lorem Ipsum has been the industry's , \
-       standard dummy text ever since the 1500s, when an unknown printer took a galley of , \
-       type and scrambled it to make a type specimen book. It has survived not only five centuries, , \
-       but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised, in the, \
-       1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop , \
-       publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
-
-      BlogPost("SecondTitle", "SecondAuthor", "Lorem Ipsum is simply dummy text of the, \
-        printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since, \
-        the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen , \
-        book. It has survived not only five centuries, but also the leap into electronic typesetting, , \
-        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets , \
-        containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker , \
-        including versions of Lorem Ipsum."),
-
-      BlogPost("ThirdTitle", "ThirdAuthor", "Lorem Ipsum is simply dummy text of the printing , \
-      and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, , \
-      when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived , \
-      not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was, \
-      popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently , \
-      with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")]
+mock_database = MockDatabase()
 
 @app.route('/', methods=["GET"])
 def index():
-    return render_template("index.html", database=db)
+    return render_template("index.html", database=mock_database.db)
 
 @app.route('/item/<int:current_index>')
 def content(current_index):
-    return render_template("Content.html", current=db[current_index])
+    return render_template("Content.html", current=mock_database.Get(current_index))
 
 @app.route('/addItem', methods=["GET", "POST"])
 def add_item():
     if request.method == "POST":
-        db.append(BlogPost(
-            request.form['NameInput'],
-            request.form['AuthorInput'],
-            request.form['ContentInput']))
+        mock_database.Add(
+            BlogPost(request.form['NameInput'], 
+                     request.form['AuthorInput'], 
+                     request.form['ContentInput']))
         return redirect('/')
-
     return render_template("AddItem.html")
 
 @app.route('/removeItem/<uuid:current_index>')
 def remove_item(current_index):
-    for element in db:
-        if element.post_id == current_index:
-            db.remove(element)
-            return redirect('/')
-
+    mock_database.Remove(current_index)
     return redirect('/')
 
 @app.route('/updateItem/<uuid:current_index>', methods=["GET", "POST"])
 def update_item(current_index):
     if request.method == "GET":
-        for element in db:
-            if element.post_id == current_index:
-                return render_template("UpdateItem.html", current=element)
+        return render_template("UpdateItem.html", current=mock_database.GetByIndex(current_index))
 
     if request.method == "POST":
-        for element in db:
-            if element.post_id == current_index:
-                db.remove(element)
+        mock_database.Remove(current_index)
 
-        current = BlogPost(
+        mock_database.Add(BlogPost(
             request.form['NameInput'],
             request.form['AuthorInput'],
-            request.form['ContentInput'])
-        db.append(current)
+            request.form['ContentInput']))
+
     return redirect('/')
 
 if __name__ == '__main__':

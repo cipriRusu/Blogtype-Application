@@ -42,4 +42,3 @@ class MockDatabase:
         for element in self._db:
             if element.post_id == current_index:
                 self._db.remove(element)
-        raise Exception("no element found!")

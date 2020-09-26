@@ -36,6 +36,9 @@
     <Compile Include="models\blog_post.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="repository\base_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />

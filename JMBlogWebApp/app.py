@@ -1,4 +1,3 @@
-# pylint: disable=locally-disabled, multiple-statements, line-too-long, missing-function-docstring, missing-module-docstring
 from flask import Flask, render_template, request, redirect
 from models.BlogPost import BlogPost
 

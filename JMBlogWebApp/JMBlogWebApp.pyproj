@@ -40,6 +40,9 @@
     <Folder Include="templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".pylintrc">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="static\AddItemStyle.css">
       <SubType>Code</SubType>
     </Content>

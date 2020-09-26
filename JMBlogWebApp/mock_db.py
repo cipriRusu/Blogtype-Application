@@ -32,9 +32,9 @@ class MockDatabase:
     def AddPost(self, blog_post):
         self._db.append(blog_post)
     
-    def GetByIndex(self, post_id):
+    def GetByIndex(self, current_index):
         for element in self._db:
-            if element.post_id == post_id:
+            if element.post_id == current_index:
                 return element
 
     def Remove(self, current_index):

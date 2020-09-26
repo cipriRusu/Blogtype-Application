@@ -29,15 +29,17 @@ class MockDatabase:
         for element in self._db:
             yield element
 
-    def AddPost(self, blog_post):
+    def add_post(self, blog_post):
         self._db.append(blog_post)
-    
-    def GetByIndex(self, current_index):
+
+    def get_by_index(self, current_index):
         for element in self._db:
             if element.post_id == current_index:
                 return element
+        raise Exception("no element found!")
 
-    def Remove(self, current_index):
+    def remove(self, current_index):
         for element in self._db:
             if element.post_id == current_index:
                 self._db.remove(element)
+        raise Exception("no element found!")

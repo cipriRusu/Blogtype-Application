@@ -11,32 +11,32 @@ def index():
 
 @app.route('/item/<uuid:current_index>')
 def content(current_index):
-    return render_template("Content.html", current=mock_database.GetByIndex(current_index))
+    return render_template("Content.html", current=mock_database.get_by_index(current_index))
 
 @app.route('/addItem', methods=["GET", "POST"])
 def add_item():
     if request.method == "POST":
-        mock_database.AddPost(
-            BlogPost(request.form['NameInput'], 
-                     request.form['AuthorInput'], 
+        mock_database.add_post(
+            BlogPost(request.form['NameInput'],
+                     request.form['AuthorInput'],
                      request.form['ContentInput']))
         return redirect('/')
     return render_template("AddItem.html")
 
 @app.route('/removeItem/<uuid:current_index>')
 def remove_item(current_index):
-    mock_database.Remove(current_index)
+    mock_database.remove(current_index)
     return redirect('/')
 
 @app.route('/updateItem/<uuid:current_index>', methods=["GET", "POST"])
 def update_item(current_index):
     if request.method == "GET":
-        return render_template("UpdateItem.html", current=mock_database.GetByIndex(current_index))
+        return render_template("UpdateItem.html", current=mock_database.get_by_index(current_index))
 
     if request.method == "POST":
-        mock_database.Remove(current_index)
+        mock_database.remove(current_index)
 
-        mock_database.AddPost(BlogPost(
+        mock_database.add_post(BlogPost(
             request.form['NameInput'],
             request.form['AuthorInput'],
             request.form['ContentInput']))

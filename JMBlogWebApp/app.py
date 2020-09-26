@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-from models.BlogPost import BlogPost
+from models.blog_post import BlogPost
 
 app = Flask(__name__)
 
@@ -38,8 +38,8 @@ def content(current_index):
 def add_item():
     if request.method == "POST":
         db.append(BlogPost(
-            request.form['NameInput'], 
-            request.form['AuthorInput'], 
+            request.form['NameInput'],
+            request.form['AuthorInput'],
             request.form['ContentInput']))
         return redirect('/')
 
@@ -48,7 +48,7 @@ def add_item():
 @app.route('/removeItem/<uuid:current_index>')
 def remove_item(current_index):
     for element in db:
-        if element.id == current_index:
+        if element.post_id == current_index:
             db.remove(element)
             return redirect('/')
 
@@ -58,17 +58,17 @@ def remove_item(current_index):
 def update_item(current_index):
     if request.method == "GET":
         for element in db:
-            if element.id == current_index:
+            if element.post_id == current_index:
                 return render_template("UpdateItem.html", current=element)
 
     if request.method == "POST":
         for element in db:
-            if element.id == current_index:
+            if element.post_id == current_index:
                 db.remove(element)
 
         current = BlogPost(
-            request.form['NameInput'], 
-            request.form['AuthorInput'], 
+            request.form['NameInput'],
+            request.form['AuthorInput'],
             request.form['ContentInput'])
         db.append(current)
     return redirect('/')

@@ -7,7 +7,7 @@ mock_database = MockDatabase()
 
 @app.route('/', methods=["GET"])
 def index():
-    return render_template("index.html", database=mock_database.db)
+    return render_template("index.html", database=mock_database)
 
 @app.route('/item/<uuid:current_index>')
 def content(current_index):

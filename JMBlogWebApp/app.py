@@ -9,14 +9,14 @@ mock_database = MockDatabase()
 def index():
     return render_template("index.html", database=mock_database.db)
 
-@app.route('/item/<int:current_index>')
+@app.route('/item/<uuid:current_index>')
 def content(current_index):
-    return render_template("Content.html", current=mock_database.Get(current_index))
+    return render_template("Content.html", current=mock_database.GetByIndex(current_index))
 
 @app.route('/addItem', methods=["GET", "POST"])
 def add_item():
     if request.method == "POST":
-        mock_database.Add(
+        mock_database.AddPost(
             BlogPost(request.form['NameInput'], 
                      request.form['AuthorInput'], 
                      request.form['ContentInput']))
@@ -36,7 +36,7 @@ def update_item(current_index):
     if request.method == "POST":
         mock_database.Remove(current_index)
 
-        mock_database.Add(BlogPost(
+        mock_database.AddPost(BlogPost(
             request.form['NameInput'],
             request.form['AuthorInput'],
             request.form['ContentInput']))

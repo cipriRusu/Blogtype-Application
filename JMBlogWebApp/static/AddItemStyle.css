@@ -4,27 +4,15 @@ body, html {
     padding-left: 5%;
 }
 
-h1
+.AddPostTitle
 {
-    padding-left: 1%;
+    background-color: beige;
 }
 
-.Form {
+.InputFields > input
+{
+    box-sizing:border-box;
     width: 100%;
-    height: 60%;
-    padding-left: 1%;
-}
-
-    .Form > input {
-        width: 100%;
-        box-sizing: padding-box;
-    }
-
-textarea {
-    box-sizing:padding-box;
-    width: 100%;
-    height: 90%;
-    resize: none;
 }
 
 .ReturnButton > a {
@@ -34,10 +22,20 @@ textarea {
     padding: 1%;
 }
 
-.SubmitButton
+.ContentArea > textarea
 {
-    border:none;
+    resize:none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.SubmitButton {
+    border: none;
     padding: 1%;
-    margin-right: 5%;
     background-color: beige;
+}
+
+.SubmitButton:hover
+{
+    cursor:pointer;
 }

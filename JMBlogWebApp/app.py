@@ -63,6 +63,10 @@ def update_item(current_index):
                 return render_template("UpdateItem.html", current=element)
 
     if request.method == "POST":
+        for element in db:
+            if element.id == current_index:
+                db.remove(element)
+
         current = BlogPost(
             request.form['NameInput'], 
             request.form['AuthorInput'], 

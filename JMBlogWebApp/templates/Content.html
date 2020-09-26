@@ -14,6 +14,9 @@
     <hr />
     <p class="ArticleAuthor"> Article Author : {{ current.author }}</p><br />
     <p class="ArticleContent"> {{ current.content }}</p><br />
-    <div class="RemoveButton"><a href=" {{ url_for('remove_item', current_index=current.id) }}">Remove</a></div>
+    <div class="FooterButtons">
+        <div class="EditButton"><a href="{{ url_for('update_item', current_index=current.id) }}">Update</a></div>
+        <div class="RemoveButton"><a href="{{ url_for('remove_item', current_index=current.id) }}">Remove</a></div>
+    </div>
 </body>
 </html>

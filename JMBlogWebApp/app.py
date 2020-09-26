@@ -55,5 +55,20 @@ def remove_item(current_index):
 
     return redirect('/')
 
+@app.route('/updateItem/<uuid:current_index>', methods=["GET", "POST"])
+def update_item(current_index):
+    if request.method == "GET":
+        for element in db:
+            if element.id == current_index:
+                return render_template("UpdateItem.html", current=element)
+
+    if request.method == "POST":
+        current = BlogPost(
+            request.form['NameInput'], 
+            request.form['AuthorInput'], 
+            request.form['ContentInput'])
+        db.append(current)
+    return redirect('/')
+
 if __name__ == '__main__':
     app.run('localhost', 4449)

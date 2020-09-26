@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="ReturnButton"><a href=" {{ url_for('index') }}">Return to List</a></div>
+    <div class="EditPostTitle"><h1>Edit Post</h1></div>
+    <div class="Form">
+        <form method="post">
+            <label typeof="string">Name : </label><br />
+            <div class="InputFields"><input typeof="string" name="NameInput" value="{{ current.title }}"/></div><br />
+            <label typeof="string">Author : </label><br />
+            <div class="InputFields"><input typeof="string" name="AuthorInput" value="{{ current.author }}" /></div><br />
+            <label typeof="string">Content : </label><br />
+            <div class="ContentArea"><textarea name="ContentInput"> {{ current.content }} </textarea></div><br />
+            <button class="SubmitButton">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -21,7 +21,9 @@
             <a href="
             {{ url_for('content', current_index=database|length - 1  - loop.index0) }}">
             Article Title : {{ element.title }}<br />
-            Article Author : {{ element.author }}
+            Article Author : {{ element.author }}<br />
+            Created/Modified: {{ element.datetime }}<br />
+            Preview: {{ element.preview }}
             </a>
         </li>
         {% endfor %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, url_for
 from models.blog_post import BlogPost
 from repository.base_repository import BaseRepository
 
@@ -16,11 +16,12 @@ def content(current_index):
 @post_manager.route('/addItem', methods=["GET", "POST"])
 def add_item():
     if request.method == "POST":
-        repository.add_post(
-            BlogPost(request.form['NameInput'],
-                     request.form['AuthorInput'],
-                     request.form['ContentInput']))
-        return redirect('/')
+        to_add = BlogPost(
+            request.form['NameInput'],
+            request.form['AuthorInput'],
+            request.form['ContentInput'])
+        repository.add_post(to_add)
+        return redirect(url_for('.content', current_index=to_add.post_id))
     return render_template("AddItem.html")
 
 @post_manager.route('/removeItem/<uuid:current_index>')

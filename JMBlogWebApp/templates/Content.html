@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet"
           href="{{ url_for('static', filename='ContentStyle.css') }}" />
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='script.js') }}"></script>
     <title></title>
 </head>
 <body>
@@ -17,7 +19,7 @@
     <p class="ArticleContent"> {{ current.content }} </p><br />
     <div class="FooterButtons">
         <div class="EditButton"><a href="{{ url_for('.update_item', current_index=current.post_id) }}">Edit</a></div>
-        <div class="RemoveButton"><a href="{{ url_for('.remove_item', current_index=current.post_id) }}">Remove</a></div>
+        <div class="RemoveButton" id="RemoveBtId"><a href="{{ url_for('.remove_item', current_index=current.post_id) }}" onclick="return OnRemoveClick()">Remove</a></div>
     </div>
 </body>
 </html>

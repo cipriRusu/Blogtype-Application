@@ -36,10 +36,9 @@ def update_item(current_index):
 
     if request.method == "POST":
         repository.remove(current_index)
-
-        repository.add_post(BlogPost(
+        edited = BlogPost(
             request.form['NameInput'],
             request.form['AuthorInput'],
-            request.form['ContentInput']))
-
-    return redirect('/')
+            request.form['ContentInput'])
+        repository.add_post(edited)
+        return redirect(url_for('.content', current_index=edited.post_id))

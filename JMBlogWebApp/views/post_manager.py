@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from models.blog_post import BlogPost
-from repository.base_repository import BaseRepository
+from repository.posts_in_memory_repository import PostsInMemoryRepository
 
-repository = BaseRepository()
+repository = PostsInMemoryRepository()
 post_manager = Blueprint('post_manager', __name__, template_folder='templates')
 
 @post_manager.route('/', methods=["GET"])

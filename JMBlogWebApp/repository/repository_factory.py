@@ -4,7 +4,7 @@ from repository.posts_in_memory_repository import PostsInMemoryRepository
 class RepositoryFactory:
     def __init__(self, sourceType):
         self.sourceType = sourceType
-    def GetSource(self):
+    def get_source(self):
         if self.sourceType == DataSourceType.LocalSource:
             return PostsInMemoryRepository()
         elif self.sourceType == DataSourceType.DatabaseSource:

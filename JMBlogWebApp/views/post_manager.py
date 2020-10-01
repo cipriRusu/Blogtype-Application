@@ -4,7 +4,7 @@ from repository.repository_factory import RepositoryFactory
 from repository.data_source_type import DataSourceType
 
 dataSource = DataSourceType.LocalSource
-repository = RepositoryFactory(dataSource).GetSource()
+repository = RepositoryFactory(dataSource).get_source()
 
 post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template_folder='templates')
 

@@ -13,7 +13,7 @@ def index():
 def content(current_index):
     return render_template("view_post.html", current=repository.get_by_id(current_index))
 
-@post_manager.route('/addItem', methods=["GET", "POST"])
+@post_manager.route('/add', methods=["GET", "POST"])
 def add_item():
     if request.method == "POST":
         to_add = BlogPost(
@@ -24,12 +24,12 @@ def add_item():
         return redirect(url_for('.content', current_index=to_add.post_id))
     return render_template("add_post.html")
 
-@post_manager.route('/removeItem/<uuid:current_index>')
+@post_manager.route('/remove/<uuid:current_index>')
 def remove_item(current_index):
     repository.remove(current_index)
     return redirect('/')
 
-@post_manager.route('/updateItem/<uuid:current_index>', methods=["GET", "POST"])
+@post_manager.route('/update/<uuid:current_index>', methods=["GET", "POST"])
 def update_item(current_index):
     if request.method == "GET":
         return render_template("update_post.html", current=repository.get_by_id(current_index))

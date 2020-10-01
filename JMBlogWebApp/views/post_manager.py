@@ -1,15 +1,18 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from models.blog_post import BlogPost
-from repository.posts_in_memory_repository import PostsInMemoryRepository
+from repository.repository_factory import RepositoryFactory
+from repository.data_source_type import DataSourceType
 
-repository = PostsInMemoryRepository()
-post_manager = Blueprint('post_manager', __name__, template_folder='templates')
+dataSource = DataSourceType.LocalSource;
+repository = RepositoryFactory(dataSource).GetSource()
 
-@post_manager.route('/', methods=["GET"])
+post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template_folder='templates')
+
+@post_manager.route('/allPosts', methods=["GET"])
 def index():
     return render_template("list_posts.html", database=repository.get_all())
 
-@post_manager.route('/item/<uuid:current_index>')
+@post_manager.route('/<uuid:current_index>')
 def content(current_index):
     return render_template("view_post.html", current=repository.get_by_id(current_index))
 

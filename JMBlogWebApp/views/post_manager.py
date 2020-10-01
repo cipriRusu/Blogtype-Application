@@ -42,3 +42,4 @@ def update_item(current_index):
             request.form['ContentInput'])
         repository.add_post(edited)
         return redirect(url_for('.content', current_index=edited.post_id))
+    return Exception("Request type cannot be handled")

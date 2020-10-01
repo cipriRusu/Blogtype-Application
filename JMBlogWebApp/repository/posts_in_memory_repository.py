@@ -42,7 +42,7 @@ class PostsInMemoryRepository(PostsRepository):
     def get_all(self):
         return self._db
 
-    def remove(self, current_index):
+    def remove(self, index):
         for element in self._db:
-            if element.post_id == current_index:
+            if element.post_id == index:
                 self._db.remove(element)

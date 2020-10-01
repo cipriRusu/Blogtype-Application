@@ -6,7 +6,7 @@ app.register_blueprint(post_manager)
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
-def catch_all(path):
+def catch_all():
     return redirect('/posts/allPosts', 302)
 
 if __name__ == '__main__':

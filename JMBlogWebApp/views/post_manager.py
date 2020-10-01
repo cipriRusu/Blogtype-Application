@@ -3,7 +3,7 @@ from models.blog_post import BlogPost
 from repository.repository_factory import RepositoryFactory
 from repository.data_source_type import DataSourceType
 
-dataSource = DataSourceType.LocalSource;
+dataSource = DataSourceType.LocalSource
 repository = RepositoryFactory(dataSource).GetSource()
 
 post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template_folder='templates')

@@ -30,13 +30,13 @@
     <Compile Include="app.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="mock_db.py">
+    <Compile Include="repository\posts_in_memory_repository.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\blog_post.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="repository\base_repository.py">
+    <Compile Include="repository\posts_repository.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="views\post_manager.py">

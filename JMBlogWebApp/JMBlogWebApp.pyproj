@@ -30,6 +30,9 @@
     <Compile Include="app.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="repository\data_source_type.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="repository\posts_in_memory_repository.py">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +40,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="repository\posts_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="repository\repository_factory.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="views\post_manager.py">

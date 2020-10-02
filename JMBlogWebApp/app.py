@@ -1,8 +1,8 @@
 from flask import Flask, redirect
-from views.post_manager import post_manager
+from views import post_manager
 
 app = Flask(__name__, static_url_path="", static_folder="static")
-app.register_blueprint(post_manager)
+app.register_blueprint(post_manager.post_manager)
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

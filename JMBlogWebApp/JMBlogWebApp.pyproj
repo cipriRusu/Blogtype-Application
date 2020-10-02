@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />
+    <Folder Include="dbSetup\" />
     <Folder Include="views\" />
     <Folder Include="repository\" />
     <Folder Include="static\" />
@@ -61,6 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".pylintrc">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="dbSetup\database.ini">
       <SubType>Code</SubType>
     </Content>
     <Content Include="static\add_update_style.css">

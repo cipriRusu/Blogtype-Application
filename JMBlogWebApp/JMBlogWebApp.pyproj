@@ -30,7 +30,13 @@
     <Compile Include="app.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="dbSetup\db_connection_setup.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="repository\data_source_type.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="repository\posts_db_repository.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="repository\posts_in_memory_repository.py">

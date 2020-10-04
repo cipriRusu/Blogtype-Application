@@ -22,7 +22,7 @@ def content(current_index):
 def add_item():
     if request.method == "POST":
         to_add = BlogPost(
-            uuid.uuid4(), 
+            uuid.uuid4(),
             datetime.datetime.now().strftime("%Y-%B-%d %H:%M:%S"),
             request.form['NameInput'], request.form['AuthorInput'],
             request.form['ContentInput'])

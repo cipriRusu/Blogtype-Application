@@ -8,4 +8,3 @@ class BlogPost:
         self.title = title
         self.content = content
         self.preview = ' '.join(list(islice(content.split(), 0, 10)))
-

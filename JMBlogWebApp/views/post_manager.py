@@ -10,7 +10,7 @@ repository = RepositoryFactory(dataSource).get_source()
 
 post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template_folder='templates')
 
-@post_manager.route('/allPosts', methods=["GET"])
+@post_manager.route('/', methods=["GET"])
 def index():
     return render_template("list_posts.html", database=repository.get_all())
 

@@ -8,7 +8,7 @@ app.register_blueprint(post_manager.post_manager)
 @app.route('/<path:path>')
 def catch_all(path):
     #pylint: disable=unused-argument
-    return redirect('/posts/allPosts', 302)
+    return redirect('/posts/', 302)
 
 if __name__ == '__main__':
     app.run('localhost', 4449)

@@ -1,7 +1,7 @@
-from models.blog_post import BlogPost
-from repository.posts_repository import PostsRepository
 import uuid
 import datetime
+from models.blog_post import BlogPost
+from repository.posts_repository import PostsRepository
 
 class PostsInMemoryRepository(PostsRepository):
     def __init__(self):

@@ -10,12 +10,12 @@ class PostsDBRepository(PostsRepository):
         conn = DBConnectionSetup()
         current_connection = conn.get_connection('dbSetup/database.ini', 'postgresql_conn_data')
         current_cursor = current_connection.cursor()
-        current_cursor.execute("INSERT INTO POSTS(post_id, datetime, author, title, content_field) VALUES(%s, %s, %s, %s, %s)", 
+        current_cursor.execute("INSERT INTO POSTS(post_id, datetime, author, title, content_field) VALUES(%s, %s, %s, %s, %s)",
                                (str(item.post_id), item.datetime, item.author, item.title, item.content))
         current_connection.commit()
 
     def get_all(self):
-        db = []
+        all_elements = []
         conn = DBConnectionSetup()
         current_connection = conn.get_connection('dbSetup/database.ini', 'postgresql_conn_data')
         current_cursor = current_connection.cursor()
@@ -23,10 +23,10 @@ class PostsDBRepository(PostsRepository):
 
         for item in current_cursor.fetchall():
             element = BlogPost(*item)
-            db.append(element)
+            all_elements.append(element)
 
         conn.close_connection(current_connection, current_cursor)
-        return db
+        return all_elements
 
 
     def get_by_id(self, index):

@@ -1,5 +1,3 @@
-import uuid
-import datetime
 from itertools import islice
 
 class BlogPost:

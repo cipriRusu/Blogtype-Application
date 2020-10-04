@@ -1,9 +1,9 @@
+import uuid
+import datetime
 from flask import Blueprint, render_template, request, redirect, url_for
 from models.blog_post import BlogPost
 from repository.repository_factory import RepositoryFactory
 from repository.data_source_type import DataSourceType
-import uuid
-import datetime
 
 dataSource = DataSourceType.DatabaseSource
 repository = RepositoryFactory(dataSource).get_source()

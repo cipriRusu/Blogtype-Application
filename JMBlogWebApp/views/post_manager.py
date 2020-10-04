@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from models.blog_post import BlogPost
 from repository.repository_factory import RepositoryFactory
 from repository.data_source_type import DataSourceType
+import uuid
+import datetime
 
 dataSource = DataSourceType.DatabaseSource
 repository = RepositoryFactory(dataSource).get_source()
@@ -20,8 +22,9 @@ def content(current_index):
 def add_item():
     if request.method == "POST":
         to_add = BlogPost(
-            request.form['NameInput'],
-            request.form['AuthorInput'],
+            uuid.uuid4(), 
+            datetime.datetime.now().strftime("%Y-%B-%d %H:%M:%S"),
+            request.form['NameInput'], request.form['AuthorInput'],
             request.form['ContentInput'])
         repository.add_post(to_add)
         return redirect(url_for('.content', current_index=to_add.post_id))

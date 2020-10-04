@@ -8,7 +8,6 @@ class RepositoryFactory:
     def get_source(self):
         if self.source_type == DataSourceType.LocalSource:
             return PostsInMemoryRepository()
-        elif self.source_type == DataSourceType.DatabaseSource:
+        if self.source_type == DataSourceType.DatabaseSource:
             return PostsDBRepository()
-        else:
-            return Exception('Data source unknown')
+        return Exception('Data source unknown')

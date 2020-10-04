@@ -44,4 +44,3 @@ class PostsDBRepository(PostsRepository):
         current_cursor = current_connection.cursor()
         current_cursor.execute("DELETE FROM POSTS WHERE post_id=%s;", (str(index),))
         current_connection.commit()
-        pass

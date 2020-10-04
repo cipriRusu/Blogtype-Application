@@ -1,5 +1,3 @@
-from itertools import islice
-
 class BlogPost:
     def __init__(self, post_id, datetime, title, author, content):
         self.post_id = post_id

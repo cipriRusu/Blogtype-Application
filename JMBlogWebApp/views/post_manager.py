@@ -43,6 +43,8 @@ def update_item(current_index):
     if request.method == "POST":
         repository.remove(current_index)
         edited = BlogPost(
+            uuid.uuid4(),
+            datetime.datetime.now().strftime("%Y-%B-%d %H:%M:%S"),
             request.form['NameInput'],
             request.form['AuthorInput'],
             request.form['ContentInput'])

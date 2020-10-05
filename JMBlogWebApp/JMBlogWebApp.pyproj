@@ -17,6 +17,7 @@
     <Name>JMBlogWebApp</Name>
     <RootNamespace>JMBlogWebApp</RootNamespace>
     <WebBrowserPort>4449</WebBrowserPort>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,6 +50,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="repository\repository_factory.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test_app.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="views\post_manager.py">

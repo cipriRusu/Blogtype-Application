@@ -15,6 +15,10 @@ class PostsRepository(metaclass=ABCMeta):
     def add_post(self, item):
         pass
 
+    @abc.abstractclassmethod
+    def edit_post(self, item):
+        pass
+
     @abc.abstractmethod
     def get_all(self):
         pass

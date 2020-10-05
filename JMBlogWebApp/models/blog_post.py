@@ -6,3 +6,6 @@ class BlogPost:
         self.title = title
         self.content = content
         self.preview = content[0:30]
+   
+    def __eq__(self, other):
+        return self.post_id == other.post_id

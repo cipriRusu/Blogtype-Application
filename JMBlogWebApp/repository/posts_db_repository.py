@@ -12,7 +12,7 @@ class PostsDBRepository(PostsRepository):
         current_cursor = current_connection.cursor()
         current_cursor.execute("INSERT INTO POSTS \
         (post_id, datetime, author, title, content_field) \
-        VALUES(%s, %s, %s, %s, %s)",(
+        VALUES(%s, %s, %s, %s, %s)", (
             str(item.post_id),
             item.datetime,
             item.author,

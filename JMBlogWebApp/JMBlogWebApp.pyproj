@@ -31,7 +31,7 @@
     <Compile Include="app.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="dbSetup\db_connection_setup.py">
+    <Compile Include="setup\db_connection_setup.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="repository\data_source_type.py">
@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />
-    <Folder Include="dbSetup\" />
+    <Folder Include="setup\" />
     <Folder Include="views\" />
     <Folder Include="repository\" />
     <Folder Include="static\" />
@@ -74,7 +74,7 @@
     <Content Include=".pylintrc">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="dbSetup\database.ini">
+    <Content Include="setup\database.ini">
       <SubType>Code</SubType>
     </Content>
     <Content Include="static\add_update_style.css">

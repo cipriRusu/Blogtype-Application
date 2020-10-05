@@ -1,6 +1,6 @@
 from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
-from dbSetup.db_connection_setup import DBConnectionSetup
+from setup.db_connection_setup import DBConnectionSetup
 
 class PostsDBRepository(PostsRepository):
     def __init__(self):
@@ -8,7 +8,7 @@ class PostsDBRepository(PostsRepository):
 
     def add_post(self, item):
         conn = DBConnectionSetup()
-        current_connection = conn.get_connection('dbSetup/database.ini', 'postgresql_conn_data')
+        current_connection = conn.get_connection('setup/database.ini', 'postgresql_conn_data')
         current_cursor = current_connection.cursor()
         current_cursor.execute("INSERT INTO POSTS \
         (post_id, datetime, author, title, content_field) \
@@ -24,7 +24,7 @@ class PostsDBRepository(PostsRepository):
     def get_all(self):
         all_elements = []
         conn = DBConnectionSetup()
-        current_connection = conn.get_connection('dbSetup/database.ini', 'postgresql_conn_data')
+        current_connection = conn.get_connection('setup/database.ini', 'postgresql_conn_data')
         current_cursor = current_connection.cursor()
         current_cursor.execute('SELECT * FROM POSTS;')
 
@@ -39,7 +39,7 @@ class PostsDBRepository(PostsRepository):
 
     def get_by_id(self, index):
         conn = DBConnectionSetup()
-        current_connection = conn.get_connection('dbSetup/database.ini', 'postgresql_conn_data')
+        current_connection = conn.get_connection('setup/database.ini', 'postgresql_conn_data')
         current_cursor = current_connection.cursor()
         current_cursor.execute("SELECT * FROM POSTS WHERE post_id=%s;", (str(index),))
         current_element = current_cursor.fetchone()
@@ -49,7 +49,7 @@ class PostsDBRepository(PostsRepository):
 
     def remove(self, index):
         conn = DBConnectionSetup()
-        current_connection = conn.get_connection('dbSetup/database.ini', 'postgresql_conn_data')
+        current_connection = conn.get_connection('setup/database.ini', 'postgresql_conn_data')
         current_cursor = current_connection.cursor()
         current_cursor.execute("DELETE FROM POSTS WHERE post_id=%s;", (str(index),))
         conn.close_connection(current_connection, current_cursor)

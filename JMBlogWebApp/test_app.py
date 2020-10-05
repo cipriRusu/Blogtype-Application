@@ -16,5 +16,11 @@ class TestApp(unittest.TestCase):
         response = tester.get('/posts/', content_type='html/text')
         self.assertTrue(b'Blog App' in response.data)
 
+    def test_app_dynamic_content(self):
+        post_manager.dataSource = 0
+        tester = app.test_client(self)
+        response = tester.get('/posts/', content_type='html/text')
+        self.assertTrue(b'FirstTitle' in response.data)
+
 if __name__ == '__main__':
     unittest.main()

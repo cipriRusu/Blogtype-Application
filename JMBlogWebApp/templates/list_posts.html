@@ -19,10 +19,11 @@
         {% for element in database|reverse %}
         <li class="ArticleGroup">
             <a href=" {{ url_for('.content', current_index=element.stamp.post_id) }}">
-            Article Title : {{ element.title }}<br />
-            Article Author : {{ element.author }}<br />
-            Created/Modified: {{ element.datetime }}<br />
-            Preview: {{ element.preview }}
+                Article Title : {{ element.title }}<br />
+                Article Author : {{ element.author }}<br />
+                Created On: {{ element.stamp.creation_time }}<br />
+                Last Edited On: {{ element.stamp.edit_time }}<br />
+                Preview: {{ element.preview }}
             </a>
         </li>
         {% endfor %}

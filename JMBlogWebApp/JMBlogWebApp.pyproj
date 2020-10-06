@@ -31,6 +31,9 @@
     <Compile Include="app.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="models\post_id_and_timestamps.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="setup\db_connection_setup.py">
       <SubType>Code</SubType>
     </Compile>

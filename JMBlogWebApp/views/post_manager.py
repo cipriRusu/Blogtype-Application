@@ -5,9 +5,9 @@ from repository.data_source_type import DataSourceType
 
 post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template_folder='templates')
 
-test_mode = False
+TEST_MODE = False
 
-if test_mode == True:
+if TEST_MODE:
     data_source = DataSourceType.LocalSource
 else:
     data_source = DataSourceType.DatabaseSource

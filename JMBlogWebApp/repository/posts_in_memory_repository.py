@@ -1,12 +1,9 @@
-import uuid
-import datetime
 from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
 
 class PostsInMemoryRepository(PostsRepository):
     def __init__(self):
-        self._db = [BlogPost(uuid.uuid4(), datetime.datetime.now().strftime("%Y-%B-%d %H:%M:%S")
-                             , "FirstTitle", "FirstAuthor", "Lorem Ipsum is simply dummy ,\
+        self._db = [BlogPost("FirstTitle", "FirstAuthor", "Lorem Ipsum is simply dummy ,\
                              'text of the printing and typesetting industry. Lorem Ipsum \
                              has been the industry's , standard dummy text ever since the \
                              1500s,when an unknown printer took a galley of , type and scrambled \
@@ -17,8 +14,7 @@ class PostsInMemoryRepository(PostsRepository):
                              passages,and more recently with desktop , publishing software like \
                              Aldus PageMaker including versions of Lorem Ipsum."),
 
-                    BlogPost(uuid.uuid4(), datetime.datetime.now().strftime("%Y-%B-%d %H:%M:%S"),
-                             "SecondTitle", "SecondAuthor", "Lorem Ipsum is simply \
+                    BlogPost("SecondTitle", "SecondAuthor", "Lorem Ipsum is simply \
                              dummy text of the, printing and typesetting industry. \
                              Lorem Ipsum has been the industry's standard dummy text \
                              ever since, the 1500s, when an unknown printer took a galley\
@@ -30,8 +26,7 @@ class PostsInMemoryRepository(PostsRepository):
                              publishing software like Aldus PageMaker , including versions \
                              of Lorem Ipsum."),
 
-                    BlogPost(uuid.uuid4(), datetime.datetime.now().strftime("%Y-%B-%d %H:%M:%S"),
-                             "ThirdTitle", "ThirdAuthor", "Lorem Ipsum is simply \
+                    BlogPost("ThirdTitle", "ThirdAuthor", "Lorem Ipsum is simply \
                              dummy text of the printing ,and typesetting industry.\
                              Lorem Ipsum has been the industry's standard dummy text\
                              ever since the 1500s,when an unknown printer took a galley\
@@ -50,9 +45,13 @@ class PostsInMemoryRepository(PostsRepository):
     def add_post(self, item):
         self._db.append(item)
 
+    def update_post(self, item):
+        self._db.remove(item)
+        self._db.append(item)
+
     def get_by_id(self, index):
         for element in self._db:
-            if element.post_id == index:
+            if element.stamp.post_id == index:
                 return element
         raise Exception("no element found!")
 
@@ -61,5 +60,5 @@ class PostsInMemoryRepository(PostsRepository):
 
     def remove(self, index):
         for element in self._db:
-            if element.post_id == index:
+            if element.stamp.post_id == index:
                 self._db.remove(element)

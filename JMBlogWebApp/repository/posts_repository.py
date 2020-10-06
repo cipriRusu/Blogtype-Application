@@ -16,7 +16,7 @@ class PostsRepository(metaclass=ABCMeta):
         pass
 
     @abc.abstractclassmethod
-    def update_post(self, item):
+    def update_post(cls, item):
         pass
 
     @abc.abstractmethod

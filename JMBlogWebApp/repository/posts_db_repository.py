@@ -32,18 +32,18 @@ class PostsDBRepository(PostsRepository):
         current_connection = conn.get_connection('setup/database.ini', 'postgresql_conn_data')
         current_cursor = current_connection.cursor()
         current_cursor.execute("UPDATE POSTS SET\
-        creation_date = %s,\
-        edit_date = %s,\
-        author = %s,\
-        title = %s,\
-        post_content = %s \
-        WHERE posts_id =%s;",
-        (item.stamp.creation_time, 
-         item.stamp.edit_time,
-         item.author,
-         item.title,
-         item.content,
-         item.stamp.post_id))
+                                creation_date = %s,\
+                                edit_date = %s,\
+                                author = %s,\
+                                title = %s,\
+                                post_content = %s \
+                                WHERE posts_id =%s;",
+                               (item.stamp.creation_time,
+                                item.stamp.edit_time,
+                                item.author,
+                                item.title,
+                                item.content,
+                                item.stamp.post_id))
 
         conn.close_connection(current_connection, current_cursor)
 
@@ -75,8 +75,8 @@ class PostsDBRepository(PostsRepository):
         conn.close_connection(current_connection, current_cursor)
 
         element = BlogPost(
-            item[3], 
-            item[4], 
+            item[3],
+            item[4],
             item[5])
 
         element.stamp.post_id = item[0]

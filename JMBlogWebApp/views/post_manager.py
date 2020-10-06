@@ -1,11 +1,9 @@
-import uuid
-import datetime
 from flask import Blueprint, render_template, request, redirect, url_for
 from models.blog_post import BlogPost
 from repository.repository_factory import RepositoryFactory
 from repository.data_source_type import DataSourceType
 
-dataSource = DataSourceType.DatabaseSource
+dataSource = DataSourceType.LocalSource
 repository = RepositoryFactory(dataSource).get_source()
 
 post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template_folder='templates')
@@ -22,12 +20,11 @@ def content(current_index):
 def add_item():
     if request.method == "POST":
         to_add = BlogPost(
-            uuid.uuid4(),
-            datetime.datetime.now().strftime("%Y-%B-%d %H:%M:%S"),
-            request.form['NameInput'], request.form['AuthorInput'],
+            request.form['NameInput'],
+            request.form['AuthorInput'],
             request.form['ContentInput'])
         repository.add_post(to_add)
-        return redirect(url_for('.content', current_index=to_add.post_id))
+        return redirect(url_for('.content', current_index=to_add.stamp.post_id))
     return render_template("add_post.html")
 
 @post_manager.route('/remove/<uuid:current_index>')
@@ -41,13 +38,12 @@ def update_item(current_index):
         return render_template("update_post.html", current=repository.get_by_id(current_index))
 
     if request.method == "POST":
-        repository.remove(current_index)
-        edited = BlogPost(
-            uuid.uuid4(),
-            datetime.datetime.now().strftime("%Y-%B-%d %H:%M:%S"),
+        current = repository.get_by_id(current_index)
+        current.update(
             request.form['NameInput'],
             request.form['AuthorInput'],
             request.form['ContentInput'])
-        repository.add_post(edited)
-        return redirect(url_for('.content', current_index=edited.post_id))
+        repository.update_post(current)
+
+        return redirect(url_for('.content', current_index=current.stamp.post_id))
     return Exception("Request type cannot be handled")

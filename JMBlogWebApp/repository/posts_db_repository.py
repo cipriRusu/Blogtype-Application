@@ -21,6 +21,9 @@ class PostsDBRepository(PostsRepository):
 
         conn.close_connection(current_connection, current_cursor)
 
+    def update_post(self, item):
+        pass
+
     def get_all(self):
         all_elements = []
         conn = DBConnectionSetup()
@@ -35,7 +38,6 @@ class PostsDBRepository(PostsRepository):
         conn.close_connection(current_connection, current_cursor)
 
         return all_elements
-
 
     def get_by_id(self, index):
         conn = DBConnectionSetup()

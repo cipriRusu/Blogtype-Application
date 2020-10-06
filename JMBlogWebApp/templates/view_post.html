@@ -16,7 +16,12 @@
     <hr />
     <p class="ArticleAuthor"> Article Author : {{ current.author }}</p><br />
     <p class="ArticleAuthor"> Created : {{ current.stamp.creation_time }}</p><br />
-    <p class="ArticleAuthor"> Modified : {{ current.stamp.edit_time }}</p><br />
+    <p class="ArticleAuthor"> Modified : 
+    {% if current.stamp.edit_time == None %}
+        <b>Never</b>
+    {% else %}
+        <b>{{ current.stamp.edit_time }}</b>
+    {% endif %}
     <p class="ArticleContent"> {{ current.content }} </p><br />
     <div class="FooterButtons">
         <div class="EditButton"><a href="{{ url_for('.update_item', current_index=current.stamp.post_id) }}">Edit</a></div>

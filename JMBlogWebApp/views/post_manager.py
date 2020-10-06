@@ -12,7 +12,7 @@ if TEST_MODE:
 else:
     data_source = DataSourceType.DatabaseSource
 
-    repository = RepositoryFactory(data_source).get_source()
+repository = RepositoryFactory(data_source).get_source()
 
 @post_manager.route('/', methods=["GET"])
 def index():

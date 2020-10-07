@@ -5,7 +5,7 @@ from repository.data_source_type import DataSourceType
 
 post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template_folder='templates')
 
-TEST_MODE = False
+TEST_MODE = True
 
 if TEST_MODE:
     data_source = DataSourceType.LocalSource
@@ -30,7 +30,7 @@ def add_item():
             request.form['AuthorInput'],
             request.form['ContentInput'])
         repository.add_post(to_add)
-        return redirect(url_for('.content', current_index=to_add.stamp.post_id))
+        return redirect(url_for('.content', current_index=to_add.post_id))
     return render_template("add_post.html")
 
 @post_manager.route('/remove/<uuid:current_index>')
@@ -51,5 +51,5 @@ def update_item(current_index):
             request.form['ContentInput'])
         repository.update_post(current)
 
-        return redirect(url_for('.content', current_index=current.stamp.post_id))
+        return redirect(url_for('.content', current_index=current.post_id))
     return Exception("Request type cannot be handled")

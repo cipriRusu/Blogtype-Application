@@ -61,7 +61,7 @@ class PostsInMemoryRepository(PostsRepository):
 
     def get_by_id(self, index):
         for element in self._db:
-            if element.post_id == uuid.UUID(index.hex):
+            if element.post_id == index:
                 return element
         raise Exception("no element found!")
 

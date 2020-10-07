@@ -18,7 +18,7 @@ class PostsDBRepository(PostsRepository):
         title,\
         post_content)\
         VALUES(%s, %s, %s, %s, %s, %s)", (
-            str(item.stamp.post_id),
+            str(item.post_id),
             item.stamp.creation_time,
             item.stamp.edit_time,
             item.author,
@@ -43,7 +43,7 @@ class PostsDBRepository(PostsRepository):
                                 item.author,
                                 item.title,
                                 item.content,
-                                item.stamp.post_id))
+                                item.post_id))
 
         conn.close_connection(current_connection, current_cursor)
 
@@ -56,7 +56,7 @@ class PostsDBRepository(PostsRepository):
 
         for item in current_cursor.fetchall():
             element = BlogPost(item[3], item[4], item[5])
-            element.stamp.post_id = item[0]
+            element.post_id = item[0]
             element.stamp.creation_time = item[1]
             element.stamp.edit_time = item[2]
 
@@ -79,7 +79,7 @@ class PostsDBRepository(PostsRepository):
             item[4],
             item[5])
 
-        element.stamp.post_id = item[0]
+        element.post_id = item[0]
         element.stamp.creation_time = item[1]
         element.stamp.edit_time = item[2]
 

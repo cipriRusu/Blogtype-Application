@@ -1,13 +1,13 @@
-from repository.data_source_type import DataSourceType
 from repository.posts_in_memory_repository import PostsInMemoryRepository
 from repository.posts_db_repository import PostsDBRepository
+from repository.in_memory_data import db
 
 class RepositoryFactory:
-    def __init__(self, source_type):
-        self.source_type = source_type
-    def get_source(self):
-        if self.source_type == DataSourceType.LocalSource:
-            return PostsInMemoryRepository()
-        if self.source_type == DataSourceType.DatabaseSource:
+    IS_TEST = True
+    @staticmethod
+    def get_source():
+        if RepositoryFactory.IS_TEST:
+            return PostsInMemoryRepository(db)
+        if not RepositoryFactory.IS_TEST:
             return PostsDBRepository()
         return Exception('Data source unknown')

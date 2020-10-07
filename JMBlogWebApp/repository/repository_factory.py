@@ -3,7 +3,7 @@ from repository.posts_db_repository import PostsDBRepository
 from repository.in_memory_data import in_memory_db
 
 class RepositoryFactory:
-    IS_TEST = True
+    IS_TEST = False
     @staticmethod
     def get_source():
         if RepositoryFactory.IS_TEST:

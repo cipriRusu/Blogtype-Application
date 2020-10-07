@@ -70,5 +70,5 @@ class PostsInMemoryRepository(PostsRepository):
 
     def remove(self, index):
         for element in self._db:
-            if element.stamp.post_id == index:
+            if element.post_id == index:
                 self._db.remove(element)

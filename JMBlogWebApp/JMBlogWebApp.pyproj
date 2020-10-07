@@ -34,6 +34,9 @@
     <Compile Include="models\timestamp.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="repository\in_memory_data.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="setup\db_connection_setup.py">
       <SubType>Code</SubType>
     </Compile>

@@ -1,9 +1,8 @@
 import uuid
 import datetime
 
-class PostIdAndTimestamps:
+class TimeStamp:
     def __init__(self):
-        self.post_id = uuid.uuid4()
         self.creation_time = datetime.datetime.now().strftime("%Y-%B-%d %H:%M:%S")
         self.edit_time = None
 

@@ -7,9 +7,7 @@ class PostsDBRepository(PostsRepository):
         self._conn = DBConnectionSetup()
 
     def add_post(self, item):
-        current_connection = self._conn.get_connection()
-        current_cursor = current_connection.cursor()
-        current_cursor.execute("INSERT INTO POSTS \
+        self._conn.execute_query("INSERT INTO POSTS \
         (posts_id,\
         creation_date,\
         edit_date,\
@@ -24,37 +22,33 @@ class PostsDBRepository(PostsRepository):
             item.title,
             item.content))
 
-        self._conn.close_connection(current_connection, current_cursor)
+        self._conn.close_connection()
 
     def update_post(self, item):
-        current_connection = self._conn.get_connection()
-        current_cursor = current_connection.cursor()
-        current_cursor.execute("UPDATE POSTS SET\
+        self._conn.execute_query("UPDATE POSTS SET\
                                 creation_date = %s,\
                                 edit_date = %s,\
                                 author = %s,\
                                 title = %s,\
                                 post_content = %s \
                                 WHERE posts_id =%s;",
-                               (item.stamp.creation_time,
-                                item.stamp.edit_time,
-                                item.author,
-                                item.title,
-                                item.content,
-                                item.post_id))
+                                 (item.stamp.creation_time,
+                                  item.stamp.edit_time,
+                                  item.author,
+                                  item.title,
+                                  item.content,
+                                  item.post_id))
 
-        self._conn.close_connection(current_connection, current_cursor)
+        self._conn.close_connection()
 
     def get_all(self):
         all_elements = []
-        current_connection = self._conn.get_connection()
-        current_cursor = current_connection.cursor()
-        current_cursor.execute('SELECT * FROM POSTS;')
+        query_result = self._conn.execute_query('SELECT * FROM POSTS;')
 
-        for item in current_cursor.fetchall():
+        for item in query_result.fetchall():
             element = BlogPost(
-                item[3], 
-                item[4], 
+                item[3],
+                item[4],
                 item[5])
 
             element.post_id = item[0]
@@ -63,16 +57,16 @@ class PostsDBRepository(PostsRepository):
 
             all_elements.append(element)
 
-        self._conn.close_connection(current_connection, current_cursor)
+        self._conn.close_connection()
 
         return all_elements
 
     def get_by_id(self, index):
-        current_connection = self._conn.get_connection()
-        current_cursor = current_connection.cursor()
-        current_cursor.execute("SELECT * FROM POSTS WHERE posts_id=%s;", (str(index),))
-        item = current_cursor.fetchone()
-        self._conn.close_connection(current_connection, current_cursor)
+        query_result = self._conn.execute_query('SELECT * FROM\
+        POSTS WHERE posts_id=%s;', (str(index),))
+
+        item = query_result.fetchone()
+        self._conn.close_connection()
 
         element = BlogPost(
             item[3],
@@ -86,7 +80,5 @@ class PostsDBRepository(PostsRepository):
         return element
 
     def remove(self, index):
-        current_connection = self._conn.get_connection()
-        current_cursor = current_connection.cursor()
-        current_cursor.execute("DELETE FROM POSTS WHERE posts_id=%s;", (str(index),))
-        self._conn.close_connection(current_connection, current_cursor)
+        self._conn.execute_query("DELETE FROM POSTS WHERE posts_id=%s;", (str(index),))
+        self._conn.close_connection()

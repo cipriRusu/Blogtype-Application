@@ -1,13 +1,16 @@
 from configparser import ConfigParser
 import psycopg2
 
+CONFIG_PATH = 'setup/database.ini'
+CONFIG_HEADER = 'postgresql_conn_data'
+
 class DBConnectionSetup():
     def __init__(self):
         self.config_parser = ConfigParser()
 
     def get_connection(self):
-        self.config_parser.read('setup/database.ini')
-        config_params = self.config_parser.items('postgresql_conn_data')
+        self.config_parser.read(CONFIG_PATH)
+        config_params = self.config_parser.items(CONFIG_HEADER)
         db_conn_dict = {}
 
         for config_param in config_params:

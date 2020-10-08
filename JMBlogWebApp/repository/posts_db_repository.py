@@ -8,7 +8,7 @@ class PostsDBRepository(PostsRepository):
 
     def add_post(self, item):
         conn = DBConnectionSetup()
-        current_connection = conn.get_connection('setup/database.ini', 'postgresql_conn_data')
+        current_connection = conn.get_connection()
         current_cursor = current_connection.cursor()
         current_cursor.execute("INSERT INTO POSTS \
         (posts_id,\
@@ -29,7 +29,7 @@ class PostsDBRepository(PostsRepository):
 
     def update_post(self, item):
         conn = DBConnectionSetup()
-        current_connection = conn.get_connection('setup/database.ini', 'postgresql_conn_data')
+        current_connection = conn.get_connection()
         current_cursor = current_connection.cursor()
         current_cursor.execute("UPDATE POSTS SET\
                                 creation_date = %s,\
@@ -50,7 +50,7 @@ class PostsDBRepository(PostsRepository):
     def get_all(self):
         all_elements = []
         conn = DBConnectionSetup()
-        current_connection = conn.get_connection('setup/database.ini', 'postgresql_conn_data')
+        current_connection = conn.get_connection()
         current_cursor = current_connection.cursor()
         current_cursor.execute('SELECT * FROM POSTS;')
 
@@ -68,7 +68,7 @@ class PostsDBRepository(PostsRepository):
 
     def get_by_id(self, index):
         conn = DBConnectionSetup()
-        current_connection = conn.get_connection('setup/database.ini', 'postgresql_conn_data')
+        current_connection = conn.get_connection()
         current_cursor = current_connection.cursor()
         current_cursor.execute("SELECT * FROM POSTS WHERE posts_id=%s;", (str(index),))
         item = current_cursor.fetchone()
@@ -87,7 +87,7 @@ class PostsDBRepository(PostsRepository):
 
     def remove(self, index):
         conn = DBConnectionSetup()
-        current_connection = conn.get_connection('setup/database.ini', 'postgresql_conn_data')
+        current_connection = conn.get_connection()
         current_cursor = current_connection.cursor()
         current_cursor.execute("DELETE FROM POSTS WHERE posts_id=%s;", (str(index),))
         conn.close_connection(current_connection, current_cursor)

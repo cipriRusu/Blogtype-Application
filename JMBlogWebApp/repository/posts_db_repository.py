@@ -4,11 +4,10 @@ from setup.db_connection_setup import DBConnectionSetup
 
 class PostsDBRepository(PostsRepository):
     def __init__(self):
-        pass
+        self._conn = DBConnectionSetup()
 
     def add_post(self, item):
-        conn = DBConnectionSetup()
-        current_connection = conn.get_connection()
+        current_connection = self._conn.get_connection()
         current_cursor = current_connection.cursor()
         current_cursor.execute("INSERT INTO POSTS \
         (posts_id,\
@@ -25,11 +24,10 @@ class PostsDBRepository(PostsRepository):
             item.title,
             item.content))
 
-        conn.close_connection(current_connection, current_cursor)
+        self._conn.close_connection(current_connection, current_cursor)
 
     def update_post(self, item):
-        conn = DBConnectionSetup()
-        current_connection = conn.get_connection()
+        current_connection = self._conn.get_connection()
         current_cursor = current_connection.cursor()
         current_cursor.execute("UPDATE POSTS SET\
                                 creation_date = %s,\
@@ -45,34 +43,36 @@ class PostsDBRepository(PostsRepository):
                                 item.content,
                                 item.post_id))
 
-        conn.close_connection(current_connection, current_cursor)
+        self._conn.close_connection(current_connection, current_cursor)
 
     def get_all(self):
         all_elements = []
-        conn = DBConnectionSetup()
-        current_connection = conn.get_connection()
+        current_connection = self._conn.get_connection()
         current_cursor = current_connection.cursor()
         current_cursor.execute('SELECT * FROM POSTS;')
 
         for item in current_cursor.fetchall():
-            element = BlogPost(item[3], item[4], item[5])
+            element = BlogPost(
+                item[3], 
+                item[4], 
+                item[5])
+
             element.post_id = item[0]
             element.stamp.creation_time = item[1]
             element.stamp.edit_time = item[2]
 
             all_elements.append(element)
 
-        conn.close_connection(current_connection, current_cursor)
+        self._conn.close_connection(current_connection, current_cursor)
 
         return all_elements
 
     def get_by_id(self, index):
-        conn = DBConnectionSetup()
-        current_connection = conn.get_connection()
+        current_connection = self._conn.get_connection()
         current_cursor = current_connection.cursor()
         current_cursor.execute("SELECT * FROM POSTS WHERE posts_id=%s;", (str(index),))
         item = current_cursor.fetchone()
-        conn.close_connection(current_connection, current_cursor)
+        self._conn.close_connection(current_connection, current_cursor)
 
         element = BlogPost(
             item[3],
@@ -86,8 +86,7 @@ class PostsDBRepository(PostsRepository):
         return element
 
     def remove(self, index):
-        conn = DBConnectionSetup()
-        current_connection = conn.get_connection()
+        current_connection = self._conn.get_connection()
         current_cursor = current_connection.cursor()
         current_cursor.execute("DELETE FROM POSTS WHERE posts_id=%s;", (str(index),))
-        conn.close_connection(current_connection, current_cursor)
+        self._conn.close_connection(current_connection, current_cursor)

@@ -12,7 +12,7 @@ in_memory_db = [BlogPost("FirstTitle", "FirstAuthor", "Lorem Ipsum is simply dum
                              passages,and more recently with desktop , publishing software like \
                              Aldus PageMaker including versions of Lorem Ipsum."),
 
-      BlogPost("SecondTitle", "SecondAuthor", "Lorem Ipsum is simply \
+                BlogPost("SecondTitle", "SecondAuthor", "Lorem Ipsum is simply \
                              dummy text of the, printing and typesetting industry. \
                              Lorem Ipsum has been the industry's standard dummy text \
                              ever since, the 1500s, when an unknown printer took a galley\
@@ -24,7 +24,7 @@ in_memory_db = [BlogPost("FirstTitle", "FirstAuthor", "Lorem Ipsum is simply dum
                              publishing software like Aldus PageMaker , including versions \
                              of Lorem Ipsum."),
 
-      BlogPost("ThirdTitle", "ThirdAuthor", "Lorem Ipsum is simply \
+                BlogPost("ThirdTitle", "ThirdAuthor", "Lorem Ipsum is simply \
                              dummy text of the printing ,and typesetting industry.\
                              Lorem Ipsum has been the industry's standard dummy text\
                              ever since the 1500s,when an unknown printer took a galley\

@@ -57,3 +57,15 @@ def test_remove_post_route_check_content_in_listing_after(current_app):
     remove_post = current_app.get('/posts/remove/f9c3a576-28bc-4b63-931d-04d6488d2f0d'
                                   , follow_redirects=True).data
     assert b'FirstTitle' not in remove_post
+
+def test_edit_post_route_check_content_in_post_after_edit(current_app):
+    data = {
+        'NameInput': 'NewName',
+        'AuthorInput': 'NewAuthor',
+        'ContentInput': 'NewContent'}
+
+    edit_post = current_app.post('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
+                                 data=data, follow_redirects=True)
+
+    assert b'SecondTitle' not in edit_post.data
+    assert b'NewName' in edit_post.data

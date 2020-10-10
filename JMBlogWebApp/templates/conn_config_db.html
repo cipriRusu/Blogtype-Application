@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='conn_config_db_style.css') }}" />
+    <title></title>
+</head>
+<body>
+    <div class="SetupForm">
+        <form method="post">
+            <label typeof="string">Name : </label><br />
+            <div class="InputFields"><input typeof="string" name="NameInput" /> </div><br />
+            <label typeof="string">Author : </label><br />
+            <div class="InputFields"><input typeof="string" name="AuthorInput" /></div><br />
+            <button class="SubmitButton">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -70,7 +70,7 @@
     <Compile Include="views\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-	<Compile Include="views\connection_manager.py">
+    <Compile Include="views\setup_manager.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

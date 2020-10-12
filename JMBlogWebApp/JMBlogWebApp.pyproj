@@ -102,6 +102,7 @@
     <Content Include="templates\view_post.html" />
     <Content Include="templates\list_posts.html" />
     <Content Include="templates\update_post.html" />
+    <Content Include="templates\setup.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 

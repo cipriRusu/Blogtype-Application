@@ -1,16 +1,16 @@
 import configparser
 from flask import Blueprint, render_template, request, redirect, url_for
 
-connection_manager = Blueprint(
+setup_manager = Blueprint(
     'connection_manager',
     __name__,
     url_prefix='/dbsetup',
     template_folder='templates')
 
-@connection_manager.route('/', methods=["GET", "POST"])
+@setup_manager.route('/', methods=["GET", "POST"])
 def database_connector():
     if request.method == "GET":
-        return render_template("conn_config_db.html")
+        return render_template("setup.html")
     if request.method == "POST":
         config = configparser.ConfigParser()
         config['postgresql_conn_data'] = { 'host' : request.form['HostInput'],

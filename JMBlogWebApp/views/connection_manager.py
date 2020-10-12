@@ -1,6 +1,5 @@
 import configparser
 from flask import Blueprint, render_template, request, redirect, url_for
-from setup.db_setup import DbSetup
 
 connection_manager = Blueprint(
     'connection_manager',

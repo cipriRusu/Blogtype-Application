@@ -10,7 +10,7 @@ app.register_blueprint(setup_manager.setup_manager)
 @app.route('/')
 @app.route('/<path:path>')
 def catch_all():
-    if path.exists('./setup/database.ini'):
+    if path.exists('./setup/config.ini'):
         return redirect('/posts/', 302)
     return redirect('/dbsetup/', 302)
 

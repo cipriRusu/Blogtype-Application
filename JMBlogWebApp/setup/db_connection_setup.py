@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 import psycopg2
 
-CONFIG_PATH = 'setup/database.ini'
+CONFIG_PATH = 'setup/config.ini'
 CONFIG_HEADER = 'postgresql_conn_data'
 
 class DBConnectionSetup():

@@ -12,7 +12,7 @@ app.register_blueprint(setup_manager.setup_manager)
 def catch_all():
     if Config().is_configured():
         return redirect('/posts/', 302)
-    return redirect('/dbsetup/', 302)
+    return redirect('/setup/', 302)
 
 if __name__ == '__main__':
     app.run('localhost', 4449)

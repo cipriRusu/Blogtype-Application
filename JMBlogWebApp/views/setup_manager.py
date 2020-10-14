@@ -5,7 +5,7 @@ from setup.config import Config
 setup_manager = Blueprint(
     'connection_manager',
     __name__,
-    url_prefix='/dbsetup',
+    url_prefix='/setup',
     template_folder='templates')
 
 @setup_manager.route('/', methods=["GET", "POST"])

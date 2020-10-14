@@ -40,6 +40,9 @@
     <Compile Include="setup\db_connection_setup.py">
       <SubType>Code</SubType>
     </Compile>
+	<Compile Include="setup\config.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="repository\data_source_type.py">
       <SubType>Code</SubType>
     </Compile>

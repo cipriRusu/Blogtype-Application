@@ -40,7 +40,7 @@
     <Compile Include="setup\db_connection_setup.py">
       <SubType>Code</SubType>
     </Compile>
-	<Compile Include="setup\config.py">
+    <Compile Include="setup\config.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="repository\data_source_type.py">
@@ -88,9 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".pylintrc">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="setup\database.ini">
       <SubType>Code</SubType>
     </Content>
     <Content Include="static\add_update_style.css">

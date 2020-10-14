@@ -1,10 +1,12 @@
 from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
 from setup.db_connection_setup import DBConnectionSetup
+from setup.config import Config
 
 class PostsDBRepository(PostsRepository):
     def __init__(self):
-        self._conn = DBConnectionSetup()
+        self._params = Config().from_file('db_connection')
+        self._conn = DBConnectionSetup(self._params)
 
     def add_post(self, item):
         self._conn.execute_query("INSERT INTO POSTS \

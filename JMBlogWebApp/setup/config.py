@@ -22,7 +22,7 @@ class Config():
 
     def to_file(self, source, header):
         self._config_parser[header] = source
-        with open('./setup/config.ini', 'w+') as configfile:
+        with open(self._config_path, 'w+') as configfile:
             self._config_parser.write(configfile)
 
     def is_configured(self):

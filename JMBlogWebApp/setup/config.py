@@ -20,6 +20,5 @@ class Config():
 
     def to_file(self, source, header):
         self._config_parser[header] = source
-        config.optionxform = lowercase
         with open('./setup/config.ini', 'w+') as configfile:
             self._config_parser.write(configfile)

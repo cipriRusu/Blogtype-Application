@@ -15,14 +15,14 @@ def database_connector():
     if request.method == "POST":
         Config().to_file(request.form, 'db_connection')
 
-        conn = DBConnectionSetup(
+        conn = DbSetup(
             {'host': request.form['host'],
              'user': request.form['user'],
              'password': request.form['password']})
 
         conn.execute_query("CREATE DATABASE %s;" % request.form['database'])
 
-        conn = DBConnectionSetup({
+        conn = DbSetup({
             'host': request.form['host'],
             'user': request.form['user'],
             'database': request.form['database'],

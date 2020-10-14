@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from setup.db_connection_setup import DBConnectionSetup
+from setup.db_setup import DbSetup
 from setup.config import Config
 
 setup_manager = Blueprint(

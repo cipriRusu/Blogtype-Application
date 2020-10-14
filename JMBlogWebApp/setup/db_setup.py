@@ -1,6 +1,6 @@
 import psycopg2
 
-class DBConnectionSetup():
+class DbSetup():
     def __init__(self, connection_params):
         self._connection = psycopg2.connect(**connection_params)
         self._connection.autocommit = True

@@ -1,6 +1,6 @@
 from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
-from setup.db_setup import DbSetup 
+from setup.db_setup import DbSetup
 from setup.config import Config
 
 class PostsDBRepository(PostsRepository):

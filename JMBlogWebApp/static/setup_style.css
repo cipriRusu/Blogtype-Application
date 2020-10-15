@@ -1,0 +1,32 @@
+header
+{
+    background-color:beige;
+}
+
+.InputFields > input
+{
+    border: none;
+    border-bottom: 1px solid #ddd;
+    outline: none;
+}
+
+body, html {
+    height: 90%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+.InputFields > input {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.SubmitButton {
+    padding: 1%;
+    border: none;
+    background-color: beige;
+}
+
+.SubmitButton:hover {
+    cursor: pointer;
+}

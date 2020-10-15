@@ -96,6 +96,9 @@
     <Content Include="static\add_update_style.css">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="static\setup_style.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="static\view_post_style.css">
       <SubType>Code</SubType>
     </Content>

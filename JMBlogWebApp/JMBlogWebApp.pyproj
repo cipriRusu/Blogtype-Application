@@ -70,6 +70,9 @@
     <Compile Include="tests\test_posts_manager.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tests\test_setup_manager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="views\post_manager.py">
       <SubType>Code</SubType>
     </Compile>

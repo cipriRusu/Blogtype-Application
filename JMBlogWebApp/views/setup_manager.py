@@ -14,26 +14,11 @@ def database_connector():
         return render_template("setup.html")
     if request.method == "POST":
         Config().to_file(request.form, 'db_connection')
-
-        conn = DbSetup(
+        DbSetup(
             {'host': request.form['host'],
              'user': request.form['user'],
-             'password': request.form['password']})
+             'password': request.form['password'],
+             'database' : request.form['database']})
 
-        conn.execute_query("CREATE DATABASE %s;" % request.form['database'])
-
-        conn = DbSetup({
-            'host': request.form['host'],
-            'user': request.form['user'],
-            'database': request.form['database'],
-            'password': request.form['password']})
-
-        conn.execute_query("CREATE TABLE POSTS(posts_id uuid,\
-        creation_date timestamp,\
-        edit_date timestamp,\
-        author varchar,\
-        title varchar,\
-        post_content varchar);")
-        conn.close_connection()
         return redirect(url_for('post_manager.index'))
     return Exception("Cannot handle current request")

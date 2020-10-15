@@ -43,7 +43,7 @@ class DbSetup():
                 password=self._params['password'])
 
             temp_cursor = temp_connection.cursor()
-            temp_cursor.execute("CREATE TABLE POSTS(posts_id uuid,\
+            temp_cursor.execute("CREATE TABLE IF NOT EXISTS POSTS(posts_id uuid,\
             creation_date timestamp,\
             edit_date timestamp,\
             author varchar,\

@@ -1,4 +1,5 @@
 import psycopg2
+import setup.postgres_scripts as scripts
 
 class DbSetup():
     def __init__(self, connection_params):
@@ -23,14 +24,15 @@ class DbSetup():
 
         temp_cursor = temp_connection.cursor()
 
-        temp_cursor.execute('SELECT datname from pg_database')
+        temp_cursor.execute(scripts.LIST_DATABASES_SCRIPT)
 
         contained = temp_cursor.fetchall()
 
         databases = [x[0] for x in contained]
 
+        #check if database exists on server
         if self._params.get('database') not in databases:
-            temp_cursor.execute("CREATE DATABASE %s;" % self._params['database'])
+            temp_cursor.execute(scripts.CREATE_DATABASE_SCRIPT % self._params['database'])
 
             temp_cursor.close()
             temp_connection.commit()
@@ -43,16 +45,29 @@ class DbSetup():
                 password=self._params['password'])
 
             temp_cursor = temp_connection.cursor()
-            temp_cursor.execute("CREATE TABLE IF NOT EXISTS POSTS(posts_id uuid,\
-            creation_date timestamp,\
-            edit_date timestamp,\
-            author varchar,\
-            title varchar,\
-            post_content varchar);")
+            temp_cursor.execute(scripts.CREATE_TABLE_SCRIPT)
 
             temp_cursor.close()
             temp_connection.commit()
             temp_connection.close()
+
+        #check if posts table exists in existing database
+        temp_connection = psycopg2.connect(
+            host=self._params['host'],
+            user=self._params['user'],
+            database=self._params['database'],
+            password=self._params['password'])
+
+        temp_cursor = temp_connection.cursor()
+
+        temp_cursor.execute(scripts.SEARCH_TABLE_SCRIPT % ("'posts'",))
+
+        if not temp_cursor.fetchone()[0]:
+            temp_cursor.execute(scripts.CREATE_TABLE_SCRIPT)
+            temp_cursor.close()
+            temp_connection.commit()
+            temp_connection.close()
+
 
         return psycopg2.connect(
             host=self._params['host'],

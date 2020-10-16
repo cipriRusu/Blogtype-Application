@@ -1,5 +1,6 @@
 import psycopg2
 import setup.postgres_scripts as scripts
+from setup.db_connect import DbConnect
 
 class DbSetup():
     def __init__(self, connection_params):
@@ -15,65 +16,23 @@ class DbSetup():
         return self._cursor
 
     def _create_connection(self):
-        temp_connection = psycopg2.connect(
-            host=self._params['host'],
-            user=self._params['user'],
-            password=self._params['password'])
 
-        temp_connection.autocommit = True
+        conn = DbConnect(hasDb=False, **self._params)
 
-        temp_cursor = temp_connection.cursor()
+        if not conn.contains_database(self._params.get('database')):
 
-        temp_cursor.execute(scripts.LIST_DATABASES_SCRIPT)
+            conn.execute(scripts.CREATE_DATABASE_SCRIPT % self._params['database'])
 
-        contained = temp_cursor.fetchall()
+            conn = DbConnect(**self._params)
 
-        databases = [x[0] for x in contained]
+            conn.execute(scripts.CREATE_TABLE_SCRIPT)
 
-        #check if database exists on server
-        if self._params.get('database') not in databases:
-            temp_cursor.execute(scripts.CREATE_DATABASE_SCRIPT % self._params['database'])
+        conn = DbConnect(**self._params)
 
-            temp_cursor.close()
-            temp_connection.commit()
-            temp_connection.close()
+        if not conn.contains_table():
+            conn.execute(scripts.CREATE_TABLE_SCRIPT)
 
-            temp_connection = psycopg2.connect(
-                host=self._params['host'],
-                user=self._params['user'],
-                database=self._params['database'],
-                password=self._params['password'])
-
-            temp_cursor = temp_connection.cursor()
-            temp_cursor.execute(scripts.CREATE_TABLE_SCRIPT)
-
-            temp_cursor.close()
-            temp_connection.commit()
-            temp_connection.close()
-
-        #check if posts table exists in existing database
-        temp_connection = psycopg2.connect(
-            host=self._params['host'],
-            user=self._params['user'],
-            database=self._params['database'],
-            password=self._params['password'])
-
-        temp_cursor = temp_connection.cursor()
-
-        temp_cursor.execute(scripts.SEARCH_TABLE_SCRIPT % ("'posts'",))
-
-        if not temp_cursor.fetchone()[0]:
-            temp_cursor.execute(scripts.CREATE_TABLE_SCRIPT)
-            temp_cursor.close()
-            temp_connection.commit()
-            temp_connection.close()
-
-
-        return psycopg2.connect(
-            host=self._params['host'],
-            user=self._params['user'],
-            database=self._params['database'],
-            password=self._params['password'])
+        return psycopg2.connect(**self._params)
 
     def close_connection(self):
         self._cursor.close()

@@ -37,6 +37,9 @@
     <Compile Include="repository\in_memory_data.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="setup\db_connect.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="setup\db_setup.py">
       <SubType>Code</SubType>
     </Compile>

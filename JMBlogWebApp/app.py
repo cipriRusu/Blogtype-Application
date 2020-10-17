@@ -11,8 +11,6 @@ app.register_blueprint(setup_manager.setup_manager)
 @app.route('/')
 @app.route('/<path:path>')
 def catch_all():
-    if current_repository.IS_TEST:
-        return redirect('/posts/', 302)
     if Config().is_configured():
         return redirect('/posts/', 302)
     return redirect('/setup/', 302)

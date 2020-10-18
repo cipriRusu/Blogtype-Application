@@ -69,3 +69,11 @@ def test_edit_post_route_check_content_in_post_after_edit(current_app):
 
     assert b'SecondTitle' not in edit_post.data
     assert b'NewName' in edit_post.data
+
+def test_start_page_redirects_to_setup_if_setup_not_present(current_app):
+    response = current_app.get('/', follow_redirects=True).data
+    assert b'Connection Setup:' in response
+
+def test_start_page_does_not_redirect_if_setup_present(current_app):
+    response = current_app.get('/', follow_redirects=True).data
+    assert b'Blog App' in response

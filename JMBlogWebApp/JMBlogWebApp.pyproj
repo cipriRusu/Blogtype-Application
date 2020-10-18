@@ -37,6 +37,12 @@
     <Compile Include="repository\in_memory_data.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="services\services.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="services\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="setup\db_connect.py">
       <SubType>Code</SubType>
     </Compile>
@@ -88,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />
+    <Folder Include="services\" />
     <Folder Include="tests\" />
     <Folder Include="setup\" />
     <Folder Include="views\" />

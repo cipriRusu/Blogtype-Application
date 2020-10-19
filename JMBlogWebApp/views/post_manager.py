@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from models.blog_post import BlogPost
 from services.services import Services as src
 
-post_manager = Blueprint('post_manager', __name__, url_prefix='/', template_folder='templates')
+post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template_folder='templates')
 
 @post_manager.route('/', methods=["GET"])
 def index():

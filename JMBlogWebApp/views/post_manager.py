@@ -10,7 +10,8 @@ def index():
 
 @post_manager.route('/<uuid:current_index>')
 def content(current_index):
-    return render_template("view_post.html", current=src().get_service('test').get_by_id(current_index))
+    return render_template("view_post.html",
+                           current=src().get_service('test').get_by_id(current_index))
 
 @post_manager.route('/add', methods=["GET", "POST"])
 def add_item():
@@ -36,7 +37,7 @@ def update_item(current_index):
                                current=src().get_service('database').get_by_id(current_index))
 
     if request.method == "POST":
-        current = src().get_service().get_by_id(current_index)
+        current = src().get_service('database').get_by_id(current_index)
         current.update(
             request.form['NameInput'],
             request.form['AuthorInput'],

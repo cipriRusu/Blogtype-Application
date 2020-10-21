@@ -26,8 +26,3 @@ class DbSetup():
             conn.execute(scripts.CREATE_TABLE_SCRIPT)
 
         return psycopg2.connect(**self._params)
-
-    def close_connection(self):
-        self._cursor.close()
-        self._connection.commit()
-        self._connection.close()

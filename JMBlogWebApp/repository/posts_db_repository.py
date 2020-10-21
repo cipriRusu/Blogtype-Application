@@ -1,15 +1,14 @@
 from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
-from setup.db_setup import DbSetup
+from setup.db_connect import DbConnect
 from setup.config import Config
 
 class PostsDBRepository(PostsRepository):
     def __init__(self):
-        self._params = Config().from_file('db_connection')
-        self._conn = DbSetup(self._params)
+        self._conn = DbConnect(True, **Config().from_file('db_connection'))
 
     def add_post(self, item):
-        self._conn.execute_query("INSERT INTO POSTS \
+        self._conn.execute("INSERT INTO POSTS \
         (posts_id,\
         creation_date,\
         edit_date,\
@@ -24,28 +23,24 @@ class PostsDBRepository(PostsRepository):
             item.title,
             item.content))
 
-        self._conn.close_connection()
-
     def update_post(self, item):
-        self._conn.execute_query("UPDATE POSTS SET\
-                                creation_date = %s,\
-                                edit_date = %s,\
-                                author = %s,\
-                                title = %s,\
-                                post_content = %s \
-                                WHERE posts_id =%s;",
-                                 (item.stamp.creation_time,
-                                  item.stamp.edit_time,
-                                  item.author,
-                                  item.title,
-                                  item.content,
-                                  item.post_id))
-
-        self._conn.close_connection()
+        self._conn.execute("UPDATE POSTS SET\
+        creation_date = %s,\
+        edit_date = %s,\
+        author = %s,\
+        title = %s,\
+        post_content = %s \
+        WHERE posts_id =%s;",
+                           (item.stamp.creation_time,
+                            item.stamp.edit_time,
+                            item.author,
+                            item.title,
+                            item.content,
+                            item.post_id))
 
     def get_all(self):
         all_elements = []
-        query_result = self._conn.execute_query('SELECT * FROM POSTS;')
+        query_result = self._conn.execute('SELECT * FROM POSTS;')
 
         for item in query_result.fetchall():
             element = BlogPost(
@@ -59,16 +54,13 @@ class PostsDBRepository(PostsRepository):
 
             all_elements.append(element)
 
-        self._conn.close_connection()
-
         return all_elements
 
     def get_by_id(self, index):
-        query_result = self._conn.execute_query('SELECT * FROM\
+        query_result = self._conn.execute('SELECT * FROM\
         POSTS WHERE posts_id=%s;', (str(index),))
 
         item = query_result.fetchone()
-        self._conn.close_connection()
 
         element = BlogPost(
             item[3],
@@ -82,5 +74,4 @@ class PostsDBRepository(PostsRepository):
         return element
 
     def remove(self, index):
-        self._conn.execute_query("DELETE FROM POSTS WHERE posts_id=%s;", (str(index),))
-        self._conn.close_connection()
+        self._conn.execute("DELETE FROM POSTS WHERE posts_id=%s;", (str(index),))

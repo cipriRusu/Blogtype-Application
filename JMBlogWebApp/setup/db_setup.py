@@ -5,7 +5,7 @@ from setup.db_connect import DbConnect
 class DbSetup():
     def __init__(self, connection_params):
         self._params = connection_params
-        self._connection = self._create_database()
+        self._connection = self.create_database()
         self._cursor = self._connection.cursor()
 
     def execute_query(self, query, args=None):
@@ -15,7 +15,7 @@ class DbSetup():
             self._cursor.execute(query, args)
         return self._cursor
 
-    def _create_database(self):
+    def create_database(self):
 
         conn = DbConnect(hasDb=False, **self._params)
 

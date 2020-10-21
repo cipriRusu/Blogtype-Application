@@ -1,12 +1,10 @@
-import psycopg2
 import setup.postgres_scripts as scripts
 from setup.db_connect import DbConnect
 
 class DbSetup():
-    def __init__(self, connection_params):
+    def __init__(self, **connection_params):
         self._params = connection_params
         self._connection = self.create_database()
-        self._cursor = self._connection.cursor()
 
     def create_database(self):
 
@@ -25,4 +23,4 @@ class DbSetup():
         if not conn.contains_table():
             conn.execute(scripts.CREATE_TABLE_SCRIPT)
 
-        return psycopg2.connect(**self._params)
+        return self._connection

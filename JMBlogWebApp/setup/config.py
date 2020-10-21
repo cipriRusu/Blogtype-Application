@@ -25,7 +25,8 @@ class Config():
         with open(self._config_path, 'w+') as configfile:
             self._config_parser.write(configfile)
 
-    def is_configured(self):
-        if path.exists(self._config_path):
+    @classmethod
+    def is_configured(cls):
+        if path.exists(CONFIG_PATH):
             return True
         return False

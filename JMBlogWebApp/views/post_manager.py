@@ -5,7 +5,7 @@ post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template
 
 @post_manager.route('/', methods=["GET"])
 def index():
-    return render_template("list_posts.html", 
+    return render_template("list_posts.html",
                            database=current_app.config['DATA_SOURCE'].get_all())
 
 @post_manager.route('/<uuid:current_index>')

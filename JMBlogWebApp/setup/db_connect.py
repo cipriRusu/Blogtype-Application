@@ -13,11 +13,12 @@ class DbConnect():
         self._connection.autocommit = True
         self._cursor = self._connection.cursor()
 
-    def execute(self, query):
-        self._cursor.execute(query)
-        self._cursor.close()
-        self._connection.commit()
-        self._connection.close()
+    def execute(self, query, args=None):
+        if args is None:
+            self._cursor.execute(query)
+        else:
+            self._cursor.execute(query, args)
+        return self._cursor
 
     def contains_database(self, db_name):
         self._cursor.execute(scripts.LIST_DATABASES_SCRIPT)
@@ -28,3 +29,8 @@ class DbConnect():
     def contains_table(self):
         self._cursor.execute(scripts.SEARCH_TABLE_SCRIPT % ("'posts'",))
         return self._cursor.fetchone()[0]
+
+    def close_connection(self):
+        self._cursor.close()
+        self._connection.commit()
+        self._connection.close()

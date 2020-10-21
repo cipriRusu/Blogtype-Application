@@ -23,4 +23,4 @@ class DbSetup():
         if not conn.contains_table():
             conn.execute(scripts.CREATE_TABLE_SCRIPT)
 
-        return self._connection
+        return conn

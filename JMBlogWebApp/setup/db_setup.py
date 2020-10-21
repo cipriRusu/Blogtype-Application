@@ -8,13 +8,6 @@ class DbSetup():
         self._connection = self.create_database()
         self._cursor = self._connection.cursor()
 
-    def execute_query(self, query, args=None):
-        if args is None:
-            self._cursor.execute(query)
-        else:
-            self._cursor.execute(query, args)
-        return self._cursor
-
     def create_database(self):
 
         conn = DbConnect(hasDb=False, **self._params)

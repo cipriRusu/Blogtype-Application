@@ -18,5 +18,5 @@ class Services:
             return config()
 
         if service_name == 'connect':
-            setup(**config().from_file('db_connection'))
+            setup(**config().from_file('db_connection')).create_database()
             connect(True, **config().from_file('db_connection'))

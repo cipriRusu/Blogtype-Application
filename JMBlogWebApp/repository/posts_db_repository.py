@@ -8,6 +8,7 @@ class PostsDBRepository(PostsRepository):
         self._conn = DbConnect(True, **Config().from_file('db_connection'))
 
     def add_post(self, item):
+        self._conn.create_connection()
         self._conn.execute("INSERT INTO POSTS \
         (posts_id,\
         creation_date,\
@@ -26,6 +27,7 @@ class PostsDBRepository(PostsRepository):
         self._conn.close_connection()
 
     def update_post(self, item):
+        self._conn.create_connection()
         self._conn.execute("UPDATE POSTS SET\
         creation_date = %s,\
         edit_date = %s,\
@@ -43,6 +45,7 @@ class PostsDBRepository(PostsRepository):
         self._conn.close_connection()
 
     def get_all(self):
+        self._conn.create_connection()
         all_elements = []
         query_result = self._conn.execute('SELECT * FROM POSTS;')
 
@@ -62,6 +65,7 @@ class PostsDBRepository(PostsRepository):
         return all_elements
 
     def get_by_id(self, index):
+        self._conn.create_connection()
         query_result = self._conn.execute('SELECT * FROM\
         POSTS WHERE posts_id=%s;', (str(index),))
 
@@ -80,5 +84,6 @@ class PostsDBRepository(PostsRepository):
         return element
 
     def remove(self, index):
+        self._conn.create_connection()
         self._conn.execute("DELETE FROM POSTS WHERE posts_id=%s;", (str(index),))
         self._conn.close_connection()

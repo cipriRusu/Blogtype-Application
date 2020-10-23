@@ -23,6 +23,8 @@ class PostsDBRepository(PostsRepository):
             item.title,
             item.content))
 
+        self._conn.close_connection()
+
     def update_post(self, item):
         self._conn.execute("UPDATE POSTS SET\
         creation_date = %s,\
@@ -37,6 +39,8 @@ class PostsDBRepository(PostsRepository):
                             item.title,
                             item.content,
                             item.post_id))
+
+        self._conn.close_connection()
 
     def get_all(self):
         all_elements = []
@@ -54,6 +58,7 @@ class PostsDBRepository(PostsRepository):
 
             all_elements.append(element)
 
+        self._conn.close_connection()
         return all_elements
 
     def get_by_id(self, index):
@@ -71,7 +76,9 @@ class PostsDBRepository(PostsRepository):
         element.stamp.creation_time = item[1]
         element.stamp.edit_time = item[2]
 
+        self._conn.close_connection()
         return element
 
     def remove(self, index):
         self._conn.execute("DELETE FROM POSTS WHERE posts_id=%s;", (str(index),))
+        self._conn.close_connection()

@@ -59,16 +59,16 @@ def test_remove_post_route_check_content_in_listing_after(current_app):
     assert b'FirstTitle' not in remove_post
 
 def test_edit_post_route_check_content_in_post_after_edit(current_app):
-    data = {
-        'NameInput': 'NewName',
-        'AuthorInput': 'NewAuthor',
-        'ContentInput': 'NewContent'}
+
+    data = {"NameInput": "NewName",
+            "AuthorInput": "NewAuthor",
+            "ContentInput": "NewContent"}
 
     edit_post = current_app.post('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
-                                 data=data, follow_redirects=True)
+                                 data=data, follow_redirects=True).data
 
-    assert b'SecondTitle' not in edit_post.data
-    assert b'NewName' in edit_post.data
+    assert b'SecondTitle' not in edit_post
+    assert b'NewName' in edit_post
 
 def test_start_page_redirects_to_setup_if_setup_not_present(current_app):
     response = current_app.get('/', follow_redirects=True).data

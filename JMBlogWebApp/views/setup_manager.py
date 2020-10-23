@@ -10,7 +10,7 @@ setup_manager = Blueprint(
 @setup_manager.route('/', methods=["GET", "POST"])
 def database_connector():
     if request.method == "GET":
-        if Services().get_service('config').is_configured() or Services().IS_TEST:
+        if Services().get_service('config').is_configured():
             Services().get_service('connect')
             return redirect(url_for('post_manager.index'))
         return render_template("setup.html")

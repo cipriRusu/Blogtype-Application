@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from setup.db_setup import DbSetup
-from setup.db_connect  import DbConnect
-from setup.config import Config
+from services.services import Services
 
 setup_manager = Blueprint(
     'connection_manager',
@@ -12,13 +10,12 @@ setup_manager = Blueprint(
 @setup_manager.route('/', methods=["GET", "POST"])
 def database_connector():
     if request.method == "GET":
+        if Services().get_service('config').is_configured() or Services().IS_TEST:
+            Services().get_service('connect')
+            return redirect(url_for('post_manager.index'))
         return render_template("setup.html")
     if request.method == "POST":
-        if not Config().is_configured():
-            Config().to_file(request.form, 'db_connection')
-            DbSetup(**Config().from_file('db_connection'))
-            DbConnect(True, **request.form)
-        if Config.is_configured():
-            DbConnect(True, **request.form)
-            return redirect(url_for('post_manager.index'))
+        Services().get_service('config').to_file(request.form, 'db_connection')
+        Services().get_service('connect')
+        return redirect(url_for('post_manager.index'))
     return Exception("Cannot handle current request")

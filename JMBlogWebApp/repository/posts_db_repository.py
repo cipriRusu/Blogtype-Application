@@ -5,7 +5,8 @@ from setup.config import Config
 
 class PostsDBRepository(PostsRepository):
     def __init__(self):
-        self._conn = DbConnect(True, **Config().from_file('db_connection'))
+        self._conn = DbConnect()
+        self._conn.get_parameters(**Config().from_file('db_connection'))
 
     def add_post(self, item):
         self._conn.create_connection()

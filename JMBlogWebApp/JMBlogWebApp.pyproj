@@ -70,6 +70,9 @@
     <Compile Include="setup\postgres_scripts.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="setup\services_listing.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\conftest.py">
       <SubType>Code</SubType>
     </Compile>

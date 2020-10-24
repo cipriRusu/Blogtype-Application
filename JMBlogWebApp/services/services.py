@@ -1,3 +1,4 @@
+from setup import services_listing as service
 from setup.config import Config as config
 from setup.db_connect  import DbConnect as connect
 from setup.db_setup import DbSetup as setup
@@ -10,13 +11,12 @@ class Services:
     def __init__(self):
         pass
 
-    def get_service(self, service_name):
-        if service_name == 'data_source':
-            return test_db(test_data) if Services.IS_TEST else db()
+    services_container = {
+        service.DATA_SOURCE: db(),
+        service.CONFIGURE: config(),
+        service.CONNECT: connect(),
+        service.SETUP: setup()}
 
-        if service_name == 'config':
-            return config()
-
-        if service_name == 'connect':
-            setup(**config().from_file('db_connection')).create_database()
-            connect(True, **config().from_file('db_connection'))
+    @classmethod
+    def get_service(cls, service_name):
+        return Services.services_container[service_name]

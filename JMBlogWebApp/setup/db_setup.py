@@ -2,12 +2,13 @@ import setup.postgres_scripts as scripts
 from setup.db_connect import DbConnect
 
 class DbSetup():
-    def __init__(self, **connection_params):
-        self._params = connection_params
+    def __init__(self):
+        self._params = None
 
     def create_database(self):
 
-        conn = DbConnect(hasDb=False, **self._params)
+        conn = DbConnect(hasDb=False)
+        conn.get_parameters(**self._params)
         conn.create_connection()
 
         if not conn.contains_database(self._params.get('database')):
@@ -15,13 +16,15 @@ class DbSetup():
             conn.execute(scripts.CREATE_DATABASE_SCRIPT % self._params['database'])
             conn.close_connection()
 
-            conn = DbConnect(**self._params)
+            conn = DbConnect()
+            conn.get_parameters(**self._params)
             conn.create_connection()
 
             conn.execute(scripts.CREATE_TABLE_SCRIPT)
             conn.close_connection()
 
-        conn = DbConnect(**self._params)
+        conn = DbConnect()
+        conn.get_parameters(**self._params)
         conn.create_connection()
 
         if not conn.contains_table():
@@ -29,4 +32,5 @@ class DbSetup():
 
         conn.close_connection()
 
-        return conn
+    def get_connection(self, **connection_params):
+        self._params = connection_params

@@ -17,6 +17,19 @@ class Services:
         service.CONNECT: connect(),
         service.SETUP: setup()}
 
+    test_container = {
+        service.DATA_SOURCE: test_db(test_data),
+        service.CONFIGURE: config(),
+        service.CONNECT: connect(),
+        service.SETUP: setup()}
+
+    singletons = {}
+
     @classmethod
     def get_service(cls, service_name):
-        return Services.services_container[service_name]
+        if service_name not in Services.singletons:
+            Services.singletons[service_name] = (Services.test_container[service_name]
+                                                 if Services.IS_TEST
+                                                 else Services.services_container[service_name])
+            return Services.singletons[service_name]
+        return Services.singletons[service_name]

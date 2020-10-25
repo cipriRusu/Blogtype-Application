@@ -4,6 +4,9 @@ class PostsInMemoryRepository(PostsRepository):
     def __init__(self, db):
         self._db = db
 
+    def get_parameters(self, **conn):
+        pass
+
     def __iter__(self):
         for element in self._db:
             yield element

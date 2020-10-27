@@ -12,12 +12,6 @@ setup_manager = Blueprint(
 def database_connector():
     if request.method == "GET":
         if Services.get_service(services.CONFIGURE).is_configured():
-            #get current configuration data
-            config = Services.get_service(services.CONFIGURE).from_file('db_connection')
-
-            #connect to current data source
-            Services.get_service(services.DATA_SOURCE).get_parameters(**config)
-
             return redirect(url_for('post_manager.index'))
         return render_template("setup.html")
 

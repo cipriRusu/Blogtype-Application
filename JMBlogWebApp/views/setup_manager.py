@@ -10,26 +10,16 @@ setup_manager = Blueprint(
 
 @setup_manager.route('/', methods=["GET", "POST"])
 def database_connector():
+    current_config = Services.get_service(services.CONFIGURE)
+    current_setup = Services.get_service(services.SETUP)
+
     if request.method == "GET":
-        if Services.get_service(services.CONFIGURE).is_configured():
+        if current_config.is_configured():
             return redirect(url_for('post_manager.index'))
         return render_template("setup.html")
 
     if request.method == "POST":
-        #save configuration to file
-        Services.get_service(services.CONFIGURE).to_file(request.form, 'db_connection')
-
-        #get current configuration
-        config = Services.get_service(services.CONFIGURE).from_file('db_connection')
-
-        #connect to database server
-        Services.get_service(services.SETUP).get_connection(**config)
-
-        #create database and posts table
-        Services.get_service(services.SETUP).create_database()
-
-        #link data source to current database
-        Services.get_service(services.DATA_SOURCE).get_parameters(**config)
-
+        current_config.to_file(request.form, 'db_connection')
+        current_setup.create_database()
         return redirect(url_for('post_manager.index'))
     return Exception("Cannot handle current request")

@@ -1,14 +1,9 @@
 from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
-from setup.db_connect import DbConnect
 
 class PostsDBRepository(PostsRepository):
-    def __init__(self):
-        self._conn = None
-
-    def get_parameters(self, **conn):
-        self._conn = DbConnect()
-        self._conn.get_parameters(**conn)
+    def __init__(self, db_connection):
+        self._conn = db_connection
 
     def add_post(self, item):
         self._conn.create_connection()

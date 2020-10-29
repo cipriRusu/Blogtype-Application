@@ -18,10 +18,11 @@ class Services():
 
 
     production = {service.DATA_SOURCE: db(connect(config())),
-               service.CONFIGURE: config(),
-               service.CONNECT: connect(config()),
-               service.SETUP: setup(config())}
+                  service.CONFIGURE: config(),
+                  service.CONNECT: connect(config()),
+                  service.SETUP: setup(config())}
 
     @classmethod
     def get_service(cls, service_name):
-        return Services.test[service_name] if Services.IS_TEST else Services.production[service_name]
+        return (Services.test[service_name]
+                if Services.IS_TEST else Services.production[service_name])

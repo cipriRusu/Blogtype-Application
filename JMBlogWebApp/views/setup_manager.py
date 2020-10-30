@@ -3,7 +3,7 @@ from setup import services_listing as services
 from services.services import Services
 
 setup_manager = Blueprint(
-    'connection_manager',
+    'setup_manager',
     __name__,
     url_prefix='/setup',
     template_folder='templates')

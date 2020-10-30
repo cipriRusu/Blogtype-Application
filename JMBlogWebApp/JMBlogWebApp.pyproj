@@ -31,6 +31,12 @@
     <Compile Include="app.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="decorators\decorators.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="decorators\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="models\timestamp.py">
       <SubType>Code</SubType>
     </Compile>
@@ -88,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />
+    <Folder Include="decorators\" />
     <Folder Include="services\" />
     <Folder Include="tests\" />
     <Folder Include="setup\" />

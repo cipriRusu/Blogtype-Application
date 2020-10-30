@@ -19,7 +19,7 @@ def test_loading_contains_static_value(configured_app):
     assert b'Blog App' in response
 
 def test_browsing_to_posts_route_redirects_to_setup_automatically(unconfigured_app):
-    response = unconfigured_app.get('/posts/').data
+    response = unconfigured_app.get('/posts/', follow_redirects=True).data
     assert b'Connection Setup:' in response
 
 def test_loading_contains_dynamic_value(configured_app):
@@ -35,7 +35,8 @@ def test_loading_cotains_static_value_post_page(configured_app):
     assert b'FirstTitle' in response
 
 def test_post_page_redirects_to_setup_page(unconfigured_app):
-    response = unconfigured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d').data
+    response = unconfigured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d',
+                                    follow_redirects=True).data
     assert b'Connection Setup:' in response
 
 def test_loading_contains_dynamic_value_post_page(configured_app):

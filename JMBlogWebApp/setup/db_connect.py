@@ -2,30 +2,15 @@ import psycopg2
 import setup.postgres_scripts as scripts
 
 class DbConnect():
-    def __init__(self, config, hasDb=True):
-        self._has_db = hasDb
+    def __init__(self, config):
         self._config = config
-        self._params = None
         self._connection = None
         self._cursor = None
-        self._params = None
 
     def create_connection(self):
-        if self._has_db:
-            self._params = self._config.from_file('db_connection')
-        else:
-            self._params = self._config.from_file('db_connection')
-            del self._params['database']
-
-        self._connection = psycopg2.connect(**self._params)
+        self._connection = psycopg2.connect(**self._config.from_file('db_connection'))
         self._connection.autocommit = True
         self._cursor = self._connection.cursor()
-
-    def contains_database(self, db_name):
-        self._cursor.execute(scripts.LIST_DATABASES_SCRIPT)
-        contained = self._cursor.fetchall()
-        databases = [x[0] for x in contained]
-        return db_name in databases
 
     def contains_table(self):
         self._cursor.execute(scripts.SEARCH_TABLE_SCRIPT % ("'posts'",))

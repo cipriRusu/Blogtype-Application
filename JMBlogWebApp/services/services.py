@@ -13,18 +13,19 @@ class Services():
 
     configuration = Config()
     connection = DbConnect(configuration)
+    setup = DbSetup(connection)
     posts_repository = PostsDBRepository(connection)
     test_repository = PostsInMemoryRepository(test_data)
 
     test = {service.DATA_SOURCE: test_repository,
             service.CONFIGURE: configuration,
             service.CONNECT: connection,
-            service.SETUP: DbSetup(configuration)}
+            service.SETUP: setup}
 
     production = {service.DATA_SOURCE: posts_repository,
                   service.CONFIGURE: configuration,
                   service.CONNECT: connection,
-                  service.SETUP: DbSetup(configuration)}
+                  service.SETUP: setup}
 
     @classmethod
     def get_service(cls, service_name):

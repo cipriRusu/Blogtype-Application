@@ -12,4 +12,4 @@ class DbConfig(Config):
                         DbConfig.DB_CONNECTION_HEADER)
 
     def is_configured(self):
-        return super().has_section(DbConfig.DB_CONNECTION_HEADER) and super().is_configured()
+        return super().is_configured() and super().has_section(DbConfig.DB_CONNECTION_HEADER)

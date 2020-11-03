@@ -9,7 +9,7 @@ class Config():
         self._config_parser = ConfigParser()
 
     def from_file(self, header):
-        self._config_parser.read(self._config_path)
+        self.read_file()
         config_params = self._config_parser.items(header)
         db_conn_dict = {}
 
@@ -20,10 +20,17 @@ class Config():
 
         return db_conn_dict
 
+    def read_file(self):
+        self._config_parser.read(self._config_path)
+
     def to_file(self, source, header):
         self._config_parser[header] = source
         with open(self._config_path, 'w+') as configfile:
             self._config_parser.write(configfile)
+
+    def has_section(self, header):
+        self.read_file()
+        return self._config_parser.has_section(header)
 
     @classmethod
     def is_configured(cls):

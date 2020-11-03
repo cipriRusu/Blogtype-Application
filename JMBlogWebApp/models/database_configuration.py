@@ -1,6 +1,6 @@
 class DatabaseConfiguration:
-    def __init__(self, database, port, user, password):
-        self.host = 'localhost'
+    def __init__(self, host, database, port, user, password):
+        self.host = host
         self.database = database
         self.port = port
         self.user = user

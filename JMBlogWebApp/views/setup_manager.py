@@ -10,14 +10,14 @@ setup_manager = Blueprint(
 
 @setup_manager.route('/', methods=["GET", "POST"])
 @decorators.inject
-def database_connector(current_config: services.CONFIGURE, current_setup: services.SETUP):
+def database_connector(current_db_config: services.DB_CONFIGURATION, setup: services.SETUP):
     if request.method == "GET":
-        if current_config.is_configured():
+        if current_db_config.is_configured():
             return redirect(url_for('post_manager.index'))
         return render_template("setup.html")
 
     if request.method == "POST":
-        current_config.to_file(request.form, 'db_connection')
-        current_setup.create_database()
+        current_db_config.save_configuration(request.form)
+        setup.create_database()
         return redirect(url_for('post_manager.index'))
     return Exception("Cannot handle current request")

@@ -37,7 +37,13 @@
     <Compile Include="decorators\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="models\database_configuration.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="models\timestamp.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="repository\in_memory_data.py">
@@ -47,6 +53,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="services\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="setup\db_config.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="setup\db_connect.py">
@@ -74,6 +83,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="setup\services_listing.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="setup\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\conftest.py">

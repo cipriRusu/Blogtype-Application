@@ -1,5 +1,5 @@
 from setup import services_listing as service
-from setup.config import Config
+from setup.db_config import DbConfig
 from setup.db_connect  import DbConnect
 from setup.db_setup import DbSetup
 from repository.posts_db_repository import PostsDBRepository
@@ -11,19 +11,19 @@ class Services():
     def __init__(self):
         pass
 
-    configuration = Config()
-    connection = DbConnect(configuration)
+    db_configuration = DbConfig()
+    connection = DbConnect(db_configuration)
     setup = DbSetup(connection)
     posts_repository = PostsDBRepository(connection)
     test_repository = PostsInMemoryRepository(test_data)
 
-    test = {service.DATA_SOURCE: test_repository,
-            service.CONFIGURE: configuration,
+    test = {service.DB_CONFIGURATION: db_configuration,
+            service.DATA_SOURCE: test_repository,
             service.CONNECT: connection,
             service.SETUP: setup}
 
-    production = {service.DATA_SOURCE: posts_repository,
-                  service.CONFIGURE: configuration,
+    production = {service.DB_CONFIGURATION: db_configuration,
+                  service.DATA_SOURCE: posts_repository,
                   service.CONNECT: connection,
                   service.SETUP: setup}
 

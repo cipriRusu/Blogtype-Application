@@ -1,8 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from setup import services_listing as services
-from setup.config import Config
-from setup.db_setup import DbSetup
-from services.services import Services
 from decorators import decorators
 
 setup_manager = Blueprint(
@@ -13,7 +10,7 @@ setup_manager = Blueprint(
 
 @setup_manager.route('/', methods=["GET", "POST"])
 @decorators.inject
-def database_connector(current_config: "Config", current_setup: "DbSetup"):
+def database_connector(current_config: services.CONFIGURE, current_setup: services.SETUP):
     if request.method == "GET":
         if current_config.is_configured():
             return redirect(url_for('post_manager.index'))

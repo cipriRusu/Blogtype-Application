@@ -8,7 +8,7 @@ class DbConnect():
         self._cursor = None
 
     def create_connection(self):
-        self._connection = psycopg2.connect(**self._config.from_file('db_connection'))
+        self._connection = psycopg2.connect(**self._config.load_configuration())
         self._connection.autocommit = True
         self._cursor = self._connection.cursor()
 

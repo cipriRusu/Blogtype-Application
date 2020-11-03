@@ -3,12 +3,12 @@ from flask import redirect, url_for
 from setup import services_listing as services
 from services.services import Services
 
-current_config = Services.get_service(services.CONFIGURE)
+current_db_config = Services.get_service(services.DB_CONFIGURATION)
 
 def config_check(function):
     @wraps(function)
     def wrapper(*args, **kwargs):
-        if current_config.is_configured():
+        if current_db_config.is_configured():
             return function(*args, **kwargs)
         return redirect(url_for('setup_manager.database_connector'))
     return wrapper

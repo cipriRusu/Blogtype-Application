@@ -1,5 +1,5 @@
-from decorators import decorators
 from flask import Blueprint, render_template, request, redirect, url_for
+from decorators import decorators
 from models.database_configuration import DatabaseConfiguration
 from setup import services_listing as services
 

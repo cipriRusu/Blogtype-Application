@@ -24,7 +24,7 @@ class Config():
         self._config_parser.read(self._config_path)
 
     def to_file(self, source, header):
-        self._config_parser[header] = source
+        self._config_parser[header] = source.get_dictionary()
         with open(self._config_path, 'w+') as configfile:
             self._config_parser.write(configfile)
 

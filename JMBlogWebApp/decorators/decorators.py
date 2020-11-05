@@ -17,6 +17,7 @@ def inject(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         for element in func.__annotations__.items():
-            kwargs[element[0]] = Services.get_service(element[1])
+            kwargs[element[0]] = (Services.get_service(element[1]) if 
+                                  Services.is_service(element[1]) else element[1])
         return func(*args, **kwargs)
     return wrapper

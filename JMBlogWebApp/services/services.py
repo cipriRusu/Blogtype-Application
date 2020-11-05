@@ -28,6 +28,11 @@ class Services():
                   service.SETUP: setup}
 
     @classmethod
+    def is_service(cls, service_name):
+        all_services = {k:v for (k, v) in service.__dict__.items() if not k.startswith("_")}
+        return service_name in all_services.values()
+
+    @classmethod
     def get_service(cls, service_name):
         return (Services.test[service_name]
                 if Services.IS_TEST else Services.production[service_name])

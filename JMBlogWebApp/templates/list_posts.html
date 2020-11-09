@@ -3,21 +3,22 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="{{ url_for('static', filename='list_posts_style.css') }}" />
     <title></title>
 </head>
 <body>
     <header class="MainHeader">
-        <h1 class="MainTitle">Blog App</h1>
-        <div class="NewItemButton">
+        <h1 class="MainTitle navbar-header">Blog App</h1>
+        <div class="NewItemButton btn btn-default">
             <a href="{{ url_for('.add_item') }}">Add New Post</a>
         </div>
     </header>
-    <ul class="ArticlesList">
+    <ul class="list-group">
         {% for element in database|reverse %}
-        <li class="ArticleGroup">
+        <li class="ArticleGroup list-group-item">
             <a href=" {{ url_for('.content', current_index=element.post_id) }}">
                 Article Title : {{ element.title }}<br />
                 Article Author : {{ element.author }}<br />

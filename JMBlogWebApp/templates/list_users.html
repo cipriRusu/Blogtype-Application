@@ -3,21 +3,20 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="{{ url_for('static', filename='list_users_style.css') }}" />
     <title></title>
 </head>
 <body>
-    <ul>
+    <div class="list-group">
         {% for element in database %}
-        <li class="UsersList">
-            <a href=" {{ url_for('.content', current_index=element.post_id) }}">
-                Username : {{ element.user_name }}<br />
-                Email : {{ element.user_email }}
-            </a>
-        </li>
+        <a href="#" class="list-group-item">
+            Username : {{ element.user_name }}<br />
+            Email : {{ element.user_email }}
+        </a>
         {% endfor %}
-    </ul>
+    </div>
 </body>
 </html>

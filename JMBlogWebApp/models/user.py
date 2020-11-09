@@ -13,4 +13,4 @@ class User:
         self.user_name = user_name
         self.user_email = user_email
         self.user_password = user_password
-        self.stamp.on_edit()
+        self.user_timestamp.on_edit()

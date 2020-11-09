@@ -1,4 +1,5 @@
-DATA_SOURCE = "data"
+DATA_SOURCE_POSTS = "data"
+DATA_SOURCE_USERS = "users"
 CONNECT = "conn"
 CONFIGURE = "config"
 SETUP = "setup"

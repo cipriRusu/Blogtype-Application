@@ -9,4 +9,14 @@ creation_date timestamp,\
 edit_date timestamp,\
 author varchar,\
 title varchar,\
-post_content varchar);"
+post_content varchar,\
+PRIMARY KEY(posts_id),\
+FOREIGN KEY(author)\
+    REFERENCES users(user_name));"
+
+CREATE_USERS_SCRIPT = "CREATE TABLE USERS(user_id uuid,\
+user_name varchar UNIQUE,\
+user_email varchar,\
+user_password varchar,\
+user_created_at timestamp,\
+user_modified_at timestamp);"

@@ -53,9 +53,9 @@ in_memory_users = [
     User('ThirdAuthor', 't_author@blog.com', 'tpass')]
 
 in_memory_users[0].user_id = uuid.UUID('afa28c0c-4e89-468f-8709-a7583c666cb4')
-in_memory_posts[0].stamp.creation_time = '2017-03-21 21:20:33'
+in_memory_users[0].user_timestamp.creation_time = '2017-03-21 21:20:33'
 in_memory_users[1].user_id = uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')
-in_memory_posts[1].stamp.creation_time = '2015-03-12 12:02:31'
+in_memory_users[1].user_timestamp.creation_time = '2015-03-12 12:02:31'
 in_memory_users[2].user_id = uuid.UUID('25447284-aa74-4fb6-b7a0-2bb955f2b2b1')
-in_memory_posts[2].stamp.creation_time = '2009-06-15 13:21:35'
+in_memory_users[2].user_timestamp.creation_time = '2009-06-15 13:21:35'
 

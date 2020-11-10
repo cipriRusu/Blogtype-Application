@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='add_update_style.css') }}" />
+    <title></title>
+</head>
+<body>
+    <div class="Form">
+        <form method="post">
+            <label typeof="string">Username : </label><br />
+            <div><input typeof="string" name="NameInput" /> </div><br />
+            <label typeof="string">Email : </label><br />
+            <div><input typeof="string" name="EmailInput" /></div><br />
+            <label typeof="string">Password : </label><br />
+            <div><input type="password" name="PasswordInput" /></div><br />
+            <button class="SubmitButton">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

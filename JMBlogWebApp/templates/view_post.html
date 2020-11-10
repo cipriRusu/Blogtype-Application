@@ -12,7 +12,7 @@
     <title></title>
 </head>
 <body>
-    <div class="ReturnButton"><a href=" {{ url_for('.index') }}">Return to List</a></div>
+    <div class="ReturnButton btn btn-default"><a href=" {{ url_for('.index') }}">Return to List</a></div>
     <p class="ArticleTitle"> Article Title : {{ current.title }} </p><br />
     <hr />
     <p class="ArticleAuthor"> Article Author : {{ current.author }}</p><br />
@@ -25,8 +25,8 @@
     {% endif %}
     <p class="ArticleContent"> {{ current.content }} </p><br />
     <div class="FooterButtons">
-        <div class="EditButton"><a href="{{ url_for('.update_item', current_index=current.post_id) }}">Edit</a></div>
-        <div class="RemoveButton" id="RemoveBtId"><a href="{{ url_for('.remove_item', current_index=current.post_id) }}" onclick="return OnRemoveClick()">Remove</a></div>
+        <div class="btn btn-default"><a href="{{ url_for('.update_item', current_index=current.post_id) }}">Edit</a></div>
+        <div class="btn btn-default" id="RemoveBtId"><a href="{{ url_for('.remove_item', current_index=current.post_id) }}" onclick="return OnRemoveClick()">Remove</a></div>
     </div>
 </body>
 </html>

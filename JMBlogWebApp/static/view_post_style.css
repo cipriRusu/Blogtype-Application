@@ -9,6 +9,12 @@ body
     padding-right: 5%;
 }
 
+.a {
+    text-decoration: none;
+    color: black
+} 
+
+
 .ArticleTitle {
     font-weight: bold;
     font-size: xx-large;
@@ -36,26 +42,6 @@ body
     margin-bottom: 0;
     white-space: pre-line;
     white-space: pre-wrap;
-}
-
-.ReturnButton > a {
-    text-decoration: none;
-    color: black;
-    padding: 1%;
-    background-color: beige;
-}
-
-.RemoveButton > a {
-    text-decoration: none;
-    color: black;
-    background-color: beige;
-    margin:inherit;
-}
-
-.EditButton > a {
-    text-decoration: none;
-    color: black;
-    background-color: beige;
 }
 
 .FooterButtons {

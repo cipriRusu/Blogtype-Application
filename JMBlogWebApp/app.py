@@ -1,10 +1,11 @@
+import os
 from flask import Flask, redirect
 from views import post_manager
 from views import setup_manager
 from views import user_manager
 
 app = Flask(__name__, static_url_path="", static_folder="static")
-app.secret_key = 'somerandomstring'
+app.secret_key = os.urandom(10)
 
 with app.app_context():
     app.register_blueprint(post_manager.post_manager)

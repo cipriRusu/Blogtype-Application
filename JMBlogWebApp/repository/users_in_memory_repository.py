@@ -10,11 +10,11 @@ class UsersInMemoryRepository(UsersRepository):
             yield element
 
     def add_user(self, user):
-        self._db.append(item)
+        self._db.append(user)
 
     def update_user(self, user):
-        self._db.remove(item)
-        self._db.append(item)
+        self._db.remove(user)
+        self._db.append(user)
 
     def get_users(self):
         return self._db
@@ -23,8 +23,9 @@ class UsersInMemoryRepository(UsersRepository):
         for element in self._db:
             if element.user_id == user_id:
                 return element
+        raise Exception('No user found in current repository')
 
     def remove_user(self, user_id):
         for element in self._db:
-            if element.post_id == index:
+            if element.post_id == user_id:
                 self._db.remove(element)

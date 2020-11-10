@@ -19,5 +19,3 @@ def index(current_database: services.DATA_SOURCE_USERS):
 @decorators.inject
 def content(current_index, current: services.DATA_SOURCE_USERS):
     return render_template("view_user.html", element=current.get_user_by_id(current_index))
-
-

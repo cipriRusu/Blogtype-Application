@@ -43,10 +43,22 @@
     <Compile Include="models\timestamp.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="models\user.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="repository\in_memory_data.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="repository\users_db_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="repository\users_in_memory_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="repository\users_repository.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="services\services.py">
@@ -100,6 +112,9 @@
     <Compile Include="views\post_manager.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="views\user_manager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="views\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -134,10 +149,14 @@
     <Content Include="static\list_posts_style.css" />
     <Content Include="static\script.js" />
     <Content Include="templates\add_post.html" />
+    <Content Include="templates\list_users.html" />
     <Content Include="templates\view_post.html" />
     <Content Include="templates\list_posts.html" />
     <Content Include="templates\update_post.html" />
     <Content Include="templates\setup.html" />
+    <Content Include="templates\view_user.html">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 

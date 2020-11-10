@@ -1,4 +1,4 @@
-from flask import Flask, redirect, session
+from flask import Flask, redirect
 from views import post_manager
 from views import setup_manager
 from views import user_manager

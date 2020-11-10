@@ -1,4 +1,3 @@
-from models.user import User
 from repository.users_repository import UsersRepository
 
 class UsersInMemoryRepository(UsersRepository):
@@ -27,5 +26,5 @@ class UsersInMemoryRepository(UsersRepository):
 
     def remove_user(self, user_id):
         for element in self._db:
-            if element.post_id == user_id:
+            if element.user_id == user_id:
                 self._db.remove(element)

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from decorators import decorators
 from setup import services_listing as services
 from models.user import User
@@ -14,6 +14,15 @@ user_manager = Blueprint(
 @decorators.inject
 def index(users_database: services.DATA_SOURCE_USERS):
     return render_template("list_users.html", database=users_database.get_users())
+
+@user_manager.route('/login', methods=["GET", "POST"])
+@decorators.config_check
+@decorators.inject
+def login():
+    #TODO: Inject login manager?
+    if request.method == "POST":
+        session['logged'] = request.form['NameInput']
+    return render_template("login_user.html")
 
 @user_manager.route('/<uuid:user_index>')
 @decorators.config_check

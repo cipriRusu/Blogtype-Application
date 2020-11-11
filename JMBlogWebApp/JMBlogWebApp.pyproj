@@ -40,6 +40,9 @@
     <Compile Include="models\database_configuration.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="models\password_hasher.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="models\timestamp.py">
       <SubType>Code</SubType>
     </Compile>
@@ -159,6 +162,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="templates\list_users.html" />
+    <Content Include="templates\login_user.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="templates\view_post.html" />
     <Content Include="templates\list_posts.html" />
     <Content Include="templates\update_post.html" />

@@ -106,13 +106,22 @@
     <Compile Include="tests\conftest.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="tests\tests_user_manager.py">
+    <Compile Include="tests\test_login_manager.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\test_user_manager.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\test_posts_manager.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\test_setup_manager.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="views\login_manager.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="views\post_manager.py">

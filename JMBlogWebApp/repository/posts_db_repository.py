@@ -45,7 +45,13 @@ class PostsDBRepository(PostsRepository):
     def get_all(self):
         self._conn.create_connection()
         all_elements = []
-        query_result = self._conn.execute('SELECT * FROM POSTS;')
+        query_result = self._conn.execute('SELECT\
+         posts_id\
+        ,creation_date\
+        ,edit_date\
+        ,user_name\
+        ,title\
+        ,post_content from posts inner join users on author = user_id;')
 
         for item in query_result.fetchall():
             element = BlogPost(

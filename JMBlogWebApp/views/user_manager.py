@@ -44,16 +44,16 @@ def remove_item(user_index, current_database: services.DATA_SOURCE_USERS):
 @user_manager.route('/update/<uuid:user_index>', methods=["GET", "POST"])
 @decorators.config_check
 @decorators.inject
-def update_item(current_index, current_database: services.DATA_SOURCE_USERS):
+def update_item(user_index, current_database: services.DATA_SOURCE_USERS):
     if request.method == "GET":
         return render_template("update_user.html",
-                               current=current_database.get_by_id(current_index))
+                               current=current_database.get_user_by_id(user_index))
 
     if request.method == "POST":
-        current = current_database.get_user_by_id(current_index)
-        current.update(request.form['NameInput'],
-                       request.form['EmailInput'],
-                       request.form['PasswordInput'])
-        current_database.update_post(current)
-        return redirect(url_for('.content', current_index=current.post_id))
+        current = current_database.get_user_by_id(user_index)
+        current.update(request.form['UserNameInput'],
+                       request.form['UserEmailInput'],
+                       request.form['UserPassInput'])
+        current_database.update_user(current)
+        return redirect(url_for('.content', user_index=current.user_id))
     return Exception("Request type cannot be handled")

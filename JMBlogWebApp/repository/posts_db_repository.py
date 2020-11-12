@@ -70,8 +70,13 @@ class PostsDBRepository(PostsRepository):
 
     def get_by_id(self, index):
         self._conn.create_connection()
-        query_result = self._conn.execute('SELECT * FROM\
-        POSTS WHERE posts_id=%s;', (str(index),))
+        query_result = self._conn.execute('SELECT\
+         posts_id\
+        ,creation_date\
+        ,edit_date\
+        ,user_name\
+        ,title\
+        ,post_content from posts inner join users on author = user_id where posts_id=%s;', (str(index),))
 
         item = query_result.fetchone()
 

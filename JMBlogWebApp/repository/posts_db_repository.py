@@ -76,7 +76,8 @@ class PostsDBRepository(PostsRepository):
         ,edit_date\
         ,user_name\
         ,title\
-        ,post_content from posts inner join users on author = user_id where posts_id=%s;', (str(index),))
+        ,post_content from posts inner join users on author = user_id\
+        where posts_id=%s;', (str(index),))
 
         item = query_result.fetchone()
 

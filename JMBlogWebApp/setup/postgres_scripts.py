@@ -7,12 +7,12 @@ SEARCH_TABLE_SCRIPT = "SELECT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHE
 CREATE_TABLE_SCRIPT = "CREATE TABLE POSTS(posts_id uuid,\
 creation_date timestamp,\
 edit_date timestamp,\
-author varchar,\
+author uuid,\
 title varchar,\
 post_content varchar,\
 PRIMARY KEY(posts_id),\
 FOREIGN KEY(author)\
-    REFERENCES users(user_name));"
+    REFERENCES users(user_id));"
 
 CREATE_USERS_SCRIPT = "CREATE TABLE USERS(user_id uuid,\
 user_name varchar UNIQUE,\

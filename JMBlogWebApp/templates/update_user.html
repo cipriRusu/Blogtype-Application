@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="Form">
+        <form method="post">
+            <label typeof="string">Username : </label><br />
+            <input typeof="string" name="UserNameInput" value="{{ current.user_name }}" /><br />
+            <label typeof="string">Email : </label><br />
+            <input typeof="string" name="UserEmailInput" value="{{ current.user_email }}" /><br />
+            <label typeof="string">Password : </label><br />
+            <input type="password" name="UserPassInput" /><br />
+            <button class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

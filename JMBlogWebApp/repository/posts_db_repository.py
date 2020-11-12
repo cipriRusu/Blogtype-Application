@@ -55,8 +55,8 @@ class PostsDBRepository(PostsRepository):
 
         for item in query_result.fetchall():
             element = BlogPost(
-                item[3],
                 item[4],
+                item[3],
                 item[5])
 
             element.post_id = item[0]
@@ -82,8 +82,8 @@ class PostsDBRepository(PostsRepository):
         item = query_result.fetchone()
 
         element = BlogPost(
-            item[3],
             item[4],
+            item[3],
             item[5])
 
         element.post_id = item[0]

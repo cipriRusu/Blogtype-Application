@@ -37,6 +37,12 @@
     <Compile Include="decorators\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="login\user_login.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="login\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="models\database_configuration.py">
       <SubType>Code</SubType>
     </Compile>
@@ -140,6 +146,7 @@
   <ItemGroup>
     <Folder Include="models\" />
     <Folder Include="decorators\" />
+    <Folder Include="login\" />
     <Folder Include="services\" />
     <Folder Include="tests\" />
     <Folder Include="setup\" />

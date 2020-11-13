@@ -8,7 +8,7 @@ from repository.posts_in_memory_repository import PostsInMemoryRepository
 from repository.users_in_memory_repository import UsersInMemoryRepository
 from repository.in_memory_data import in_memory_posts as test_data_posts
 from repository.in_memory_data import in_memory_users as test_data_users
-from login.user_login import UserLogin
+from services.user_authentication import UserAuthentication
 
 class Services():
     IS_TEST = False
@@ -18,7 +18,7 @@ class Services():
     db_configuration = DbConfig()
     connection = DbConnect(db_configuration)
     setup = DbSetup(connection)
-    login = UserLogin(connection)
+    login = UserAuthentication(connection)
     test_users_repository = UsersInMemoryRepository(test_data_users)
     test_posts_repository = PostsInMemoryRepository(test_data_posts)
     posts_repository = PostsDBRepository(connection)

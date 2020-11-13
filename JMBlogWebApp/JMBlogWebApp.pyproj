@@ -37,7 +37,7 @@
     <Compile Include="decorators\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="login\user_login.py">
+    <Compile Include="services\user_authentication.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="login\__init__.py">
@@ -46,7 +46,7 @@
     <Compile Include="models\database_configuration.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="models\password_hasher.py">
+    <Compile Include="services\password_hasher.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\timestamp.py">

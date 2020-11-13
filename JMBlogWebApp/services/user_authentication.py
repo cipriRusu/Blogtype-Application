@@ -1,6 +1,6 @@
-from models.password_hasher import PasswordHasher
+from services.password_hasher import PasswordHasher
 
-class UserLogin:
+class UserAuthentication:
     def __init__(self, connection):
         self._conn = connection
         self._username = None

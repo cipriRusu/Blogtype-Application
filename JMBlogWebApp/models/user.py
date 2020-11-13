@@ -1,6 +1,6 @@
 import uuid
 from models.timestamp import TimeStamp
-from models.password_hasher import PasswordHasher
+from services.password_hasher import PasswordHasher
 
 class User:
     def __init__(self, user_name, user_email, user_password):

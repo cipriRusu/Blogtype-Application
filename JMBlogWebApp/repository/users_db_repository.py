@@ -72,6 +72,32 @@ class UsersDBRepository(UsersRepository):
         self._db.close_connection()
         return user
 
+    def get_by_name_and_pass(self, username, password):
+        self._db.create_connection()
+        query_result = self._db.execute("SELECT * FROM\
+                                         users WHERE user_name =%s\
+                                         AND user_password =%s",
+                                        (username, password))
+
+        query_output = query_result.fetchone()
+
+        if query_output is not None:
+            user = User(
+                query_output[1],
+                query_output[2],
+                query_output[3])
+
+            user.user_password = query_output[3]
+            user.user_id = query_output[0]
+            user.user_timestamp.creation_time = query_output[4]
+            user.user_timestamp.edit_time = query_output[5]
+
+        else:
+            user = None
+
+        self._db.close_connection()
+        return user
+
     def remove_user(self, user_id):
         self._db.create_connection()
         self._db.execute("DELETE FROM users WHERE user_id=%s;", (str(user_id),))

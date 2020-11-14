@@ -26,6 +26,10 @@ class UsersRepository(metaclass=ABCMeta):
     def get_user_by_id(self, user_id):
         pass
 
+    @abc.abstractclassmethod
+    def get_by_name_and_pass(cls, username, password):
+        pass
+
     @abc.abstractmethod
     def remove_user(self, user_id):
         pass

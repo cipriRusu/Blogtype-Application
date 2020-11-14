@@ -10,10 +10,8 @@ login_manager = Blueprint('login_manager', __name__, url_prefix='/login',
 @decorators.inject
 def login(login_service: services.USER_LOGIN):
     if request.method == "POST":
-        login_service.get_credentials(
-            request.form['NameInput'],
-            request.form['PasswordInput'])
-        #TODO: Implement login validation & session
-        login_service.is_login_valid()
-        return redirect(url_for('post_manager.index'))
+        if login_service.user_login(request.form['NameInput'],
+                                    request.form['PasswordInput']) is True:
+            return redirect(url_for('post_manager.index'))
+        return render_template("login_user.html")
     return render_template("login_user.html")

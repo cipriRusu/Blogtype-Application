@@ -10,13 +10,25 @@
     <title></title>
 </head>
 <body>
+    <nav class="navigation-bar">
+        <ul class="nav">
+            <li><a href="{{ url_for('post_manager.index')}}">Posts</a></li>
+            <li><a href="{{ url_for('user_manager.index')}}">Users</a></li>
+            <li><a href="{{ url_for('login_manager.login') }}">Login</a></li>
+            {% if session['logged_name'] is defined %}
+            <li><a href="{{ url_for('.add_item') }}">Add Post</a></li>
+            <li><a href="{{ url_for('login_manager.logout') }}">Logout</a></li>
+            {% endif%}
+        </ul>
+    </nav>
     <header class="MainHeader">
         <h1 class="MainTitle navbar-header">Blog App</h1>
-        <div class="NewItemButton btn btn-default">
-            <a href="{{ url_for('.add_item') }}">Add New Post</a>
-        </div>
     </header>
-    <p>Logged in as: {{ session['logged'] }}</p>
+    {% if session['logged_name'] is defined %}
+    <p>Logged in as: {{ session['logged_name'] }}</p>
+    {% else %}
+    <p>Not logged in</p>
+    {% endif %}
     <ul class="list-group">
         {% for element in database|reverse %}
         <li class="ArticleGroup list-group-item">

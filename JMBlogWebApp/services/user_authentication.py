@@ -19,3 +19,7 @@ class UserAuthentication():
             session['logged_id'] = self._found_user.user_id
             return True
         return False
+
+    def user_logout(self):
+        session.pop('logged_name', None)
+        session.pop('logged_id', None)

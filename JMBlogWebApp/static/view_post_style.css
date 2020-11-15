@@ -12,17 +12,12 @@ body
 .a {
     text-decoration: none;
     color: black
-} 
-
+}
 
 .ArticleTitle {
     font-weight: bold;
     font-size: xx-large;
     background-color: beige;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    margin-top: 2%;
-    margin-bottom: 0%;
     padding-left: 1%;
 }
 

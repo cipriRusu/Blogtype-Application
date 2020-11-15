@@ -46,6 +46,7 @@ def remove_item(user_index, current_database: services.DATA_SOURCE_USERS):
 @user_manager.route('/update/<uuid:user_index>', methods=["GET", "POST"])
 @decorators.config_check
 @decorators.inject
+@decorators.requres_login
 def update_item(user_index, current_database: services.DATA_SOURCE_USERS):
     if request.method == "GET":
         return render_template("update_user.html",

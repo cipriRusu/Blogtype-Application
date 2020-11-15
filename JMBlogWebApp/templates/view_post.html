@@ -23,10 +23,12 @@
     {% else %}
         <b>{{ current.stamp.edit_time }}</b>
     {% endif %}
-    <p class="ArticleContent"> {{ current.content }} </p><br />
+        <p class="ArticleContent"> {{ current.content }} </p><br />
+    {% if session['logged_name'] == current.author or session['logged_name'] == 'admin' %}
     <div class="FooterButtons">
         <div class="btn btn-default"><a href="{{ url_for('.update_item', current_index=current.post_id) }}">Edit</a></div>
         <div class="btn btn-default" id="RemoveBtId"><a href="{{ url_for('.remove_item', current_index=current.post_id) }}" onclick="return OnRemoveClick()">Remove</a></div>
     </div>
+    {% endif %}
 </body>
 </html>

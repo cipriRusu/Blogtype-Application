@@ -25,7 +25,7 @@ def inject(func):
 def requires_admin(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if 'logged_user' in session:
+        if 'logged_name' in session:
             if session['logged_name'] == 'admin':
                 return func(*args, **kwargs)
         return render_template("unauthorized.html")

@@ -30,7 +30,7 @@ body > ul
     background-color: beige;
     padding: 1em;
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 5;
 }
 
 .MainHeader > h1
@@ -38,29 +38,14 @@ body > ul
     margin: 0;
 }
 
-.NewItemButton {
-    background-color: blanchedalmond;
-    vertical-align: middle;
-    box-sizing: border-box;
-    display: table;
-    height: 100%;
-    border: none;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-    .NewItemButton > a {
-        grid-column-start: 2;
-        grid-row-start: 2;
-        text-decoration: none;
-        color: black;
-        display: table-cell;
-        vertical-align: middle;
-        text-align: center;
-    }
-
 .MainHeader {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
     border-radius: 5px;
+}
+
+nav > ul > li {
+    display: inline;
+    float: left;
 }

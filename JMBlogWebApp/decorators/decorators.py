@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import redirect, url_for
+from flask import redirect, url_for, session, render_template
 from setup import services_listing as services
 from services.services import Services
 
@@ -20,4 +20,21 @@ def inject(func):
             kwargs[element[0]] = (Services.get_service(element[1]) if
                                   Services.is_service(element[1]) else element[1])
         return func(*args, **kwargs)
+    return wrapper
+
+def requires_admin(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if 'logged_user' in session:
+            if session['logged_name'] == 'admin':
+                return func(*args, **kwargs)
+        return render_template("unauthorized.html")
+    return wrapper
+
+def requres_login(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if 'logged_name' in session:
+            return func(*args, **kwargs)
+        return render_template("unauthorized.html")
     return wrapper

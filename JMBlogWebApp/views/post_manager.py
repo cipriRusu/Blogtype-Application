@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from setup import services_listing as services
 from models.blog_post import BlogPost
 from decorators import decorators
@@ -20,11 +20,12 @@ def content(current_index, current: services.DATA_SOURCE_POSTS):
 @post_manager.route('/add', methods=["GET", "POST"])
 @decorators.config_check
 @decorators.inject
+@decorators.requres_login
 def add_item(current_database: services.DATA_SOURCE_POSTS):
     if request.method == "POST":
         to_add = BlogPost(
             request.form['NameInput'],
-            request.form['AuthorInput'],
+            session['logged_name'],
             request.form['ContentInput'])
         current_database.add_post(to_add)
         return redirect(url_for('.content', current_index=to_add.post_id))
@@ -33,6 +34,7 @@ def add_item(current_database: services.DATA_SOURCE_POSTS):
 @post_manager.route('/remove/<uuid:current_index>')
 @decorators.config_check
 @decorators.inject
+@decorators.requres_login
 def remove_item(current_index, current_database: services.DATA_SOURCE_POSTS):
     current_database.remove(current_index)
     return redirect('/posts')
@@ -40,6 +42,7 @@ def remove_item(current_index, current_database: services.DATA_SOURCE_POSTS):
 @post_manager.route('/update/<uuid:current_index>', methods=["GET", "POST"])
 @decorators.config_check
 @decorators.inject
+@decorators.requres_login
 def update_item(current_index, current_database: services.DATA_SOURCE_POSTS):
     if request.method == "GET":
         return render_template("update_post.html",
@@ -48,7 +51,7 @@ def update_item(current_index, current_database: services.DATA_SOURCE_POSTS):
     if request.method == "POST":
         current = current_database.get_by_id(current_index)
         current.update(request.form['NameInput'],
-                       request.form['AuthorInput'],
+                       session['logged_name'],
                        request.form['ContentInput'])
         current_database.update_post(current)
         return redirect(url_for('.content', current_index=current.post_id))

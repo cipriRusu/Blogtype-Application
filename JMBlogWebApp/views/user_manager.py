@@ -24,6 +24,7 @@ def content(user_index, current: services.DATA_SOURCE_USERS):
 @user_manager.route('/add', methods=["GET", "POST"])
 @decorators.config_check
 @decorators.inject
+@decorators.requires_admin
 def add_item(users_database: services.DATA_SOURCE_USERS):
     if request.method == "POST":
         to_add = User(
@@ -37,6 +38,7 @@ def add_item(users_database: services.DATA_SOURCE_USERS):
 @user_manager.route('/remove/<uuid:user_index>')
 @decorators.config_check
 @decorators.inject
+@decorators.requires_admin
 def remove_item(user_index, current_database: services.DATA_SOURCE_USERS):
     current_database.remove_user(user_index)
     return redirect('/users')

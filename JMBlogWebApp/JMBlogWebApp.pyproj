@@ -40,9 +40,6 @@
     <Compile Include="services\user_authentication.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="login\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="models\database_configuration.py">
       <SubType>Code</SubType>
     </Compile>
@@ -146,7 +143,6 @@
   <ItemGroup>
     <Folder Include="models\" />
     <Folder Include="decorators\" />
-    <Folder Include="login\" />
     <Folder Include="services\" />
     <Folder Include="tests\" />
     <Folder Include="setup\" />
@@ -181,6 +177,7 @@
     <Content Include="templates\login_user.html">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="templates\unauthorized.html" />
     <Content Include="templates\update_user.html" />
     <Content Include="templates\view_post.html" />
     <Content Include="templates\list_posts.html" />

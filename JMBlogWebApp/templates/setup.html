@@ -1,10 +1,10 @@
-﻿{% extends "base_layout.html" %}
+﻿<!DOCTYPE html>
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='setup_style.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='setup_style.css') }}" />
 {% endblock %}
 
-{% block body %}
+<body>
     <header class="panel">
         <h1>Connection Setup: </h1>
     </header>
@@ -23,4 +23,4 @@
             <button class="btn btn-default">Submit</button>
         </div>
     </form>
-{% endblock %}
+</body>

@@ -3,11 +3,12 @@
 {% block head %}{% endblock %}
 
 {% block body %}
-    <p>Username: {{ element.user_name }}</p>
-    <p>Email: {{ element.user_email }}</p>
-    <p>Created on: {{ element.user_timestamp.creation_time }}</p>
-    <p>Last edited on: {{ element.user_timestamp.edit_time }}</p>
+<p>Username: {{ element.user_name }}</p>
+<p>Email: {{ element.user_email }}</p>
+<p>Created on: {{ element.user_timestamp.creation_time }}</p>
+<p>Last edited on: {{ element.user_timestamp.edit_time }}</p>
     {% if session['logged_name'] == 'admin' and element.user_name != 'admin' %}
+        <div class="btn btn-default"><a href="{{ url_for('.update_item', user_index=element.user_id) }}">Edit</a></div>
         <div class="btn btn-default"><a href="{{ url_for('.remove_item', user_index=element.user_id) }}">Remove</a></div>
     {% endif %}
 {% endblock %}

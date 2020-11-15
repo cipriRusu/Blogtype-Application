@@ -11,7 +11,7 @@ from repository.in_memory_data import in_memory_users as test_data_users
 from services.user_authentication import UserAuthentication
 
 class Services():
-    IS_TEST = True
+    IS_TEST = False
     def __init__(self):
         pass
 

@@ -1,13 +1,8 @@
-﻿<!DOCTYPE html>
+﻿{% extends "base_layout.html" %}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <title></title>
-</head>
-<body>
+{% block head %}{% endblock %}
+
+{% block body %}
     <p>Username: {{ element.user_name }}</p>
     <p>Email: {{ element.user_email }}</p>
     <p>Created on: {{ element.user_timestamp.creation_time }}</p>
@@ -15,5 +10,4 @@
     {% if session['logged_name'] == 'admin' and element.user_name != 'admin' %}
         <div class="btn btn-default"><a href="{{ url_for('.remove_item', user_index=element.user_id) }}">Remove</a></div>
     {% endif %}
-</body>
-</html>
+{% endblock %}

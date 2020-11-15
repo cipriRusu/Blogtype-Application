@@ -1,11 +1,8 @@
-﻿<!DOCTYPE html>
+﻿{% extends "base_layout.html" %}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+{% block head %} {% endblock %}
+
+{% block body %}
     <div class="Form">
         <form method="post">
             <label typeof="string">Username : </label><br />
@@ -17,5 +14,4 @@
             <button class="btn btn-default">Submit</button>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}

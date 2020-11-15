@@ -1,20 +1,15 @@
-﻿<!DOCTYPE html>
+﻿{% extends "base_layout.html" %}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='add_update_style.css') }}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="ReturnButton"><a href=" {{ url_for('.index') }}">Return to List</a></div>
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='add_update_style.css') }}" />
+{% endblock %}
+
+{% block body %}
     <div class="EditPostTitle"><h1>Edit Post</h1></div>
     <div class="Form">
         <form method="post">
             <label typeof="string">Name : </label><br />
-            <div class="InputFields"><input typeof="string" name="NameInput" value="{{ current.title }}"/></div><br />
+            <div class="InputFields"><input typeof="string" name="NameInput" value="{{ current.title }}" /></div><br />
             <label typeof="string">Author : </label><br />
             <div class="InputFields"><input typeof="string" name="AuthorInput" value="{{ current.author }}" /></div><br />
             <label typeof="string">Content : </label><br />
@@ -22,5 +17,4 @@
             <button class="SubmitButton">Submit</button>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}

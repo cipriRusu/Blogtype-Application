@@ -1,24 +1,19 @@
-﻿<!DOCTYPE html>
+﻿{% extends "base_layout.html" %}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+{% block head %}
     <link rel="stylesheet"
           href="{{ url_for('static', filename='add_update_style.css') }}" />
-    <title></title>
-</head>
-<body>
-    <div class="btn btn-default"><a href=" {{ url_for('.index') }}">Return to List</a></div>
+{% endblock %}
+
+{% block body %}
     <div class="AddPostTitle"><h1>Add Post</h1></div>
     <div class="Form">
         <form method="post">
-        <label typeof="string">Name : </label><br />
-        <div class="InputFields"><input typeof="string" name="NameInput" /> </div><br />
-        <label typeof="string">Content : </label><br />
-        <textarea name="ContentInput"></textarea><br />
-        <button class="btn btn-default">Submit</button>
-    </form></div>
-</body>
-</html>
+            <label typeof="string">Name : </label><br />
+            <div class="InputFields"><input typeof="string" name="NameInput" /> </div><br />
+            <label typeof="string">Content : </label><br />
+            <textarea name="ContentInput"></textarea><br />
+            <button class="btn btn-default">Submit</button>
+        </form>
+    </div>
+{% endblock %}

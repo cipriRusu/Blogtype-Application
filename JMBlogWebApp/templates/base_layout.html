@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base_layout_style.css') }}" />
+    {% block head %} {% endblock %}
+</head>
+<body>
+    <nav class="navigation-bar">
+        <ul class="nav">
+            <li><a href="{{ url_for('post_manager.index')}}">Posts</a></li>
+            <li><a href="{{ url_for('user_manager.index')}}">Users</a></li>
+            {% if session['logged_name'] is not defined %}
+            <li><a href="{{ url_for('login_manager.login') }}">Login</a></li>
+            {% endif %}
+            {% if session['logged_name'] is defined %}
+            <li><a href="{{ url_for('post_manager.add_item') }}">Add Post</a></li>
+            <li><a href="{{ url_for('login_manager.logout') }}">Logout</a></li>
+            {% endif%}
+        </ul>
+    </nav>
+    {% block body %}{% endblock %}
+</body>
+</html>

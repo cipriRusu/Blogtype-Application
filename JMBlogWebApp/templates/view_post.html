@@ -1,34 +1,30 @@
-﻿<!DOCTYPE html>
+﻿{% extends "base_layout.html" %}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+{% block head %}
     <link rel="stylesheet"
           href="{{ url_for('static', filename='view_post_style.css') }}" />
     <script type="text/javascript"
             src="{{ url_for('static', filename='script.js') }}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <title></title>
-</head>
-<body>
-    <div class="ReturnButton btn btn-default"><a href=" {{ url_for('.index') }}">Return to List</a></div>
+{% endblock %}
+
+{% block body %}
     <p class="ArticleTitle"> Article Title : {{ current.title }} </p><br />
     <hr />
     <p class="ArticleAuthor"> Article Author : {{ current.author }}</p><br />
     <p class="ArticleAuthor"> Created : {{ current.stamp.creation_time }}</p><br />
-    <p class="ArticleAuthor"> Modified : 
-    {% if current.stamp.edit_time == None %}
+    <p class="ArticleAuthor">
+        Modified :
+        {% if current.stamp.edit_time == None %}
         <b>Never</b>
-    {% else %}
+        {% else %}
         <b>{{ current.stamp.edit_time }}</b>
-    {% endif %}
-        <p class="ArticleContent"> {{ current.content }} </p><br />
+        {% endif %}
+    <p class="ArticleContent"> {{ current.content }} </p><br />
     {% if session['logged_name'] == current.author or session['logged_name'] == 'admin' %}
     <div class="FooterButtons">
         <div class="btn btn-default"><a href="{{ url_for('.update_item', current_index=current.post_id) }}">Edit</a></div>
         <div class="btn btn-default" id="RemoveBtId"><a href="{{ url_for('.remove_item', current_index=current.post_id) }}" onclick="return OnRemoveClick()">Remove</a></div>
     </div>
     {% endif %}
-</body>
-</html>
+{% endblock %}

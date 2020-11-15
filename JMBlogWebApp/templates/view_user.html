@@ -7,7 +7,7 @@
 <p>Email: {{ element.user_email }}</p>
 <p>Created on: {{ element.user_timestamp.creation_time }}</p>
 <p>Last edited on: {{ element.user_timestamp.edit_time }}</p>
-    {% if session['logged_name'] == 'admin' or session['logged_name'] == element.user_name %}
+    {% if element.user_name != 'admin' and (session['logged_name'] == 'admin' or session['logged_name'] == element.user_name) %}
         <div class="btn btn-default"><a href="{{ url_for('.update_item', user_index=element.user_id) }}">Edit</a></div>
         <div class="btn btn-default"><a href="{{ url_for('.remove_item', user_index=element.user_id) }}">Remove</a></div>
     {% endif %}

@@ -21,4 +21,4 @@ def login(login_service: services.USER_LOGIN):
 @decorators.inject
 def logout(login_service: services.USER_LOGIN):
     login_service.user_logout()
-    return render_template("login_user.html")
+    return redirect(url_for("post_manager.index"))

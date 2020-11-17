@@ -18,6 +18,9 @@
             {% if session['logged_name'] != 'admin' and session['logged_name'] is defined %}
             <li class="nav-item"><a href="{{ url_for('user_manager.update_item', user_index=session['logged_id'])}}">Edit User</a></li>
             {% endif %}
+            {% if session['logged_name'] == 'admin' %}
+            <li class="nav-item"><a href="{{ url_for('user_manager.add_item')}}">Add User</a></li>
+            {% endif %}
             {% if session['logged_name'] is not defined %}
             <li class="nav-item"><a href="{{ url_for('login_manager.login') }}">Login</a></li>
             {% endif %}

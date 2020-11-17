@@ -5,9 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <div class="list-group">
+<h3>Current registered users</h3>
+    <div class="form-group">
         {% for element in database %}
-        <div class="user-group list-group-item">
+        <div>
             <a href="{{ url_for('.content', user_index=element.user_id) }}" class="list-group-item">
                 Username : {{ element.user_name }}<br />
                 Email : {{ element.user_email }}

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from setup import services_listing as services
 from decorators import decorators
 
@@ -13,6 +13,7 @@ def login(login_service: services.USER_LOGIN):
         if login_service.user_login(request.form['NameInput'],
                                     request.form['PasswordInput']) is True:
             return redirect(url_for("post_manager.index"))
+        flash('Invalid login')
         return render_template("login_user.html")
     return render_template("login_user.html")
 

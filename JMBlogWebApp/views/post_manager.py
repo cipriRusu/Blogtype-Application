@@ -25,7 +25,7 @@ def add_item(current_database: services.DATA_SOURCE_POSTS):
     if request.method == "POST":
         to_add = BlogPost(
             request.form['NameInput'],
-            session['logged_name'],
+            session['logged_id'],
             request.form['ContentInput'])
         current_database.add_post(to_add)
         return redirect(url_for('.content', post_index=to_add.post_id))
@@ -59,7 +59,7 @@ def update_item(post_index, current_database: services.DATA_SOURCE_POSTS):
                            request.form['ContentInput'])
         else:
             current.update(request.form['NameInput'],
-                           session['logged_name'],
+                           session['logged_id'],
                            request.form['ContentInput'])
 
         current_database.update_post(current)

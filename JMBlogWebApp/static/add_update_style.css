@@ -1,12 +1,11 @@
 .AddPostTitle
 {
     background-color: beige;
+    padding-left: 1%;
 }
 
-.InputFields > input
-{
-    box-sizing:border-box;
-    width: 100%;
+h1 {
+    margin: 0%;
 }
 
 .EditPostTitle
@@ -15,27 +14,15 @@
     padding-left: 1%;
 }
 
-.Form
-{
-    height: 40%;
-}
-
-form
-{
-    height: 100%;
-}
-
-textarea
-{
-    resize: none;
-    width:100%;
-    height: 100%;
-    box-sizing: border-box;
-    padding-right: 0;
-    margin-right: 0;
-}
-
 .SubmitButton:hover
 {
     cursor:pointer;
+}
+
+.TitleInput {
+    resize: none;
+}
+
+.ContentInput {
+    resize: none;
 }

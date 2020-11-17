@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block body %}
-    <div class="EditPostTitle"><h1>Edit Post</h1></div>
+    <div><h1 class="TitleField">Edit Post</h1></div>
     <div class="form-group">
         <form method="post">
             <label typeof="string">Name : </label><br />
-            <textarea class="TitleInput form-control" rows="1" name="NameInput"> {{ current.title }} </textarea><br />
+            <textarea class="Form-Field form-control" rows="1" name="NameInput"> {{ current.title }} </textarea><br />
             <label typeof="string">Content : </label><br />
-            <textarea class="ContentInput form-control" rows="10" name="ContentInput"> {{ current.content }} </textarea><br /><br />
+            <textarea class="Form-Field form-control" rows="10" name="ContentInput"> {{ current.content }} </textarea><br /><br />
             <button class="btn btn-default">Submit</button>
         </form>
     </div>

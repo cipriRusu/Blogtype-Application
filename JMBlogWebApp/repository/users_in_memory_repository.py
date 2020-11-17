@@ -24,9 +24,9 @@ class UsersInMemoryRepository(UsersRepository):
                 return element
         raise Exception('No user found in current repository')
 
-    def get_by_name_and_pass(self, username, password):
+    def get_by_name(self, username):
         for element in self._db:
-            if element.user_name == username and element.user_password == password:
+            if element.user_name == username:
                 return element
         return None
 

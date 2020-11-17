@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import redirect, url_for, session, render_template
+from flask import redirect, url_for, session
 from setup import services_listing as services
 from services.services import Services
 
@@ -28,10 +28,18 @@ def requires_admin(func):
         if 'logged_name' in session:
             if session['logged_name'] == 'admin':
                 return func(*args, **kwargs)
-        return render_template("unauthorized.html")
+        return redirect(url_for('error_manager.error_redirect'))
     return wrapper
 
-def requres_login(func):
+def login_required(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if 'logged_name' in session:
+            return func(*args, **kwargs)
+        return redirect(url_for('error_manager.error_redirect'))
+    return wrapper
+
+def admin_or_owner_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         if 'post_index' in kwargs:
@@ -43,5 +51,5 @@ def requres_login(func):
             found_user = kwargs['current_database'].get_user_by_id(kwargs['user_index'])
             if found_user.user_name == session['logged_name'] or session['logged_name'] == 'admin':
                 return func(*args, **kwargs)
-        return render_template("unauthorized.html")
+        return redirect(url_for('error_manager.error_redirect'))
     return wrapper

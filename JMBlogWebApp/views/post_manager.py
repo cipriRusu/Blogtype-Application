@@ -53,14 +53,9 @@ def update_item(post_index, current_database: services.DATA_SOURCE_POSTS):
     if request.method == "POST":
         current = current_database.get_by_id(post_index)
 
-        if session['logged_name'] == 'admin':
-            current.update(request.form['NameInput'],
-                           current.author,
-                           request.form['ContentInput'])
-        else:
-            current.update(request.form['NameInput'],
-                           session['logged_id'],
-                           request.form['ContentInput'])
+        current.update(request.form['NameInput'],
+                       session['logged_id'],
+                       request.form['ContentInput'])
 
         current_database.update_post(current)
         return redirect(url_for('.content', post_index=current.post_id))

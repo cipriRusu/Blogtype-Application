@@ -29,13 +29,11 @@ class PostsDBRepository(PostsRepository):
         self._conn.execute("UPDATE POSTS SET\
         creation_date = %s,\
         edit_date = %s,\
-        author = %s,\
         title = %s,\
         post_content = %s \
         WHERE posts_id =%s;",
                            (item.stamp.creation_time,
                             item.stamp.edit_time,
-                            item.author,
                             item.title,
                             item.content,
                             item.post_id))

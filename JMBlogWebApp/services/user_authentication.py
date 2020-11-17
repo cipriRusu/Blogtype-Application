@@ -13,7 +13,7 @@ class UserAuthentication():
         self._password_hash = PasswordHasher().get_hash(form_pass)
         self._found_user = self._db.get_by_name(self._username)
 
-        if (self._found_user is not None) and (self._password_hash == 
+        if (self._found_user is not None) and (self._password_hash ==
                                                self._found_user.user_password):
             session['logged_name'] = self._found_user.user_name
             session['logged_id'] = self._found_user.user_id

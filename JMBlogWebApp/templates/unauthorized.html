@@ -1,7 +1,18 @@
-﻿{% extends "base_layout.html" %}
+﻿<!DOCTYPE html>
 
-{% block head %} {% endblock %}
-
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base_layout_style.css') }}" />
+</head>
 <body>
     <h1>403 Unauthorized acces</h1>
+    <form action="{{ error_redirect }}" method="post">
+        <p>You tried to access a resource without appropriate credentials <br /> Please return to the homepage
+        and provide appropriate credentials</p>
+        <button class ="btn btn-primary" type="submit">Return to Homepage</button>
+    </form>
 </body>
+</html>

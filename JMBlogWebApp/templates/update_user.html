@@ -1,17 +1,19 @@
 ﻿{% extends "base_layout.html" %}
 
-{% block head %} {% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='base_form_style.css') }}" />
+{% endblock %}
 
 {% block body %}
-    <div class="Form">
-        <form method="post">
-            <label typeof="string">Username : </label><br />
-            <input typeof="string" name="UserNameInput" value="{{ current.user_name }}" /><br />
-            <label typeof="string">Email : </label><br />
-            <input typeof="string" name="UserEmailInput" value="{{ current.user_email }}" /><br />
-            <label typeof="string">Password : </label><br />
-            <input type="password" name="UserPassInput" /><br />
-            <button class="btn btn-default">Submit</button>
-        </form>
-    </div>
+<div class="Form form-group">
+    <form method="post">
+        <label typeof="string">Username : </label><br />
+        <input class="form-control" typeof="string" name="UserNameInput" value="{{ current.user_name }}" /><br />
+        <label typeof="string">Email : </label><br />
+        <input class="form-control" typeof="string" name="UserEmailInput" value="{{ current.user_email }}" /><br />
+        <label typeof="string">Password : </label><br />
+        <input class="form-control" type="password" name="UserPassInput" /><br />
+        <button class="btn btn-default">Submit</button>
+    </form>
+</div>
 {% endblock %}

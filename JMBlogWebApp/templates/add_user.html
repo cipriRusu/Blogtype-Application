@@ -1,19 +1,22 @@
 ﻿{% extends "base_layout.html" %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='add_update_style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='base_form_style.css') }}" />
 {% endblock %}
 
 {% block body %}
-    <div class="Form">
-        <form method="post">
-            <label typeof="string">Username : </label><br />
-            <div><input typeof="string" name="NameInput" /> </div><br />
-            <label typeof="string">Email : </label><br />
-            <div><input typeof="string" name="EmailInput" /></div><br />
-            <label typeof="string">Password : </label><br />
-            <div><input type="password" name="PasswordInput" /></div><br />
-            <button class="SubmitButton">Submit</button>
-        </form>
-    </div>
+<div class="Form">
+    <header class="panel">
+        <h3>Add new user: </h3>
+    </header>
+    <form method="post">
+        <label typeof="string">Username</label><br />
+        <textarea typeof="string" class="Form-Field form-control" rows="1" name="NameInput"></textarea><br />
+        <label typeof="string">Email:</label><br />
+        <textarea typeof="string" class="Form-Field form-control" rows="1" name="EmailInput"></textarea><br />
+        <label typeof="string">Password</label><br />
+        <input type="password" class="form-control" name="PasswordInput"><br />
+        <button class="SubmitButton">Submit</button>
+    </form>
+</div>
 {% endblock %}

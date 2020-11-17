@@ -9,17 +9,22 @@
     {% block head %} {% endblock %}
 </head>
 <body>
-    <nav class="navigation-bar">
-        <ul class="nav">
-            <li><a href="{{ url_for('post_manager.index')}}">Posts</a></li>
-            <li><a href="{{ url_for('user_manager.index')}}">Users</a></li>
+    <nav class="nav nav-tabs">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a href="{{ url_for('post_manager.index')}}">Posts</a></li>
+            {% if session['logged_name'] == 'admin' %}
+            <li class="nav-item"><a href="{{ url_for('user_manager.index')}}">Users</a></li>
+            {% endif %}
+            {% if session['logged_name'] != 'admin' and session['logged_name'] is defined %}
+            <li class="nav-item"><a href="{{ url_for('user_manager.update_item', user_index=session['logged_id'])}}">Edit User</a></li>
+            {% endif %}
             {% if session['logged_name'] is not defined %}
-            <li><a href="{{ url_for('login_manager.login') }}">Login</a></li>
+            <li class="nav-item"><a href="{{ url_for('login_manager.login') }}">Login</a></li>
             {% endif %}
             {% if session['logged_name'] is defined %}
-            <li><a href="{{ url_for('post_manager.add_item') }}">Add Post</a></li>
-            <li><a href="{{ url_for('login_manager.logout') }}">Logout</a></li>
-            {% endif%}
+            <li class="nav-item"><a href="{{ url_for('post_manager.add_item') }}">Add Post</a></li>
+            <li class="nav-item"><a href="{{ url_for('login_manager.logout') }}">Logout</a></li>
+            {% endif %}
         </ul>
     </nav>
     {% block body %}{% endblock %}

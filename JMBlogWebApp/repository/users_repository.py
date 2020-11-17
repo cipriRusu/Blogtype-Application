@@ -27,7 +27,7 @@ class UsersRepository(metaclass=ABCMeta):
         pass
 
     @abc.abstractclassmethod
-    def get_by_name_and_pass(cls, username, password):
+    def get_by_name(cls, username):
         pass
 
     @abc.abstractmethod

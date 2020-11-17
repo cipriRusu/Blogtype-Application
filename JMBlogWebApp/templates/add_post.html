@@ -5,15 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <div class="AddPostTitle"><h1>Add Post</h1></div>
-    <div class="form-group">
-        <form method="post">
-            <label typeof="string">Name : </label><br />
-            <textarea class="TitleInput form-control" rows="1" name="NameInput"></textarea><br />
-            <label typeof="string">Content : </label><br />
-            <textarea class="ContentInput form-control" rows="10" name="ContentInput"></textarea><br /><br />
-            <button class="btn btn-default">Submit</button>
-        </form>
+    <div><h1 class="TitleField">Add Post</h1></div>
+    <div class="Form">
+        <div class="form-group">
+            <form method="post">
+                <label typeof="string">Name : </label><br />
+                <textarea class="TitleInput form-control" rows="1" name="NameInput"></textarea><br />
+                <label typeof="string">Content : </label><br />
+                <textarea class="ContentInput form-control" rows="10" name="ContentInput"></textarea><br /><br />
+                <button class="btn btn-default">Submit</button>
+            </form>
+        </div>
     </div>
 {% endblock %}
 

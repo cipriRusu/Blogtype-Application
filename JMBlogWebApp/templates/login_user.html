@@ -1,18 +1,31 @@
 ﻿{% extends "base_layout.html" %}
 
-{% block head %} {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='base_form_style.css') }}" />
+{% endblock %}
 
 {% block body %}
+<div class="Form">
     <header class="panel">
         <h1>User Login: </h1>
     </header>
-    <div class="Form">
-        <form method="post">
-            <label typeof="string">Username : </label><br />
-            <div class="InputFields"><input typeof="string" name="NameInput" /> </div><br />
-            <label typeof="string">Password : </label><br />
-            <div class="InputFields"><input type="password" name="PasswordInput" /></div><br />
-            <button class="btn btn-default">Submit</button>
-        </form>
-    </div>
-{% endblock %}
+    <form method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input typeof="string" class="form-control" id="username" name="NameInput">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="PasswordInput">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p class="text-left">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% endblock %}
+</div>

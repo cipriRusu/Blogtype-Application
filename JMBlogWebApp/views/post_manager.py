@@ -20,7 +20,7 @@ def content(post_index, current: services.DATA_SOURCE_POSTS):
 @post_manager.route('/add', methods=["GET", "POST"])
 @decorators.config_check
 @decorators.inject
-@decorators.requres_login
+@decorators.login_required
 def add_item(current_database: services.DATA_SOURCE_POSTS):
     if request.method == "POST":
         to_add = BlogPost(
@@ -34,7 +34,8 @@ def add_item(current_database: services.DATA_SOURCE_POSTS):
 @post_manager.route('/remove/<uuid:post_index>')
 @decorators.config_check
 @decorators.inject
-@decorators.requres_login
+@decorators.login_required
+@decorators.admin_or_owner_required
 def remove_item(post_index, current_database: services.DATA_SOURCE_POSTS):
     current_database.remove(post_index)
     return redirect('/posts')
@@ -42,7 +43,8 @@ def remove_item(post_index, current_database: services.DATA_SOURCE_POSTS):
 @post_manager.route('/update/<uuid:post_index>', methods=["GET", "POST"])
 @decorators.config_check
 @decorators.inject
-@decorators.requres_login
+@decorators.login_required
+@decorators.admin_or_owner_required
 def update_item(post_index, current_database: services.DATA_SOURCE_POSTS):
     if request.method == "GET":
         return render_template("update_post.html",

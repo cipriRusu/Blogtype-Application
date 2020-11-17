@@ -124,6 +124,9 @@
     <Compile Include="tests\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="views\error_manager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="views\login_manager.py">
       <SubType>Code</SubType>
     </Compile>
@@ -160,6 +163,9 @@
     </Content>
     <Content Include="static\base_layout_style.css" />
     <Content Include="static\list_users_style.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\base_form_style.css">
       <SubType>Code</SubType>
     </Content>
     <Content Include="static\setup_style.css">

@@ -72,12 +72,9 @@ class UsersDBRepository(UsersRepository):
         self._db.close_connection()
         return user
 
-    def get_by_name_and_pass(self, username, password):
+    def get_by_name(self, username):
         self._db.create_connection()
-        query_result = self._db.execute("SELECT * FROM\
-                                         users WHERE user_name =%s\
-                                         AND user_password =%s",
-                                        (username, password))
+        query_result = self._db.execute("SELECT * FROM users WHERE user_name =%s", (username, ))
 
         query_output = query_result.fetchone()
 

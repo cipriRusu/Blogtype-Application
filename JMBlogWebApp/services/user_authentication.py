@@ -20,6 +20,7 @@ class UserAuthentication():
             return True
         return False
 
-    def user_logout(self):
+    @classmethod
+    def user_logout(cls):
         session.pop('logged_name', None)
         session.pop('logged_id', None)

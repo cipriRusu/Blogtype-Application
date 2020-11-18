@@ -43,50 +43,44 @@ def test_loading_contains_dynamic_value_post_page(configured_app):
     response = configured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d').data
     assert b'Specific content first post' in response
 
-def test_add_post_route_status_code(configured_app):
-    data = {
-        'NameInput': 'NewName',
-        'AuthorInput': 'NewAuthor',
-        'ContentInput': 'NewContent'}
-    post_response = configured_app.post('/posts/add', data=data).status_code
-    assert post_response == 302
+def test_logged_user_can_edit_own_post(configured_app):
+    login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
 
-def test_add_post_route_check_content_after_post(configured_app):
-    data = {
-        'NameInput': 'NewName',
-        'AuthorInput': 'NewAuthor',
-        'ContentInput': 'NewContent'}
+    logged_app = configured_app.post('/authentication/login', data=login_data, 
+                                     follow_redirects=True)
 
-    post_response = configured_app.post('/posts/add', data=data, follow_redirects=True).data
+    response = configured_app.get('/posts/update/f9c3a576-28bc-4b63-931d-04d6488d2f0d', 
+                                  follow_redirects=True).status_code
 
-    assert b'NewName' in post_response
+    assert response == 200
 
-def test_add_post_route_check_content_in_listing_after(configured_app):
-    data = {
-        'NameInput': 'NewName',
-        'AuthorInput': 'NewAuthor',
-        'ContentInput': 'NewContent'}
+def test_logged_user_can_remove_own_post(configured_app):
+    login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
+    
+    logged_app = configured_app.post('/authentication/login', data=login_data, 
+                                     follow_redirects=True)
 
-    add_post = configured_app.post('/posts/add', data=data, follow_redirects=True)
-    assert add_post.status_code == 200
+    response = configured_app.get('/posts/remove/f9c3a576-28bc-4b63-931d-04d6488d2f0d', 
+                                  follow_redirects=True).status_code
 
-    after_add = configured_app.get('/', follow_redirects=True).data
+    assert response == 200
 
-    assert b'NewName' in after_add
+def test_logged_user_cannot_edit_other_post(configured_app):
+    login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
+    
+    logged_app = configured_app.post('/authentication/login', data=login_data, 
+                                     follow_redirects=True)
 
-def test_remove_post_route_check_content_in_listing_after(configured_app):
-    remove_post = configured_app.get('/posts/remove/f9c3a576-28bc-4b63-931d-04d6488d2f0d'
-                                     , follow_redirects=True).data
-    assert b'FirstTitle' not in remove_post
+    post_page = configured_app.get('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23', 
+                                  follow_redirects=True).status_code
+    assert post_page == 403
 
-def test_edit_post_route_check_content_in_post_after_edit(configured_app):
+def test_logged_user_cannot_remove_other_post(configured_app):
+    login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
+    
+    logged_app = configured_app.post('/authentication/login', data=login_data, 
+                                     follow_redirects=True)
 
-    data = {"NameInput": "NewName",
-            "AuthorInput": "NewAuthor",
-            "ContentInput": "NewContent"}
-
-    edit_post = configured_app.post('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
-                                    data=data, follow_redirects=True).data
-
-    assert b'SecondTitle' not in edit_post
-    assert b'NewName' in edit_post
+    post_page = configured_app.get('/posts/remove/daca57d1-c180-4e0a-8394-f5c95a5d5f23', 
+                                  follow_redirects=True).status_code
+    assert post_page == 403

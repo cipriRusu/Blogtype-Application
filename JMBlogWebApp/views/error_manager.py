@@ -10,4 +10,4 @@ error_manager = Blueprint(
 def error_redirect():
     if request.method == "POST":
         return redirect(url_for('post_manager.index'))
-    return render_template("unauthorized.html")
+    return render_template("unauthorized.html"), 403

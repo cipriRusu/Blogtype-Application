@@ -46,111 +46,111 @@ def test_loading_contains_dynamic_value_post_page(configured_app):
 def test_logged_user_can_edit_own_post(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
 
-    logged_app = configured_app.post('/authentication/login', data=login_data, 
-                                     follow_redirects=True)
+    configured_app.post('/authentication/login', data=login_data,
+                        follow_redirects=True)
 
-    response = configured_app.get('/posts/update/f9c3a576-28bc-4b63-931d-04d6488d2f0d', 
+    response = configured_app.get('/posts/update/f9c3a576-28bc-4b63-931d-04d6488d2f0d',
                                   follow_redirects=True).data
 
     assert b'Submit' in response
 
 def test_logged_user_can_remove_own_post(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
-    
-    logged_app = configured_app.post('/authentication/login', data=login_data, 
-                                     follow_redirects=True)
 
-    response = configured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d', 
+    configured_app.post('/authentication/login', data=login_data,
+                        follow_redirects=True)
+
+    response = configured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d',
                                   follow_redirects=True).data
 
     assert b'Remove' in response
 
 def test_logged_user_cannot_edit_other_post(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
-    
-    logged_app = configured_app.post('/authentication/login', data=login_data, 
-                                     follow_redirects=True)
 
-    post_page = configured_app.get('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23', 
-                                  follow_redirects=True).status_code
+    configured_app.post('/authentication/login', data=login_data,
+                        follow_redirects=True)
+
+    post_page = configured_app.get('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
+                                   follow_redirects=True).status_code
     assert post_page == 403
 
 def test_logged_user_cannot_remove_other_post(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
-    
-    logged_app = configured_app.post('/authentication/login', data=login_data, 
-                                     follow_redirects=True)
 
-    post_page = configured_app.get('/posts/remove/daca57d1-c180-4e0a-8394-f5c95a5d5f23', 
-                                  follow_redirects=True).status_code
+    configured_app.post('/authentication/login', data=login_data,
+                        follow_redirects=True)
+
+    post_page = configured_app.get('/posts/remove/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
+                                   follow_redirects=True).status_code
     assert post_page == 403
 
 def test_logged_admin_can_edit_other_post(configured_app):
     login_data = {"NameInput": "admin", "PasswordInput": "adminpass"}
 
-    logged_app = configured_app.post('/authentication/login', data=login_data, 
-                                     follow_redirects=True)
+    configured_app.post('/authentication/login', data=login_data,
+                        follow_redirects=True)
 
-    post_page = configured_app.get('/posts/daca57d1-c180-4e0a-8394-f5c95a5d5f23', 
-                                  follow_redirects=True).data
+    post_page = configured_app.get('/posts/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
+                                   follow_redirects=True).data
     assert b'Edit' in post_page
 
-def test_logged_admin_can_edit_other_post_other_author(configured_app):
+def test_logged_admin_can_edit_other_post_other_author_first_author(configured_app):
     login_data = {"NameInput": "admin", "PasswordInput": "adminpass"}
 
-    logged_app = configured_app.post('/authentication/login', data=login_data, 
-                                     follow_redirects=True)
+    configured_app.post('/authentication/login', data=login_data,
+                        follow_redirects=True)
 
-    post_page = configured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d', 
-                                  follow_redirects=True).data
+    post_page = configured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d',
+                                   follow_redirects=True).data
     assert b'Edit' in post_page
 
 def test_logged_admin_can_remove_post(configured_app):
     login_data = {"NameInput": "admin", "PasswordInput": "adminpass"}
 
-    logged_app = configured_app.post('/authentication/login', data=login_data, 
-                                     follow_redirects=True)
+    configured_app.post('/authentication/login', data=login_data,
+                        follow_redirects=True)
 
-    post_page = configured_app.get('/posts/daca57d1-c180-4e0a-8394-f5c95a5d5f23', 
-                                  follow_redirects=True).data
+    post_page = configured_app.get('/posts/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
+                                   follow_redirects=True).data
     assert b'Remove' in post_page
 
 def test_logged_admin_can_edit_other_post_other_author(configured_app):
     login_data = {"NameInput": "admin", "PasswordInput": "adminpass"}
 
-    logged_app = configured_app.post('/authentication/login', data=login_data, 
-                                     follow_redirects=True)
+    configured_app.post('/authentication/login', data=login_data,
+                        follow_redirects=True)
 
-    post_page = configured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d', 
-                                  follow_redirects=True).data
+    post_page = configured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d',
+                                   follow_redirects=True).data
     assert b'Edit' in post_page
 
 def test_logged_admin_can_remove_other_post_other_author(configured_app):
     login_data = {"NameInput": "admin", "PasswordInput": "adminpass"}
 
-    logged_app = configured_app.post('/authentication/login', data=login_data, 
-                                     follow_redirects=True)
+    configured_app.post('/authentication/login', data=login_data,
+                        follow_redirects=True)
 
-    post_page = configured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d', 
-                                  follow_redirects=True).data
+    post_page = configured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d',
+                                   follow_redirects=True).data
     assert b'Remove' in post_page
 
 def test_logged_admin_can_edit_other_post_other_author_third(configured_app):
     login_data = {"NameInput": "admin", "PasswordInput": "adminpass"}
 
-    logged_app = configured_app.post('/authentication/login', data=login_data, 
-                                     follow_redirects=True)
+    configured_app.post('/authentication/login', data=login_data,
+                        follow_redirects=True)
 
-    post_page = configured_app.get('/posts/a656f973-5b82-462d-aff7-8d2c6c3e4fa2', 
-                                  follow_redirects=True).data
+    post_page = configured_app.get('/posts/a656f973-5b82-462d-aff7-8d2c6c3e4fa2',
+                                   follow_redirects=True).data
     assert b'Edit' in post_page
 
 def test_logged_admin_can_remove_other_post_other_author_third(configured_app):
     login_data = {"NameInput": "admin", "PasswordInput": "adminpass"}
 
-    logged_app = configured_app.post('/authentication/login', data=login_data, 
-                                     follow_redirects=True)
+    configured_app.post('/authentication/login', data=login_data,
+                        follow_redirects=True)
 
-    post_page = configured_app.get('/posts/a656f973-5b82-462d-aff7-8d2c6c3e4fa2', 
-                                  follow_redirects=True).data
+    post_page = configured_app.get('/posts/a656f973-5b82-462d-aff7-8d2c6c3e4fa2',
+                                   follow_redirects=True).data
     assert b'Remove' in post_page

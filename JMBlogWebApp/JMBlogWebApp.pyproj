@@ -31,12 +31,6 @@
     <Compile Include="app.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="decorators\decorators.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="decorators\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="services\user_authentication.py">
       <SubType>Code</SubType>
     </Compile>
@@ -124,6 +118,18 @@
     <Compile Include="tests\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="views\decorators\authorization_decorators.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="views\decorators\inject_decorators.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="views\decorators\setup_decorators.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="views\decorators\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="views\error_manager.py">
       <SubType>Code</SubType>
     </Compile>
@@ -145,7 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />
-    <Folder Include="decorators\" />
     <Folder Include="services\" />
     <Folder Include="tests\" />
     <Folder Include="setup\" />
@@ -153,6 +158,7 @@
     <Folder Include="repository\" />
     <Folder Include="static\" />
     <Folder Include="templates\" />
+    <Folder Include="views\decorators\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".pylintrc">

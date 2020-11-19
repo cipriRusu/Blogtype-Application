@@ -20,3 +20,7 @@ user_email varchar,\
 user_password varchar,\
 user_created_at timestamp,\
 user_modified_at timestamp);"
+
+CREATE_ADMIN_SCRIPT = "INSERT INTO USERS(user_id, user_name, user_password)\
+VALUES ('45137158-83d4-4871-9b50-2df81746cf29',\
+'admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918')"

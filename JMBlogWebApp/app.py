@@ -16,6 +16,10 @@ with app.app_context():
     app.register_blueprint(login_manager.login_manager)
     app.register_blueprint(error_manager.error_manager)
 
+    @app.before_first_request
+    def check_db_version():
+        pass
+
     @app.route('/')
     @app.route('/<path:path>')
     def catch_all():

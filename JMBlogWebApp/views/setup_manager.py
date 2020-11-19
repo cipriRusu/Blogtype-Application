@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from decorators import decorators
 from models.database_configuration import DatabaseConfiguration
 from setup import services_listing as services
+from views.decorators import inject_decorators
 
 setup_manager = Blueprint(
     'setup_manager',
@@ -10,7 +10,7 @@ setup_manager = Blueprint(
     template_folder='templates')
 
 @setup_manager.route('/', methods=["GET", "POST"])
-@decorators.inject
+@inject_decorators.inject
 def database_connector(current_db_config: services.DB_CONFIGURATION, setup: services.SETUP):
     if request.method == "GET":
         if current_db_config.is_configured():

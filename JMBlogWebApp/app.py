@@ -20,10 +20,8 @@ with app.app_context():
 
     @app.before_first_request
     @inject_decorators.inject
-    def check_db_version(db_version: services.DB_VERSION):
-        CURRENT_VERSION = 0
-        if db_version.is_configured():
-            CURRENT_VERSION = db_version.load_configuration()['version']
+    def check_db_version(db_setup: services.SETUP):
+        pass
 
     @app.route('/')
     @app.route('/<path:path>')

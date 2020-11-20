@@ -91,9 +91,6 @@
     <Compile Include="repository\posts_repository.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="setup\db_version.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="setup\postgres_scripts.py">
       <SubType>Code</SubType>
     </Compile>

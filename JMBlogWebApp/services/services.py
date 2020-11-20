@@ -1,7 +1,8 @@
 from setup import services_listing as service
 from setup.db_config import DbConfig
-from setup.db_connect  import DbConnect
+from setup.db_connect import DbConnect
 from setup.db_setup import DbSetup
+from setup.db_version import DbVersion
 from repository.posts_db_repository import PostsDBRepository
 from repository.users_db_repository import UsersDBRepository
 from repository.posts_in_memory_repository import PostsInMemoryRepository
@@ -15,6 +16,7 @@ class Services():
     def __init__(self):
         pass
 
+    db_version = DbVersion()
     db_configuration = DbConfig()
     connection = DbConnect(db_configuration)
     setup = DbSetup(connection)
@@ -30,14 +32,16 @@ class Services():
             service.DATA_SOURCE_USERS: test_users_repository,
             service.CONNECT: connection,
             service.SETUP: setup,
-            service.USER_LOGIN: test_login}
+            service.USER_LOGIN: test_login,
+            service.DB_VERSION: db_version}
 
     production = {service.DB_CONFIGURATION: db_configuration,
                   service.DATA_SOURCE_POSTS: posts_repository,
                   service.DATA_SOURCE_USERS: users_repository,
                   service.CONNECT: connection,
                   service.SETUP: setup,
-                  service.USER_LOGIN: database_login}
+                  service.USER_LOGIN: database_login,
+                  service.DB_VERSION: db_version}
 
     @classmethod
     def is_service(cls, service_name):

@@ -12,7 +12,7 @@ title varchar,\
 post_content varchar,\
 PRIMARY KEY(posts_id),\
 FOREIGN KEY(author)\
-    REFERENCES users(user_id));"
+    REFERENCES users(user_id) ON DELETE CASCADE);"
 
 CREATE_USERS_SCRIPT = "CREATE TABLE USERS(user_id uuid UNIQUE,\
 user_name varchar UNIQUE,\

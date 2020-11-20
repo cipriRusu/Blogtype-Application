@@ -4,7 +4,8 @@ LIST_DATABASES_SCRIPT = "SELECT datname from pg_database"
 
 SEARCH_TABLE_SCRIPT = "SELECT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=%s)"
 
-CREATE_TABLE_SCRIPT = "CREATE TABLE POSTS(posts_id uuid UNIQUE,\
+CREATE_TABLE_SCRIPT = "CREATE TABLE IF NOT EXISTS\
+POSTS(posts_id uuid UNIQUE,\
 creation_date timestamp,\
 edit_date timestamp,\
 author uuid UNIQUE,\
@@ -14,7 +15,8 @@ PRIMARY KEY(posts_id),\
 FOREIGN KEY(author)\
     REFERENCES users(user_id) ON DELETE CASCADE);"
 
-CREATE_USERS_SCRIPT = "CREATE TABLE USERS(user_id uuid UNIQUE,\
+CREATE_USERS_SCRIPT = "CREATE TABLE IF NOT EXISTS\
+USERS(user_id uuid UNIQUE,\
 user_name varchar UNIQUE,\
 user_email varchar,\
 user_password varchar,\

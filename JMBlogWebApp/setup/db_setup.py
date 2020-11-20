@@ -1,6 +1,9 @@
+from setup.config import Config
 import setup.postgres_scripts as scripts
 
+
 class DbSetup():
+    CURRENT_DB_VERSION = 0
     def __init__(self, db_connection):
         self._connection = db_connection
 
@@ -16,3 +19,7 @@ class DbSetup():
             self._connection.execute(scripts.CREATE_TABLE_SCRIPT)
 
         self._connection.close_connection()
+
+    def update_database(self):
+        res = DbSetup.CURRENT_DB_VERSION
+        pass

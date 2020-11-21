@@ -6,5 +6,8 @@ class DatabaseConfiguration:
         self.user = user
         self.password = password
 
-    def get_dictionary(self):
+    def get_dictionary(self, exclude=None):
+        if exclude is not None:
+            self.__dict__.pop(exclude, None)
+            return self.__dict__
         return self.__dict__

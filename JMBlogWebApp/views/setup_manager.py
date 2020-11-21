@@ -14,11 +14,13 @@ setup_manager = Blueprint(
 def database_connector(current_db_config: services.DB_CONFIGURATION, setup: services.SETUP):
     if request.method == "GET":
         if current_db_config.is_configured():
+            setup.update_database()
             return redirect(url_for('post_manager.index'))
         return render_template("setup.html")
 
     if request.method == "POST":
         current_db_config.save_configuration(DatabaseConfiguration(**request.form))
-        setup.create_database()
+        setup.update_database()
+        setup.establish_connection()
         return redirect(url_for('post_manager.index'))
     return Exception("Cannot handle current request")

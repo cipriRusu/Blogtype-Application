@@ -5,8 +5,6 @@ from views import setup_manager
 from views import user_manager
 from views import login_manager
 from views import error_manager
-from views.decorators import inject_decorators
-from setup import services_listing as services
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 app.secret_key = os.urandom(10)
@@ -17,11 +15,6 @@ with app.app_context():
     app.register_blueprint(user_manager.user_manager)
     app.register_blueprint(login_manager.login_manager)
     app.register_blueprint(error_manager.error_manager)
-
-    @app.before_first_request
-    @inject_decorators.inject
-    def check_db_version(db_setup: services.SETUP):
-        pass
 
     @app.route('/')
     @app.route('/<path:path>')

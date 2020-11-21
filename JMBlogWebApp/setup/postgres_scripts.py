@@ -1,11 +1,13 @@
 CREATE_DATABASE_SCRIPT = "CREATE DATABASE %s;"
 
-LIST_DATABASES_SCRIPT = "SELECT datname from pg_database"
+LIST_DATABASES_SCRIPT = "SELECT datname FROM pg_database"
 
-SEARCH_TABLE_SCRIPT = "SELECT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=%s)"
+SEARCH_DATABASE_SCRIPT = "SELECT EXISTS(SELECT datname FROM pg_catalog.pg_database \
+WHERE lower(datname) = lower('%s'))::bool;"
 
-CREATE_TABLE_SCRIPT = "CREATE TABLE IF NOT EXISTS\
-POSTS(posts_id uuid UNIQUE,\
+SEARCH_TABLE_SCRIPT = "SELECT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME='%s')"
+
+CREATE_POSTS_SCRIPT = "CREATE TABLE IF NOT EXISTS POSTS(posts_id uuid UNIQUE,\
 creation_date timestamp,\
 edit_date timestamp,\
 author uuid UNIQUE,\
@@ -15,8 +17,7 @@ PRIMARY KEY(posts_id),\
 FOREIGN KEY(author)\
     REFERENCES users(user_id) ON DELETE CASCADE);"
 
-CREATE_USERS_SCRIPT = "CREATE TABLE IF NOT EXISTS\
-USERS(user_id uuid UNIQUE,\
+CREATE_USERS_SCRIPT = "CREATE TABLE IF NOT EXISTS USERS(user_id uuid UNIQUE,\
 user_name varchar UNIQUE,\
 user_email varchar,\
 user_password varchar,\

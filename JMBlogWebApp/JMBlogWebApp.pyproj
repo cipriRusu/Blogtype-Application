@@ -73,6 +73,9 @@
     <Compile Include="setup\db_connect.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="setup\db_default.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="setup\db_setup.py">
       <SubType>Code</SubType>
     </Compile>

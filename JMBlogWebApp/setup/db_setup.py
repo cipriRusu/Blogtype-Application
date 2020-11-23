@@ -15,7 +15,7 @@ class DbSetup():
             raise Exception(self._connection,
                             "Connection cannot be established\
                              as there is no local available database")
-        
+
         for script in scripts.CREATE_FULL_DATABASE:
             self._connection.execute(script)
 

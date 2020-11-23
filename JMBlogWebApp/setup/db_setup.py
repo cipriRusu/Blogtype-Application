@@ -16,7 +16,8 @@ class DbSetup():
                              as there is no local available database")
 
         if not self._connection.contains_table():
-            self._connection.execute(scripts.CREATE_TABLE_SCRIPT)
+            for script in scripts.CREATE_FULL_DATABASE:
+                self._connection.execute(script)
 
         self._connection.close_connection()
 

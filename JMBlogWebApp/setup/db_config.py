@@ -20,6 +20,7 @@ class DbConfig(Config):
     def get_db_version(self):
         if super().is_configured() and super().has_section(DbConfig.DB_VERSION_HEADER):
             return super().from_file(DbConfig.DB_VERSION_HEADER)
+        return 0
 
     def set_db_version(self, updated_version):
         super().to_file(updated_version, DbConfig.DB_VERSION_HEADER)

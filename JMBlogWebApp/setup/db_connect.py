@@ -1,4 +1,5 @@
 import psycopg2
+import setup.postgres_scripts as scripts
 
 class DbConnect():
     def __init__(self, config):
@@ -12,6 +13,10 @@ class DbConnect():
         self._connection = psycopg2.connect(**self._loaded_config.get_dictionary())
         self._connection.autocommit = True
         self._cursor = self._connection.cursor()
+
+    def contains_table(self):
+        self._cursor.execute(scripts.SEARCH_TABLE_SCRIPT % ("'posts'",))
+        return self._cursor.fetchone()[0]
 
     def close_connection(self):
         self._cursor.close()

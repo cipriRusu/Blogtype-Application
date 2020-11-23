@@ -14,9 +14,16 @@ class DbConnect():
         self._connection.autocommit = True
         self._cursor = self._connection.cursor()
 
-    def contains_table(self):
-        self._cursor.execute(scripts.SEARCH_TABLE_SCRIPT % ("'posts'",))
-        return self._cursor.fetchone()[0]
+    def create_db(self):
+        self._connection = psycopg2.connect('host=localhost user=postgres password=testpass')
+        self._connection.autocommit = True
+        self._cursor = self._connection.cursor()
+        self._cursor.execute('''CREATE DATABASE posts''')
+        self._cursor.close()
+        self._connection.close()
+
+    def update_database(self):
+        pass
 
     def close_connection(self):
         self._cursor.close()

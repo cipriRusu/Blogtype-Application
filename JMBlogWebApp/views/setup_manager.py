@@ -12,7 +12,9 @@ setup_manager = Blueprint(
 @setup_manager.route('/', methods=["GET", "POST"])
 @inject_decorators.inject
 def database_connector(config: services.DB_CONFIGURATION, setup: services.SETUP):
-    setup.update_database()
+    if setup.is_db_outdated():
+        setup.update_database()
+
     if request.method == "GET":
         if config.is_configured():
             return redirect(url_for('post_manager.index'))

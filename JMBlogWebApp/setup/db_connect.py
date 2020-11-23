@@ -14,10 +14,6 @@ class DbConnect():
         self._connection.autocommit = True
         self._cursor = self._connection.cursor()
 
-    def contains_table(self, table_name):
-        self._cursor.execute(scripts.SEARCH_TABLE_SCRIPT % table_name)
-        return self._cursor.fetchone()[0]
-
     def close_connection(self):
         self._cursor.close()
         self._connection.commit()

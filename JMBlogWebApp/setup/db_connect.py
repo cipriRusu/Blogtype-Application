@@ -1,5 +1,4 @@
 import psycopg2
-import setup.postgres_scripts as scripts
 
 class DbConnect():
     def __init__(self, config):

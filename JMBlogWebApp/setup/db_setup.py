@@ -18,14 +18,11 @@ class DbSetup():
         self._connection.close_connection()
 
     def update_database(self):
-        #self._connection.create_connection()
-
-        #for script in scripts.CREATE_FULL_DATABASE:
-            #self._connection.execute(script)
-
-        #self._connection.close_connection()
-
-        self._configuration.set_db_version(DatabaseVersion(3))
+        try:
+            self._connection.create_connection()
+        except:
+            ##CREATE DB##
+            self._configuration.set_db_version(DatabaseVersion(3))
 
     def is_db_outdated(self):
         return self._configuration.get_db_version() != 3

@@ -5,8 +5,8 @@ from views import setup_manager
 from views import user_manager
 from views import login_manager
 from views import error_manager
-from setup import services_listing as services
 from views.decorators import inject_decorators
+from setup import services_listing as services
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 app.secret_key = os.urandom(10)

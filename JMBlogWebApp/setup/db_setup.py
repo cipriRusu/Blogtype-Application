@@ -18,12 +18,12 @@ class DbSetup():
         self._connection.close_connection()
 
     def update_database(self):
-        self._connection.create_connection()
+        #self._connection.create_connection()
 
-        for script in scripts.CREATE_FULL_DATABASE:
-            self._connection.execute(script)
+        #for script in scripts.CREATE_FULL_DATABASE:
+            #self._connection.execute(script)
 
-        self._connection.close_connection()
+        #self._connection.close_connection()
 
         self._configuration.set_db_version(DatabaseVersion(3))
 

@@ -15,6 +15,9 @@ class DbSetup():
                             "Connection cannot be established\
                              as there is no local available database")
 
+        if not self._connection.contains_table():
+            self._connection.execute(scripts.CREATE_TABLE_SCRIPT)
+
         self._connection.close_connection()
 
     def update_database(self):

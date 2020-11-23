@@ -20,9 +20,13 @@ class DbSetup():
     def update_database(self):
         try:
             self._connection.create_connection()
+            ##TODO:UPDATE IF NEEDED##
+            self._connection.close_connection()
         except:
-            ##CREATE DB##
-            self._configuration.set_db_version(DatabaseVersion(3))
+            ##TODO:CREATE DB FROM SCRATCH##
+            pass
+
+        self._configuration.set_db_version(DatabaseVersion(3))
 
     def is_db_outdated(self):
         return self._configuration.get_db_version() != 3

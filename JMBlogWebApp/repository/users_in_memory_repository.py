@@ -1,3 +1,4 @@
+from repository.in_memory_data import in_memory_posts
 from repository.users_repository import UsersRepository
 
 class UsersInMemoryRepository(UsersRepository):
@@ -34,3 +35,6 @@ class UsersInMemoryRepository(UsersRepository):
         for element in self._db:
             if element.user_id == user_id:
                 self._db.remove(element)
+            for post in in_memory_posts:
+                if element.user_name is post.author:
+                    in_memory_posts.remove(post)

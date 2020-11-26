@@ -1,4 +1,3 @@
-from models.database_version import DatabaseVersion
 import setup.postgres_scripts as scripts
 
 class DbSetup():
@@ -16,14 +15,19 @@ class DbSetup():
                             "Connection cannot be established\
                              as there is no local available database")
 
-        for script in scripts.CREATE_FULL_DATABASE:
+        if self._connection.can_update():
+            self.update_database()
+
+        for script in scripts.CREATE_ALL_DB_RELATIONS:
             self._connection.execute(script)
 
         self._connection.close_connection()
 
     def update_database(self):
-        self._connection.create_db()
-        self._configuration.set_db_version(DatabaseVersion(3))
+        try:
+            self._connection.create_db()
+        except:
+            self._connection.update_db()
 
     def is_db_outdated(self):
         return self._configuration.get_db_version() != DbSetup.LATEST_VERSION

@@ -96,3 +96,16 @@ def test_allow_acces_to_user_remove_for_admin(configured_app):
                                            follow_redirects=True).data
 
     assert b'Remove' in user_route_result
+
+def test_removing_user_removes_post_also(configured_app):
+    login_data = {"NameInput": "admin", "PasswordInput": "adminpass"}
+
+    configured_app.post('/authentication/login',
+                        data=login_data, follow_redirects=True).data
+
+    configured_app.get('/users/remove/25447284-aa74-4fb6-b7a0-2bb955f2b2b1',
+                       follow_redirects=True).data
+
+    posts_page = configured_app.get('/posts', follow_redirects=True).data
+
+    assert b'SecondAuthor' not in posts_page

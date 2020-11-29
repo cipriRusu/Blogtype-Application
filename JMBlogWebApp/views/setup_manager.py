@@ -19,6 +19,6 @@ def database_connector(config: services.DB_CONFIGURATION, setup: services.SETUP)
 
     if request.method == "POST":
         config.save_configuration(DatabaseConfiguration(**request.form))
-        setup.create_db()
+        setup.setup()
         return redirect(url_for('post_manager.index'))
     return Exception("Cannot handle current request")

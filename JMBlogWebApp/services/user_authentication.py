@@ -1,5 +1,6 @@
 from flask import session
 from services.password_hasher import PasswordHasher
+from models.user import User
 
 class UserAuthentication():
     def __init__(self, users_db):
@@ -25,6 +26,11 @@ class UserAuthentication():
             session['logged_id'] = self._found_user.user_id
             return True
         return False
+
+    def login_update(self, update_user):
+        if session['logged_name'] is not 'admin':
+            session['logged_name'] = update_user.user_name
+            session['logged_id'] = update_user.user_id
 
     @classmethod
     def user_logout(cls):

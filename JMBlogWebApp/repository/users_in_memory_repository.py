@@ -35,6 +35,6 @@ class UsersInMemoryRepository(UsersRepository):
         for element in self._db:
             if element.user_id == user_id:
                 self._db.remove(element)
-            for post in in_memory_posts:
-                if element.user_name is post.author:
-                    in_memory_posts.remove(post)
+                for post in in_memory_posts:
+                    if post.author == element.user_name:
+                        in_memory_posts.remove(post)

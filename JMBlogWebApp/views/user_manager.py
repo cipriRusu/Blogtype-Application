@@ -51,7 +51,9 @@ def remove_item(user_index, current_database: services.DATA_SOURCE_USERS):
 @setup_decorators.config_check
 @inject_decorators.inject
 @authorization_decorators.admin_or_owner_required
-def update_item(user_index, current_database: services.DATA_SOURCE_USERS):
+def update_item(user_index,
+                current_database: services.DATA_SOURCE_USERS,
+                login_manager: services.USER_LOGIN):
     if request.method == "GET":
         return render_template("update_user.html",
                                current=current_database.get_user_by_id(user_index))
@@ -62,6 +64,7 @@ def update_item(user_index, current_database: services.DATA_SOURCE_USERS):
                        request.form['UserEmailInput'],
                        request.form['UserPassInput'])
         current_database.update_user(current)
+        login_manager.login_update(current)
         return redirect(url_for('.content', user_index=current.user_id))
     return Exception("Request type cannot be handled")
 
@@ -69,7 +72,9 @@ def update_item(user_index, current_database: services.DATA_SOURCE_USERS):
 @setup_decorators.config_check
 @inject_decorators.inject
 @authorization_decorators.admin_or_owner_required
-def reset_item(user_index, current_database: services.DATA_SOURCE_USERS):
+def reset_item(user_index, 
+               current_database: services.DATA_SOURCE_USERS,
+               login_manager: services.USER_LOGIN):
     if request.method == "GET":
         return render_template("update_user.html",
                                current=current_database.get_user_by_id(user_index))
@@ -85,6 +90,7 @@ def reset_item(user_index, current_database: services.DATA_SOURCE_USERS):
         current.update(request.form['UserNameInput'],
                        request.form['UserEmailInput'],
                        request.form['UserPassInput'])
+        login_manager.login_update(current)
         current_database.update_user(current)
-        return redirect(url_for('.content', user_index=current.user_id))
+        return redirect(url_for('user_manager.content', user_index=current.user_id))
     return Exception("Request type cannot be handled")

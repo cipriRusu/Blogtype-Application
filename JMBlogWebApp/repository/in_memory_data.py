@@ -45,7 +45,6 @@ in_memory_posts[1].stamp.creation_time = '1991-03-02 12:30:44'
 in_memory_posts[2].post_id = uuid.UUID('a656f973-5b82-462d-aff7-8d2c6c3e4fa2')
 in_memory_posts[2].stamp.creation_time = '2017-04-05 21:40:32'
 
-
 in_memory_users = [
     User('admin', 'admin@admin.com', 'adminpass'),
     User('FirstAuthor', 'f_author@blog.com', 'fpass'),

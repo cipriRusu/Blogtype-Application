@@ -92,20 +92,22 @@ def test_allow_acces_to_user_remove_for_admin(configured_app):
     configured_app.post('/authentication/login', data=login_data,
                         follow_redirects=True)
 
-    user_route_result = configured_app.get('/users/25447284-aa74-4fb6-b7a0-2bb955f2b2b1',
+    assert b'Remove' in configured_app.get('/users/25447284-aa74-4fb6-b7a0-2bb955f2b2b1',
                                            follow_redirects=True).data
-
-    assert b'Remove' in user_route_result
 
 def test_removing_user_removes_post_also(configured_app):
     login_data = {"NameInput": "admin", "PasswordInput": "adminpass"}
 
-    configured_app.post('/authentication/login',
-                        data=login_data, follow_redirects=True).data
+    login_result_code = configured_app.post('/authentication/login',
+                                            data=login_data, follow_redirects=True).status_code
 
-    configured_app.get('/users/remove/25447284-aa74-4fb6-b7a0-2bb955f2b2b1',
-                       follow_redirects=True).data
+    remove_result_code = configured_app.get('/users/remove/25447284-aa74-4fb6-b7a0-2bb955f2b2b1',
+                                            follow_redirects=True).status_code
 
     posts_page = configured_app.get('/posts', follow_redirects=True).data
 
+    assert login_result_code == 200
+    assert remove_result_code == 200
+    assert b'FirstAuthor' in posts_page
+    assert b'ThirdAuthor' in posts_page
     assert b'SecondAuthor' not in posts_page

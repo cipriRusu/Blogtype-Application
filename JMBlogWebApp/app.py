@@ -20,10 +20,9 @@ with app.app_context():
 
     @app.before_first_request
     @inject_decorators.inject
-    def before_first_request(setup: services.SETUP, config: services.DB_CONFIGURATION):
-        if config.is_configured():
-            if setup.is_db_outdated():
-                setup.setup()
+    def before_first_request(setup: services.SETUP):
+        if setup.is_db_outdated():
+            setup.setup()
 
     @app.route('/')
     @app.route('/<path:path>')

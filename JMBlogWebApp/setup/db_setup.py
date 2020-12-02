@@ -37,4 +37,5 @@ class DbSetup():
         self.update_db()
 
     def is_db_outdated(self):
-        return self._configuration.get_db_version() != DbSetup.LATEST_VERSION
+        return (self._configuration.is_configured() and 
+                self._configuration.get_db_version() != DbSetup.LATEST_VERSION)

@@ -72,7 +72,7 @@ def update_item(user_index,
 @setup_decorators.config_check
 @inject_decorators.inject
 @authorization_decorators.admin_or_owner_required
-def reset_item(user_index, 
+def reset_item(user_index,
                current_database: services.DATA_SOURCE_USERS,
                login_manager: services.USER_LOGIN):
     if request.method == "GET":

@@ -152,7 +152,7 @@ def test_edit_user_edits_posts_names_also_by_user(configured_app):
     assert b'SecondEditedInput' in edited_posts
 
 def test_add_user_allows_with_user_that_exists(configured_app):
-    login_data = {"NameInput": "SecondEditedInput", "PasswordInput": "test"}
+    login_data = {"NameInput": "ThirdAuthor", "PasswordInput": "tpass"}
 
     login_result_code = configured_app.post('/authentication/login',
                                             data=login_data,
@@ -169,7 +169,7 @@ def test_add_user_allows_with_user_that_exists(configured_app):
     assert b"UpdatedTitleByUser" in all_posts
 
 def test_add_user_not_allowing_if_no_user_logged_in(configured_app):
-    add_data = {"NameInput": "TestTitle", "ContentInput":"TestContentAdded"}
+    add_data = {"NameInput": "IllegalAdd", "ContentInput":"IllegalAdd"}
 
     add_result_code = configured_app.post('/posts/add',
                                           data=add_data,
@@ -177,4 +177,4 @@ def test_add_user_not_allowing_if_no_user_logged_in(configured_app):
 
     all_posts = configured_app.get('/posts', follow_redirects=True).data
 
-    assert b'TestContentAdded' not in all_posts
+    assert b'IllegalAdd' not in all_posts

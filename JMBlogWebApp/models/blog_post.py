@@ -9,11 +9,13 @@ class BlogPost:
         self.title = title
         self.content = content
         self.preview = content[0:30]
+        self.older_author = None
 
     def __eq__(self, other):
         return self.post_id == other.post_id
 
     def update(self, title, author, content):
+        self.older_author = self.author
         self.title = title
         self.author = author
         self.content = content

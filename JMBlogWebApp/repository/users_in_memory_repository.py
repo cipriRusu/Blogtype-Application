@@ -16,6 +16,10 @@ class UsersInMemoryRepository(UsersRepository):
         self._db.remove(user)
         self._db.append(user)
 
+        for post in in_memory_posts:
+            if post.author == user.user_old_name:
+                post.author = user.user_name
+
     def get_users(self):
         return self._db
 

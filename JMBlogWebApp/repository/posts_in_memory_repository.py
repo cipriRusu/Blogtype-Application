@@ -1,3 +1,4 @@
+from repository.in_memory_data import in_memory_users
 from repository.posts_repository import PostsRepository
 
 class PostsInMemoryRepository(PostsRepository):
@@ -9,11 +10,19 @@ class PostsInMemoryRepository(PostsRepository):
             yield element
 
     def add_post(self, item):
+        for user in in_memory_users:
+            if user.user_id == item.author:
+                item.author = user.user_name
         self._db.append(item)
 
     def update_post(self, item):
-        self._db.remove(item)
-        self._db.append(item)
+        for user in in_memory_users:
+            if user.user_id == item.author:
+                if user.user_name != 'admin':
+                    item.author = user.user_name
+
+                if user.user_name == 'admin':
+                    item.author = item.older_author
 
     def get_by_id(self, index):
         for element in self._db:

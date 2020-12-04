@@ -15,7 +15,6 @@ class BlogPost:
         return self.post_id == other.post_id
 
     def update(self, title, author, content):
-        self.older_author = self.author
         self.title = title
         self.author = author
         self.content = content

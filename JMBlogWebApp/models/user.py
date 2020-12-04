@@ -12,7 +12,6 @@ class User:
         self.user_old_name = None
 
     def update(self, user_name, user_email, user_password):
-        self.user_old_name = self.user_name
         self.user_name = user_name
         self.user_email = user_email
         self.user_password = PasswordHasher().get_hash(user_password)

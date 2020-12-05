@@ -13,9 +13,8 @@ class BlogPost:
     def __eq__(self, other):
         return self.post_id == other.post_id
 
-    def update(self, title, author, content):
+    def update(self, title, content):
         self.title = title
-        self.author = author
         self.content = content
         self.preview = content[0:30]
         self.stamp.on_edit()

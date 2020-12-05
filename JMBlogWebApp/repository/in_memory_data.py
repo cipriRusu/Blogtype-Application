@@ -42,11 +42,11 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                              versions of Lorem Ipsum.")]
 
 in_memory_posts[0].post_id = uuid.UUID('f9c3a576-28bc-4b63-931d-04d6488d2f0d')
-in_memory_posts[0].stamp.creation_time = '2019-09-03 19:40:33'
+in_memory_posts[0].stamp.creation_time = '2019-September-03 19:40:33'
 in_memory_posts[1].post_id = uuid.UUID('daca57d1-c180-4e0a-8394-f5c95a5d5f23')
-in_memory_posts[1].stamp.creation_time = '1991-03-02 12:30:44'
+in_memory_posts[1].stamp.creation_time = '1991-March-02 12:30:44'
 in_memory_posts[2].post_id = uuid.UUID('a656f973-5b82-462d-aff7-8d2c6c3e4fa2')
-in_memory_posts[2].stamp.creation_time = '2017-04-05 21:40:32'
+in_memory_posts[2].stamp.creation_time = '2017-April-05 21:40:32'
 
 in_memory_users = [
     User('admin', 'admin@admin.com', 'adminpass'),

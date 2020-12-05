@@ -13,5 +13,8 @@ class User:
     def update(self, user_name, user_email, user_password):
         self.user_name = user_name
         self.user_email = user_email
-        self.user_password = PasswordHasher().get_hash(user_password)
+        self.user_password = (PasswordHasher().get_hash(user_password)
+                              if user_password
+                              else self.user_password)
+
         self.user_timestamp.on_edit()

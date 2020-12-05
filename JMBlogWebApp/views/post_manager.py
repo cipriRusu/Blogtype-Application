@@ -56,7 +56,6 @@ def update_item(post_index, current_database: services.DATA_SOURCE_POSTS):
         current = current_database.get_by_id(post_index)
 
         current.update(request.form['NameInput'],
-                       session['logged_id'],
                        request.form['ContentInput'])
 
         current_database.update_post(current)

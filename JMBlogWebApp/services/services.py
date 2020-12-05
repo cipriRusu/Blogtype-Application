@@ -19,7 +19,7 @@ class Services():
     connection = DbConnect(db_configuration)
     setup = DbSetup(connection)
     test_users_repository = UsersInMemoryRepository(test_data_users)
-    test_posts_repository = PostsInMemoryRepository(test_data_posts)
+    test_posts_repository = PostsInMemoryRepository(test_data_posts, test_users_repository)
     posts_repository = PostsDBRepository(connection)
     users_repository = UsersDBRepository(connection)
     database_login = UserAuthentication(users_repository)

@@ -1,29 +1,42 @@
 ﻿{% extends "base_layout.html" %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='list_posts_style.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='list_posts_style.css') }}" />
 {% endblock %}
 
 {% block body %}
-    <header class="MainHeader">
-        <h1 class="MainTitle navbar-header">Blog App</h1>
-    </header>
+<header class="MainHeader">
+    <h1 class="MainTitle navbar-header">Blog App</h1>
+</header>
     {% if session['logged_name'] is defined %}
-        <p>Logged in as: {{ session['logged_name'] }}</p>
+<p>Logged in as: {{ session['logged_name'] }}</p>
     {% else %}
-        <p>Not logged in</p>
+<p>Not logged in</p>
     {% endif %}
+    <label for="Users">Select by User:</label>
+    <select name="Users" class="form-control form-control-lg" id="users">
+        <option value="test">FirstAuthor</option>
+        <option value="test">SecondAuthor</option>
+        <option value="test">ThirdAuthor</option>
+    </select>
     <ul class="list-group">
-        {% for element in database|reverse %}
-        <li class="ArticleGroup list-group-item">
-            <a href=" {{ url_for('.content', post_index=element.post_id) }}">
-                Article Title : {{ element.title }}<br />
-                Article Author : {{ element.author }}<br />
-                Created On: {{ element.stamp.creation_time }}<br />
-                Last Edited On: {{ element.stamp.edit_time }}<br />
-                Preview: {{ element.preview }}
-            </a>
-        </li>
-        {% endfor %}
+    {% for element in database|reverse %}
+    <li class="ArticleGroup list-group-item">
+        <a href=" {{ url_for('.content', post_index=element.post_id) }}">
+            Article Title : {{ element.title }}<br />
+            Article Author : {{ element.author }}<br />
+            Created On: {{ element.stamp.creation_time }}<br />
+            Last Edited On: {{ element.stamp.edit_time }}<br />
+            Preview: {{ element.preview }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+    <ul class="pagination">
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
     </ul>
 {% endblock %}

@@ -13,12 +13,14 @@
     {% else %}
 <p>Not logged in</p>
     {% endif %}
-    <label for="Users">Select by User:</label>
-    <select name="Users" class="form-control form-control-lg" id="users">
-        <option value="test">FirstAuthor</option>
-        <option value="test">SecondAuthor</option>
-        <option value="test">ThirdAuthor</option>
-    </select>
+    <form method="get">
+        <label for="Users">Select by User:</label>
+        <select name="Users" class="form-control form-control-lg" id="users" onchange="this.form.submit()">
+            {% for user in users %}
+                <option>{{ user.user_name }}</option>
+            {% endfor %}
+        </select>
+    </form>
     <ul class="list-group">
     {% for element in database|reverse %}
     <li class="ArticleGroup list-group-item">

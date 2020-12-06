@@ -40,16 +40,27 @@ class PostsDBRepository(PostsRepository):
 
         self._conn.close_connection()
 
-    def get_all(self):
+    def get_all(self, filter_by=None):
         self._conn.create_connection()
         all_elements = []
-        query_result = self._conn.execute('SELECT\
-         posts_id\
-        ,creation_date\
-        ,edit_date\
-        ,user_name\
-        ,title\
-        ,post_content from posts inner join users on author = user_id;')
+
+        if filter_by is None:
+            query_result = self._conn.execute('SELECT\
+            posts_id\
+           ,creation_date\
+           ,edit_date\
+           ,user_name\
+           ,title\
+           ,post_content from posts inner join users on author = user_id')
+        else:
+            query_result = self._conn.execute('SELECT\
+            posts_id\
+           ,creation_date\
+           ,edit_date\
+           ,user_name\
+           ,title\
+           ,post_content from posts inner join \
+           users on author = user_id where user_name =%s', (filter_by,))
 
         for item in query_result.fetchall():
             element = BlogPost(

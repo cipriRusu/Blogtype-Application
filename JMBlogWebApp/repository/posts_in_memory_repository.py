@@ -1,5 +1,6 @@
 from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
+from exceptions.user_exception  import UserException
 
 class PostsInMemoryRepository(PostsRepository):
     def __init__(self, db, users_db):
@@ -41,9 +42,14 @@ class PostsInMemoryRepository(PostsRepository):
         all_posts = []
 
         for post in self._db:
+            try:
+                post_author = self._users_db.get_user_by_id(post.author).user_name
+            except UserException:
+                continue
+
             found_post = BlogPost(
                 post.title,
-                self._users_db.get_user_by_id(post.author).user_name,
+                post_author,
                 post.content)
 
             found_post.stamp.creation_time = post.stamp.creation_time

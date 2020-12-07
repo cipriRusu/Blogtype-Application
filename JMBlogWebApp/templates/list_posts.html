@@ -16,8 +16,13 @@
     <form method="get">
         <label for="Users">Select by User:</label>
         <select name="Users" class="form-control form-control-lg" id="users" onchange="this.form.submit()">
+            <option>{{ 'None' }}</option>
             {% for user in users %}
-                <option>{{ user.user_name }}</option>
+                {% if user.user_name == request.args["Users"] %}
+                    <option selected="selected">{{ user.user_name }}</option>
+                {% else %}
+                    <option>{{ user.user_name }}</option>
+                {% endif %}
             {% endfor %}
         </select>
     </form>

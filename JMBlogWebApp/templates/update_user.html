@@ -8,7 +8,11 @@
 <div class="Form form-group">
     <form method="post">
         <label typeof="string">Username : </label><br />
+        {% if current.user_name != 'admin' %}
         <input class="form-control" typeof="string" name="UserNameInput" value="{{ current.user_name }}" /><br />
+        {% else %}
+        <input class="form-control" typeof="string" name="UserNameInput" value="{{ current.user_name }}" readonly="readonly" /><br />
+        {% endif %}
         <label typeof="string">Email : </label><br />
         <input class="form-control" typeof="string" name="UserEmailInput" value="{{ current.user_email }}" /><br />
         <label typeof="string">Password : </label><br />

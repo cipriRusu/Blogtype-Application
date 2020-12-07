@@ -15,7 +15,7 @@
             {% if session['logged_name'] == 'admin' %}
             <li class="nav-item"><a href="{{ url_for('user_manager.index')}}">Users</a></li>
             {% endif %}
-            {% if session['logged_name'] != 'admin' and session['logged_name'] is defined %}
+            {% if session['logged_name'] is defined %}
             <li class="nav-item"><a href="{{ url_for('user_manager.update_item', user_index=session['logged_id'])}}">Edit User</a></li>
             {% endif %}
             {% if session['logged_name'] == 'admin' %}

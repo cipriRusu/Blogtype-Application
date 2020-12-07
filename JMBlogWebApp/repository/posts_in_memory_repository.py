@@ -42,16 +42,20 @@ class PostsInMemoryRepository(PostsRepository):
         all_posts = []
 
         for post in self._db:
-            if (filter_by is None or
-                self._users_db.get_user_by_id(post.author).user_name == filter_by):
-                found_post = BlogPost(
-                    post.title,
-                    self._users_db.get_user_by_id(post.author).user_name,
-                    post.content)
-                found_post.stamp.creation_time = post.stamp.creation_time
-                found_post.stamp.edit_time = post.stamp.edit_time
-                found_post.post_id = post.post_id
-                all_posts.append(found_post)
+            try:
+                str_author_name = self._users_db.get_user_by_id(post.author).user_name
+            except UserException:
+                continue
+
+            found_post = BlogPost(
+                post.title,
+                str_author_name,
+                post.content)
+
+            found_post.stamp.creation_time = post.stamp.creation_time
+            found_post.stamp.edit_time = post.stamp.edit_time
+            found_post.post_id = post.post_id
+            all_posts.append(found_post)
 
         return all_posts
 

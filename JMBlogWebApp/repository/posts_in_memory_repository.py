@@ -47,7 +47,7 @@ class PostsInMemoryRepository(PostsRepository):
             except UserException:
                 continue
 
-            if filter_by is None or filter_by == str_author_name:
+            if filter_by == 'None' or filter_by == str_author_name:
                 found_post = BlogPost(
                     post.title,
                     str_author_name,

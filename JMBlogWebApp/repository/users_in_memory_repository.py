@@ -1,5 +1,6 @@
 from repository.in_memory_data import in_memory_posts
 from repository.users_repository import UsersRepository
+from exceptions.user_exception  import UserException
 
 class UsersInMemoryRepository(UsersRepository):
     def __init__(self, db):
@@ -23,7 +24,7 @@ class UsersInMemoryRepository(UsersRepository):
         for element in self._db:
             if element.user_id == user_id:
                 return element
-        raise Exception('No user found in current repository')
+        raise UserException
 
     def get_by_name(self, username):
         for element in self._db:

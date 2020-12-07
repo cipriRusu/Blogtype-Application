@@ -22,23 +22,20 @@
         </select>
     </form>
     <ul class="list-group">
-    {% for element in database|reverse %}
-    <li class="ArticleGroup list-group-item">
-        <a href=" {{ url_for('.content', post_index=element.post_id) }}">
-            Article Title : {{ element.title }}<br />
-            Article Author : {{ element.author }}<br />
-            Created On: {{ element.stamp.creation_time }}<br />
-            Last Edited On: {{ element.stamp.edit_time }}<br />
-            Preview: {{ element.preview }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-    <ul class="pagination">
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
+        {% for element in database|reverse %}
+        <li class="ArticleGroup list-group-item">
+            <a href=" {{ url_for('.content', post_index=element.post_id) }}">
+                Article Title : {{ element.title }}<br />
+                Article Author : {{ element.author }}<br />
+                Created On: {{ element.stamp.creation_time }}<br />
+                Last Edited On: {{ element.stamp.edit_time }}<br />
+                Preview: {{ element.preview }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <ul class="pagination pagination-sm">
+        <li class="previous"><a href="#">Previous</a></li>
+        <li class="next"><a href="#">Next</a></li>
     </ul>
 {% endblock %}

@@ -1,5 +1,6 @@
 from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
+from exceptions.user_exception  import UserException
 
 class PostsInMemoryRepository(PostsRepository):
     def __init__(self, db, users_db):

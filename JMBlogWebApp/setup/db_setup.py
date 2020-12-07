@@ -27,7 +27,7 @@ class DbSetup():
                 for script in scripts.ALL_SCRIPTS:
                     self._connection.execute(script)
                 self._connection.close_connection()
-        self._configuration.set_db_version(DatabaseVersion(LATEST_VERSION))
+        self._configuration.set_db_version(DatabaseVersion(DbSetup.LATEST_VERSION))
 
     def setup(self):
         try:

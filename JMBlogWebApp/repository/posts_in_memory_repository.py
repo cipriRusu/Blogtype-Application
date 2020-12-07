@@ -43,13 +43,13 @@ class PostsInMemoryRepository(PostsRepository):
 
         for post in self._db:
             try:
-                post_author = self._users_db.get_user_by_id(post.author).user_name
+                str_author_name = self._users_db.get_user_by_id(post.author).user_name
             except UserException:
                 continue
 
             found_post = BlogPost(
                 post.title,
-                post_author,
+                str_author_name,
                 post.content)
 
             found_post.stamp.creation_time = post.stamp.creation_time

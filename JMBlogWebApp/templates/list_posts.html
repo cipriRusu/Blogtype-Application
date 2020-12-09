@@ -27,7 +27,7 @@
         </select>
     </form>
     <ul class="list-group">
-        {% for element in database|reverse %}
+        {% for element in database.get_current_page()|reverse %}
         <li class="ArticleGroup list-group-item">
             <a href=" {{ url_for('.content', post_index=element.post_id) }}">
                 Article Title : {{ element.title }}<br />
@@ -39,8 +39,14 @@
         </li>
         {% endfor %}
     </ul>
-    <ul class="pagination pagination-sm">
-        <li class="previous"><a href="#">Previous</a></li>
-        <li class="next"><a href="#">Next</a></li>
-    </ul>
+    <form method="get" name="Page" id="Page">
+        <ul class="pagination pagination-sm">
+            {% if database.can_previous() %}
+            <li class="previous"><a href="{{ url_for('.index', Users=request.args["Users"], Page=database.get_previous()) }}" onchange="this.form.submit()">Previous</a></li>
+            {% endif %}
+            {% if database.can_next() %}
+            <li class="next"><a href="{{ url_for('.index', Users=request.args["Users"], Page=database.get_next()) }}" onchange="this.form.submit()">Next</a></li>
+            {% endif %}
+        </ul>
+    </form>
 {% endblock %}

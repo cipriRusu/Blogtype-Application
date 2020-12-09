@@ -46,7 +46,7 @@ class PostsInMemoryRepository(PostsRepository):
                 str_author_name = self._users_db.get_user_by_id(post.author).user_name
             except UserException:
                 continue
-
+            #if filter_by in ('None', str_author_name):
             if filter_by == 'None' or filter_by == str_author_name:
                 found_post = BlogPost(
                     post.title,

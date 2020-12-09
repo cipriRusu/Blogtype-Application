@@ -9,7 +9,7 @@
     {% block head %} {% endblock %}
 </head>
 <body>
-    <nav class="nav nav-tabs">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
         <ul class="nav nav-tabs">
             <li class="nav-item"><a href="{{ url_for('post_manager.index')}}">Posts</a></li>
             {% if session['logged_name'] == 'admin' %}

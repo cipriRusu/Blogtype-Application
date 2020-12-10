@@ -52,7 +52,7 @@ class PostsDBRepository(PostsRepository):
            ,title\
            ,post_content from posts inner join users on author = user_id'
 
-        if filter_by == 'None':
+        if filter_by is None:
             query_result = self._conn.execute(selection_query)
 
         else:

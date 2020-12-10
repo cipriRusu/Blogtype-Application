@@ -9,7 +9,7 @@ from repository.users_in_memory_repository import UsersInMemoryRepository
 from repository.in_memory_data import in_memory_posts as test_data_posts
 from repository.in_memory_data import in_memory_users as test_data_users
 from services.user_authentication import UserAuthentication
-from services.pagination import Pagination
+from services.pagination_factory import PaginationFactory
 
 class Services():
     IS_TEST = True
@@ -25,8 +25,7 @@ class Services():
     users_repository = UsersDBRepository(connection)
     database_login = UserAuthentication(users_repository)
     test_login = UserAuthentication(test_users_repository)
-    pagination = Pagination(posts_repository)
-    test_pagination = Pagination(test_posts_repository)
+    pagination = PaginationFactory()
 
     test = {service.DB_CONFIGURATION: db_configuration,
             service.DATA_SOURCE_POSTS: test_posts_repository,
@@ -34,7 +33,7 @@ class Services():
             service.CONNECT: connection,
             service.SETUP: setup,
             service.USER_LOGIN: test_login,
-            service.PAGINATION: test_pagination}
+            service.PAGINATION: pagination}
 
     production = {service.DB_CONFIGURATION: db_configuration,
                   service.DATA_SOURCE_POSTS: posts_repository,

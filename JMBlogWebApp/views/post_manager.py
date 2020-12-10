@@ -11,21 +11,13 @@ post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template
 @setup_decorators.config_check
 @inject_decorators.inject
 def index(current_users: services.DATA_SOURCE_USERS,
+          current_database: services.DATA_SOURCE_POSTS,
           pagination: services.PAGINATION):
 
-    ##TODO: Include logic into pagination?
-    username_filter = ('None' if "Users" not in request.args or
-                       request.args['Users'] == '' else request.args["Users"])
-
-    current_page = (0 if "Page" not in request.args or
-                    request.args['Page'] == '' else int(request.args["Page"]))
-
-    pagination.get_name_filter(username_filter)
-
-    pagination.get_page_filter(current_page)
+    pagination.get_parameters(current_database, request.args.get("Users"), request.args.get("Page"))
 
     return render_template("list_posts.html",
-                           database=pagination,
+                           database=pagination.get_pagination(),
                            users=current_users.get_users())
 
 @post_manager.route('/<uuid:post_index>')

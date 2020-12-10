@@ -27,7 +27,7 @@
         </select>
     </form>
     <ul class="list-group">
-        {% for element in database.get_current_page()|reverse %}
+        {% for element in database.get_page() %}
         <li class="ArticleGroup list-group-item">
             <a href=" {{ url_for('.content', post_index=element.post_id) }}">
                 Article Title : {{ element.title }}<br />

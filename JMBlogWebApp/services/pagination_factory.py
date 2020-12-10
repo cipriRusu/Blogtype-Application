@@ -9,12 +9,11 @@ class PaginationFactory():
     def get_parameters(self, datasource, name_filter, page_filter):
         self._datasource = datasource
 
-        self._name_filter = None if name_filter in ("None", '') else name_filter
+        self._name_filter = None if name_filter in (None, "None", '') else name_filter
 
-        self._page_filter = (0 if
-                             page_filter is
-                             None else
-                             int(page_filter))
+        self._page_filter = (0 if page_filter in (None, "None", '')
+                             else int(page_filter)
+                             if page_filter.isnumeric() else 0)
 
     def get_pagination(self):
         return Pagination(self._datasource,

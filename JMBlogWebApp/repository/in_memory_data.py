@@ -39,7 +39,50 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                              popularised in the 1960s with the release of Letraset sheets \
                              containing Lorem Ipsum passages, and more recently , with desktop \
                              publishing software like Aldus PageMaker including \
-                             versions of Lorem Ipsum.")]
+                             versions of Lorem Ipsum."),
+
+                    BlogPost("FourthTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
+                              ,"There are many variations of passages of Lorem Ipsum available,\
+                              but the majority have suffered alteration in some form, by injected\
+                              humour, or randomised words which don't look even slightly believable. \
+                              If you are going to use a passage of Lorem Ipsum, you need to\
+                              be sure there isn't anything embarrassing hidden in the middle\
+                              of text. All the Lorem Ipsum generators on the Internet tend to\
+                              repeat predefined chunks as necessary, making this the first \
+                              true generator on the Internet. It uses a dictionary of over 200\
+                              Latin words, combined with a handful of model sentence structures,\
+                              to generate Lorem Ipsum which looks reasonable. The generated Lorem \
+                              Ipsum is therefore always free from repetition, injected humour, \
+                              or non-characteristic words etc."),
+
+                    BlogPost("FifthTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
+                              ,"There are many variations of passages of Lorem Ipsum available,\
+                              but the majority have suffered alteration in some form, by injected\
+                              humour, or randomised words which don't look even slightly believable. \
+                              If you are going to use a passage of Lorem Ipsum, you need to\
+                              be sure there isn't anything embarrassing hidden in the middle\
+                              of text. All the Lorem Ipsum generators on the Internet tend to\
+                              repeat predefined chunks as necessary, making this the first \
+                              true generator on the Internet. It uses a dictionary of over 200\
+                              Latin words, combined with a handful of model sentence structures,\
+                              to generate Lorem Ipsum which looks reasonable. The generated Lorem \
+                              Ipsum is therefore always free from repetition, injected humour, \
+                              or non-characteristic words etc."),
+
+                    BlogPost("SixthTitle", uuid.UUID('25447284-aa74-4fb6-b7a0-2bb955f2b2b1')\
+                              ,"There are many variations of passages of Lorem Ipsum available,\
+                              but the majority have suffered alteration in some form, by injected\
+                              humour, or randomised words which don't look even slightly believable. \
+                              If you are going to use a passage of Lorem Ipsum, you need to\
+                              be sure there isn't anything embarrassing hidden in the middle\
+                              of text. All the Lorem Ipsum generators on the Internet tend to\
+                              repeat predefined chunks as necessary, making this the first \
+                              true generator on the Internet. It uses a dictionary of over 200\
+                              Latin words, combined with a handful of model sentence structures,\
+                              to generate Lorem Ipsum which looks reasonable. The generated Lorem \
+                              Ipsum is therefore always free from repetition, injected humour, \
+                              or non-characteristic words etc.")]
+
 
 in_memory_posts[0].post_id = uuid.UUID('f9c3a576-28bc-4b63-931d-04d6488d2f0d')
 in_memory_posts[0].stamp.creation_time = '2019-September-03 19:40:33'
@@ -47,6 +90,12 @@ in_memory_posts[1].post_id = uuid.UUID('daca57d1-c180-4e0a-8394-f5c95a5d5f23')
 in_memory_posts[1].stamp.creation_time = '1991-March-02 12:30:44'
 in_memory_posts[2].post_id = uuid.UUID('a656f973-5b82-462d-aff7-8d2c6c3e4fa2')
 in_memory_posts[2].stamp.creation_time = '2017-April-05 21:40:32'
+in_memory_posts[3].post_id = uuid.UUID('fcd27650-ddee-479b-b029-af68c6f0ef90')
+in_memory_posts[3].stamp.creation_time = '2016-April-01 21:12:22'
+in_memory_posts[4].post_id = uuid.UUID('0d816f70-0ed1-4cee-b156-112462e6ea52')
+in_memory_posts[4].stamp.creation_time = '2012-May-02 20:12:40'
+in_memory_posts[5].post_id = uuid.UUID('c98026b6-08b2-45c9-981b-a6159124189d')
+in_memory_posts[5].stamp.creation_time = '2008-June-01 18:11:12'
 
 in_memory_users = [
     User('admin', 'admin@admin.com', 'adminpass'),

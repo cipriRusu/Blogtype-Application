@@ -1,38 +1,34 @@
 class Pagination():
-    POSTS_LIMIT = 1
-    def __init__(self, db):
+    POSTS_LIMIT = 5
+    def __init__(self, db, name_filter, page_filter):
         self._db = db
-        self._size = self._db
-        self._name_filter = 'None'
-        self._current_page = 0
+        self._name_filter = name_filter
+        self._page_filter = page_filter
+        self._contains = True
 
     def can_next(self):
-        if self._current_page < len(self._db.get_all(filter_by=self._name_filter)
-                                    [self._current_page * Pagination.POSTS_LIMIT:
-                                     self._current_page + Pagination.POSTS_LIMIT]) + 1:
+        if self._contains:
             return True
         return False
 
     def can_previous(self):
-        if self._current_page - 1 >= 0:
+        if self._page_filter - 1 >= 0:
             return True
         return False
 
     def get_previous(self):
-        previous_page = self._current_page - 1
-        return previous_page
+        previous = self._page_filter - 1
+        return previous
 
     def get_next(self):
-        next_page = self._current_page + 1
-        return next_page
+        next_index = self._page_filter + 1
+        return next_index
 
-    def get_name_filter(self, name_filter):
-        self._name_filter = name_filter
-
-    def get_page_filter(self, page_filter):
-        self._current_page = page_filter
-
-    def get_current_page(self):
-        return (self._db.get_all(filter_by=self._name_filter)
-                [self._current_page * Pagination.POSTS_LIMIT:
-                 self._current_page + Pagination.POSTS_LIMIT])
+    def get_page(self):
+        current_posts = self._db.get_all(filter_by=self._name_filter)
+        current_posts.reverse()
+        returned = (current_posts[self._page_filter * Pagination.POSTS_LIMIT:]
+                                 [0:Pagination.POSTS_LIMIT])
+        if not returned:
+            self._contains = False
+        return returned

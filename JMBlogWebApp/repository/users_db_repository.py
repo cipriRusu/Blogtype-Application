@@ -5,6 +5,10 @@ class UsersDBRepository(UsersRepository):
     def __init__(self, db):
         self._db = db
 
+    def __iter__(self):
+        for element in self.get_users():
+            yield element
+
     def add_user(self, user):
         self._db.create_connection()
         self._db.execute('INSERT INTO users\

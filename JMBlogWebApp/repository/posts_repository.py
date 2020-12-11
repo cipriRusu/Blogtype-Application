@@ -20,7 +20,7 @@ class PostsRepository(metaclass=ABCMeta):
         pass
 
     @abc.abstractmethod
-    def get_all(self):
+    def get_all(self, filter_by=None):
         pass
 
     @abc.abstractmethod

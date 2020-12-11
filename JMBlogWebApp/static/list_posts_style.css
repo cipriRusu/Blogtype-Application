@@ -25,6 +25,11 @@ body > ul
     box-shadow: 0 4px 4px 0;
 }
 
+.form-control
+{
+    width: 10%;
+}
+
 .MainTitle {
     background: border-box;
     background-color: beige;

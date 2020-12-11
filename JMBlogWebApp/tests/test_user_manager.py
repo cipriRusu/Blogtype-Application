@@ -162,7 +162,7 @@ def test_add_user_allows_with_user_that_exists(configured_app):
                               data=add_data,
                               follow_redirects=True))
 
-    all_posts = configured_app.get('/posts', follow_redirects=True).data
+    all_posts = configured_app.get('/posts/?Users=&Page=0', follow_redirects=True).data
 
     assert b"UpdatedTitleByUser" in all_posts
 

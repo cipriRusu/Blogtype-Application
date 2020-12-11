@@ -38,7 +38,7 @@ class PostsInMemoryRepository(PostsRepository):
                 return found_post
         raise Exception("no element found!")
 
-    def get_all(self):
+    def get_all(self, filter_by=None):
         all_posts = []
 
         for post in self._db:
@@ -47,15 +47,16 @@ class PostsInMemoryRepository(PostsRepository):
             except UserException:
                 continue
 
-            found_post = BlogPost(
-                post.title,
-                str_author_name,
-                post.content)
+            if filter_by in (None, str_author_name):
+                found_post = BlogPost(
+                    post.title,
+                    str_author_name,
+                    post.content)
 
-            found_post.stamp.creation_time = post.stamp.creation_time
-            found_post.stamp.edit_time = post.stamp.edit_time
-            found_post.post_id = post.post_id
-            all_posts.append(found_post)
+                found_post.stamp.creation_time = post.stamp.creation_time
+                found_post.stamp.edit_time = post.stamp.edit_time
+                found_post.post_id = post.post_id
+                all_posts.append(found_post)
 
         return all_posts
 

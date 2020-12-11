@@ -9,6 +9,7 @@ from repository.users_in_memory_repository import UsersInMemoryRepository
 from repository.in_memory_data import in_memory_posts as test_data_posts
 from repository.in_memory_data import in_memory_users as test_data_users
 from services.user_authentication import UserAuthentication
+from services.pagination_factory import PaginationFactory
 
 class Services():
     IS_TEST = False
@@ -24,20 +25,23 @@ class Services():
     users_repository = UsersDBRepository(connection)
     database_login = UserAuthentication(users_repository)
     test_login = UserAuthentication(test_users_repository)
+    pagination_factory = PaginationFactory()
 
     test = {service.DB_CONFIGURATION: db_configuration,
             service.DATA_SOURCE_POSTS: test_posts_repository,
             service.DATA_SOURCE_USERS: test_users_repository,
             service.CONNECT: connection,
             service.SETUP: setup,
-            service.USER_LOGIN: test_login}
+            service.USER_LOGIN: test_login,
+            service.PAGINATION_FACTORY: pagination_factory}
 
     production = {service.DB_CONFIGURATION: db_configuration,
                   service.DATA_SOURCE_POSTS: posts_repository,
                   service.DATA_SOURCE_USERS: users_repository,
                   service.CONNECT: connection,
                   service.SETUP: setup,
-                  service.USER_LOGIN: database_login}
+                  service.USER_LOGIN: database_login,
+                  service.PAGINATION_FACTORY: pagination_factory}
 
     @classmethod
     def is_service(cls, service_name):

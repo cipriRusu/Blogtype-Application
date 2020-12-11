@@ -1,20 +1,33 @@
 ﻿{% extends "base_layout.html" %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='list_posts_style.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='list_posts_style.css') }}" />
 {% endblock %}
 
 {% block body %}
-    <header class="MainHeader">
-        <h1 class="MainTitle navbar-header">Blog App</h1>
-    </header>
+<header class="MainHeader">
+    <h1 class="MainTitle navbar-header">Blog App</h1>
+</header>
     {% if session['logged_name'] is defined %}
-        <p>Logged in as: {{ session['logged_name'] }}</p>
+<p>Logged in as: {{ session['logged_name'] }}</p>
     {% else %}
-        <p>Not logged in</p>
+<p>Not logged in</p>
     {% endif %}
+    <form method="get">
+        <label for="Users">Select by User:</label>
+        <select name="Users" class="form-control form-control-lg" id="users" onchange="this.form.submit()">
+            <option>{{ 'None' }}</option>
+            {% for user in users %}
+                {% if user.user_name == request.args["Users"] %}
+                    <option selected="selected">{{ user.user_name }}</option>
+                {% else %}
+                    <option>{{ user.user_name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </form>
     <ul class="list-group">
-        {% for element in database|reverse %}
+        {% for element in database.get_page() %}
         <li class="ArticleGroup list-group-item">
             <a href=" {{ url_for('.content', post_index=element.post_id) }}">
                 Article Title : {{ element.title }}<br />
@@ -26,4 +39,14 @@
         </li>
         {% endfor %}
     </ul>
+    <form method="get" name="Page" id="Page">
+        <ul class="pagination pagination-sm">
+            {% if database.can_previous() %}
+            <li class="previous"><a href="{{ url_for('.index', Users=request.args["Users"], Page=database.get_previous()) }}" onchange="this.form.submit()">Previous</a></li>
+            {% endif %}
+            {% if database.can_next() %}
+            <li class="next"><a href="{{ url_for('.index', Users=request.args["Users"], Page=database.get_next()) }}" onchange="this.form.submit()">Next</a></li>
+            {% endif %}
+        </ul>
+    </form>
 {% endblock %}

@@ -4,10 +4,10 @@ class Pagination():
         self._db = db
         self._name_filter = name_filter
         self._page_filter = page_filter
-        self._contains = True
+        self.can_continue = True
 
     def can_next(self):
-        if self._contains:
+        if self.can_continue:
             return True
         return False
 
@@ -25,10 +25,20 @@ class Pagination():
         return next_index
 
     def get_page(self):
-        current_posts = self._db.get_all(filter_by=self._name_filter)
-        current_posts.reverse()
-        returned = (current_posts[self._page_filter * Pagination.POSTS_LIMIT:]
-                                 [0:Pagination.POSTS_LIMIT])
-        if not returned:
-            self._contains = False
-        return returned
+        all_posts = self._db.get_all(filter_by=self._name_filter)
+
+        all_posts.reverse()
+
+        posts_on_current_page = self.__extracted_posts(all_posts, self._page_filter)
+
+        if not len(posts_on_current_page) >= Pagination.POSTS_LIMIT:
+            self.can_continue = False
+
+        if not self.__extracted_posts(all_posts, self._page_filter + 1):
+            self.can_continue = False
+
+        return posts_on_current_page
+
+    @classmethod
+    def __extracted_posts(cls, all_posts, page_index):
+        return all_posts[page_index * Pagination.POSTS_LIMIT:][0:Pagination.POSTS_LIMIT]

@@ -1,6 +1,6 @@
+from exceptions.user_exception  import UserException
 from repository.in_memory_data import in_memory_posts
 from repository.users_repository import UsersRepository
-from exceptions.user_exception  import UserException
 
 class UsersInMemoryRepository(UsersRepository):
     def __init__(self, db):

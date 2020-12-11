@@ -18,7 +18,7 @@ def index(current_users: services.DATA_SOURCE_USERS,
                                                       request.args.get("Users"),
                                                       request.args.get("Page"))
 
-    return render_template("list_posts.html",database=pagination, users=current_users)
+    return render_template("list_posts.html", database=pagination, users=current_users)
 
 @post_manager.route('/<uuid:post_index>')
 @setup_decorators.config_check

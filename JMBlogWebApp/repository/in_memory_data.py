@@ -3,7 +3,7 @@ from models.blog_post import BlogPost
 from models.user import User
 
 in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
-                             ,"Lorem Ipsum is simply dummy ,\
+                             , "Lorem Ipsum is simply dummy ,\
                              'text of the printing and typesetting industry. Lorem Ipsum \
                              has been the industry's , standard dummy text ever since the \
                              1500s,when an unknown printer took a galley of , type and scrambled \
@@ -41,8 +41,22 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                              publishing software like Aldus PageMaker including \
                              versions of Lorem Ipsum."),
 
-                    BlogPost("FourthTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
-                              ,"There are many variations of passages of Lorem Ipsum available,\
+                   BlogPost("FourthTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
+                            , "There are many variations of passages of Lorem Ipsum available,\
+                            but the majority have suffered alteration in some form, by injected\
+                            humour, or randomised words which don't look even slightly believable. \
+                            If you are going to use a passage of Lorem Ipsum, you need to\
+                            be sure there isn't anything embarrassing hidden in the middle\
+                            of text. All the Lorem Ipsum generators on the Internet tend to\
+                            repeat predefined chunks as necessary, making this the first \
+                            true generator on the Internet. It uses a dictionary of over 200\
+                            Latin words, combined with a handful of model sentence structures,\
+                            to generate Lorem Ipsum which looks reasonable. The generated Lorem \
+                            Ipsum is therefore always free from repetition, injected humour, \
+                            or non-characteristic words etc."),
+
+                   BlogPost("FifthTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
+                              , "There are many variations of passages of Lorem Ipsum available,\
                               but the majority have suffered alteration in some form, by injected\
                               humour, or randomised words which don't look even slightly believable. \
                               If you are going to use a passage of Lorem Ipsum, you need to\
@@ -55,8 +69,8 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Ipsum is therefore always free from repetition, injected humour, \
                               or non-characteristic words etc."),
 
-                    BlogPost("FifthTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
-                              ,"There are many variations of passages of Lorem Ipsum available,\
+                   BlogPost("SixthTitle", uuid.UUID('25447284-aa74-4fb6-b7a0-2bb955f2b2b1')\
+                              , "There are many variations of passages of Lorem Ipsum available,\
                               but the majority have suffered alteration in some form, by injected\
                               humour, or randomised words which don't look even slightly believable. \
                               If you are going to use a passage of Lorem Ipsum, you need to\
@@ -69,8 +83,8 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Ipsum is therefore always free from repetition, injected humour, \
                               or non-characteristic words etc."),
 
-                    BlogPost("SixthTitle", uuid.UUID('25447284-aa74-4fb6-b7a0-2bb955f2b2b1')\
-                              ,"There are many variations of passages of Lorem Ipsum available,\
+                   BlogPost("SeventhTitle", uuid.UUID('99ae0e65-372b-4f4a-be88-776d6a4d92bd')\
+                              , "There are many variations of passages of Lorem Ipsum available,\
                               but the majority have suffered alteration in some form, by injected\
                               humour, or randomised words which don't look even slightly believable. \
                               If you are going to use a passage of Lorem Ipsum, you need to\
@@ -83,8 +97,8 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Ipsum is therefore always free from repetition, injected humour, \
                               or non-characteristic words etc."),
 
-                    BlogPost("SeventhTitle", uuid.UUID('99ae0e65-372b-4f4a-be88-776d6a4d92bd')\
-                              ,"There are many variations of passages of Lorem Ipsum available,\
+                   BlogPost("EightTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
+                              , "There are many variations of passages of Lorem Ipsum available,\
                               but the majority have suffered alteration in some form, by injected\
                               humour, or randomised words which don't look even slightly believable. \
                               If you are going to use a passage of Lorem Ipsum, you need to\
@@ -97,8 +111,8 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Ipsum is therefore always free from repetition, injected humour, \
                               or non-characteristic words etc."),
 
-                    BlogPost("EightTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
-                              ,"There are many variations of passages of Lorem Ipsum available,\
+                   BlogPost("NinthTitle", uuid.UUID('25447284-aa74-4fb6-b7a0-2bb955f2b2b1')\
+                              , "There are many variations of passages of Lorem Ipsum available,\
                               but the majority have suffered alteration in some form, by injected\
                               humour, or randomised words which don't look even slightly believable. \
                               If you are going to use a passage of Lorem Ipsum, you need to\
@@ -111,8 +125,8 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Ipsum is therefore always free from repetition, injected humour, \
                               or non-characteristic words etc."),
 
-                    BlogPost("NinthTitle", uuid.UUID('25447284-aa74-4fb6-b7a0-2bb955f2b2b1')\
-                              ,"There are many variations of passages of Lorem Ipsum available,\
+                   BlogPost("TenthTitle", uuid.UUID('99ae0e65-372b-4f4a-be88-776d6a4d92bd')\
+                              , "There are many variations of passages of Lorem Ipsum available,\
                               but the majority have suffered alteration in some form, by injected\
                               humour, or randomised words which don't look even slightly believable. \
                               If you are going to use a passage of Lorem Ipsum, you need to\
@@ -125,22 +139,8 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Ipsum is therefore always free from repetition, injected humour, \
                               or non-characteristic words etc."),
 
-                    BlogPost("TenthTitle", uuid.UUID('99ae0e65-372b-4f4a-be88-776d6a4d92bd')\
-                              ,"There are many variations of passages of Lorem Ipsum available,\
-                              but the majority have suffered alteration in some form, by injected\
-                              humour, or randomised words which don't look even slightly believable. \
-                              If you are going to use a passage of Lorem Ipsum, you need to\
-                              be sure there isn't anything embarrassing hidden in the middle\
-                              of text. All the Lorem Ipsum generators on the Internet tend to\
-                              repeat predefined chunks as necessary, making this the first \
-                              true generator on the Internet. It uses a dictionary of over 200\
-                              Latin words, combined with a handful of model sentence structures,\
-                              to generate Lorem Ipsum which looks reasonable. The generated Lorem \
-                              Ipsum is therefore always free from repetition, injected humour, \
-                              or non-characteristic words etc."),
-
-                    BlogPost("EleventhTitle", uuid.UUID('99ae0e65-372b-4f4a-be88-776d6a4d92bd')\
-                              ,"There are many variations of passages of Lorem Ipsum available,\
+                   BlogPost("EleventhTitle", uuid.UUID('99ae0e65-372b-4f4a-be88-776d6a4d92bd')\
+                              , "There are many variations of passages of Lorem Ipsum available,\
                               but the majority have suffered alteration in some form, by injected\
                               humour, or randomised words which don't look even slightly believable. \
                               If you are going to use a passage of Lorem Ipsum, you need to\

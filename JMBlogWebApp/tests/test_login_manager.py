@@ -8,7 +8,7 @@ def test_login_for_admin(configured_app):
                         follow_redirects=True)
 
     after_login_page = configured_app.get('/posts/?Page=0').data
-    assert b'SecondTitle' in after_login_page
+    assert b'SeventhTitle' in after_login_page
 
 def test_redirect_after_correct_user_login(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
@@ -16,7 +16,7 @@ def test_redirect_after_correct_user_login(configured_app):
                         follow_redirects=True)
 
     after_login_page = configured_app.get('/posts/?Page=0').data
-    assert b'SecondTitle' in after_login_page
+    assert b'SeventhTitle' in after_login_page
 
 def test_redirect_after_incorrect_user_login(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "wrongpass"}

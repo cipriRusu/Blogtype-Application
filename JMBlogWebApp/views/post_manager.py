@@ -12,13 +12,13 @@ post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template
 @inject_decorators.inject
 def index(current_users: services.DATA_SOURCE_USERS,
           current_database: services.DATA_SOURCE_POSTS,
-          pagination: services.PAGINATION):
+          pagination_factory: services.PAGINATION_FACTORY):
 
-    pagination.get_parameters(current_database, request.args.get("Users"), request.args.get("Page"))
+    pagination = pagination_factory.create_pagination(current_database,
+                                                      request.args.get("Users"),
+                                                      request.args.get("Page"))
 
-    return render_template("list_posts.html",
-                           database=pagination.get_pagination(),
-                           users=current_users.get_users())
+    return render_template("list_posts.html",database=pagination, users=current_users)
 
 @post_manager.route('/<uuid:post_index>')
 @setup_decorators.config_check

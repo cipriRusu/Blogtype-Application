@@ -43,10 +43,13 @@
     <Compile Include="models\database_version.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="models\sqa_posts.py">
+    <Compile Include="models\sqa_models\sqa_posts.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="models\sqa_users.py">
+    <Compile Include="models\sqa_models\sqa_users.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\sqa_models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="services\pagination.py">
@@ -179,6 +182,7 @@
   <ItemGroup>
     <Folder Include="models\" />
     <Folder Include="exceptions\" />
+    <Folder Include="models\sqa_models\" />
     <Folder Include="services\" />
     <Folder Include="tests\" />
     <Folder Include="setup\" />

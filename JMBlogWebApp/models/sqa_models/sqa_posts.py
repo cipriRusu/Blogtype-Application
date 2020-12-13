@@ -1,14 +1,12 @@
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy import Column, String, DateTime
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
+from sqlalchemy import Column, String, DateTime, ForeignKey
+from models.sqa_models.sqa_users import Base
 
 class Posts(Base):
     __tablename__ = 'posts'
     posts_id = Column(UUID, primary_key=True)
     creation_date = Column(DateTime)
     edit_date = Column(DateTime)
-    author = Column(UUID)
+    author = Column(String, ForeignKey('users.user_name'))
     title = Column(String)
     post_content = Column(String)

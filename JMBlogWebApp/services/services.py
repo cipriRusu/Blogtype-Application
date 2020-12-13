@@ -10,6 +10,7 @@ from repository.in_memory_data import in_memory_posts as test_data_posts
 from repository.in_memory_data import in_memory_users as test_data_users
 from services.user_authentication import UserAuthentication
 from services.pagination_factory import PaginationFactory
+from services.sqa_engine import SQAEngine
 
 class Services():
     IS_TEST = False
@@ -21,8 +22,9 @@ class Services():
     setup = DbSetup(connection)
     test_users_repository = UsersInMemoryRepository(test_data_users)
     test_posts_repository = PostsInMemoryRepository(test_data_posts, test_users_repository)
-    posts_repository = PostsDBRepository(connection)
-    users_repository = UsersDBRepository(connection)
+    sqa_engine = SQAEngine(db_configuration)
+    posts_repository = PostsDBRepository(sqa_engine)
+    users_repository = UsersDBRepository(sqa_engine)
     database_login = UserAuthentication(users_repository)
     test_login = UserAuthentication(test_users_repository)
     pagination_factory = PaginationFactory()

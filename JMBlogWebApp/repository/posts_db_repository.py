@@ -57,15 +57,15 @@ class PostsDBRepository(PostsRepository):
                                Posts.edit_date))
 
         for item in join_result:
-            element = BlogPost(item.title,
-                               item.user_name,
-                               item.post_content)
+            if (filter_by is None) or (filter_by == item.user_name):
+                element = BlogPost(item.title,
+                                   item.user_name,
+                                   item.post_content)
 
-            element.post_id = item.posts_id
-            element.stamp.creation_time = item.creation_date
-            element.stamp.edit_time = item.edit_date
-
-            all_elements.append(element)
+                element.post_id = item.posts_id
+                element.stamp.creation_time = item.creation_date
+                element.stamp.edit_time = item.edit_date
+                all_elements.append(element)
 
         self._conn.close_session()
 

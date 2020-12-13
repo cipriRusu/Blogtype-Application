@@ -1,3 +1,5 @@
+from models.sqa_models.sqa_posts import Posts
+from models.sqa_models.sqa_users import Users
 from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
 
@@ -41,38 +43,23 @@ class PostsDBRepository(PostsRepository):
         self._conn.close_connection()
 
     def get_all(self, filter_by=None):
-        self._conn.create_connection()
         all_elements = []
+        self._conn.start_session()
+        session = self._conn.get_session()
 
-        selection_query = 'SELECT\
-            posts_id\
-           ,creation_date\
-           ,edit_date\
-           ,user_name\
-           ,title\
-           ,post_content from posts inner join users on author = user_id'
+        #TODO: Inner join query from ORM
 
-        if filter_by is None:
-            query_result = self._conn.execute(selection_query)
+        for item in session.query(Posts).all():
+            element = BlogPost(item.title,
+                               item.author,
+                               item.post_content)
 
-        else:
-            query_result = self._conn.execute(selection_query +
-                                              ' where user_name =%s',
-                                              (filter_by,))
-
-        for item in query_result.fetchall():
-            element = BlogPost(
-                item[4],
-                item[3],
-                item[5])
-
-            element.post_id = item[0]
-            element.stamp.creation_time = item[1]
-            element.stamp.edit_time = item[2]
+            element.post_id = item.posts_id
+            element.stamp.creation_time = item.creation_date
+            element.stamp.edit_time = item.edit_date
 
             all_elements.append(element)
 
-        self._conn.close_connection()
         return all_elements
 
     def get_by_id(self, index):

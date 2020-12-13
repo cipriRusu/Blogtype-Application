@@ -21,8 +21,9 @@ class SQAEngine():
         return self._current_session
 
     def close_session(self):
-        self._current_session.commit()##TODO: No session commit?
-        self._current_session.close()##TODO: No session close?
+        #False positive?
+        self._current_session.commit()
+        self._current_session.close()
 
     def _get_conn_dictionary(self):
         self._loaded_config = self._config.load_configuration().get_dictionary()

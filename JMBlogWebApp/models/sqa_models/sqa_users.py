@@ -1,8 +1,6 @@
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy import Table, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
-from models.sqa_models.sqa_posts import Posts
 
 Base = declarative_base()
 

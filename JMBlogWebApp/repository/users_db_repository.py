@@ -1,4 +1,5 @@
 from models.user import User
+from models.sqa_models.sqa_users import Users
 from repository.users_repository import UsersRepository
 
 class UsersDBRepository(UsersRepository):
@@ -44,18 +45,20 @@ class UsersDBRepository(UsersRepository):
                           user.user_id))
 
     def get_users(self):
-        self._db.create_connection()
         all_elements = []
-        query_result = self._db.execute('SELECT * FROM users')
 
-        for user in query_result.fetchall():
-            current_user = User(user[1], user[2], user[3])
-            current_user.user_id = user[0]
-            current_user.user_timestamp.creation_time = user[4]
-            current_user.user_timestamp.edit_time = user[5]
+        self._db.start_session()
+
+        session = self._db.get_session()
+
+        for user in session.query(Users).all():
+            current_user = User(user.user_name, user.user_email, user.user_password)
+            current_user.user_id = user.user_id
+            current_user.user_timestamp.creation_time = user.user_created_at
+            current_user.user_timestamp.edit_time = user.user_modified_at
             all_elements.append(current_user)
 
-        self._db.close_connection()
+        self._db.close_session()
         return all_elements
 
     def get_user_by_id(self, user_id):

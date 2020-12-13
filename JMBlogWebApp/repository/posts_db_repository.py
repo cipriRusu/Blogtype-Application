@@ -47,11 +47,18 @@ class PostsDBRepository(PostsRepository):
         self._conn.start_session()
         session = self._conn.get_session()
 
-        #TODO: Inner join query from ORM
+        join_result = (session.query(Posts)
+                       .join(Users, Posts.author == Users.user_id)
+                       .values(Posts.posts_id,
+                               Posts.title,
+                               Users.user_name,
+                               Posts.post_content,
+                               Posts.creation_date,
+                               Posts.edit_date))
 
-        for item in session.query(Posts).all():
+        for item in join_result:
             element = BlogPost(item.title,
-                               item.author,
+                               item.user_name,
                                item.post_content)
 
             element.post_id = item.posts_id

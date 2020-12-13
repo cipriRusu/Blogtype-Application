@@ -67,6 +67,8 @@ class PostsDBRepository(PostsRepository):
 
             all_elements.append(element)
 
+        self._conn.close_session()
+
         return all_elements
 
     def get_by_id(self, index):

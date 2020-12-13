@@ -46,7 +46,6 @@ class UsersDBRepository(UsersRepository):
 
     def get_users(self):
         all_elements = []
-
         self._db.start_session()
 
         session = self._db.get_session()

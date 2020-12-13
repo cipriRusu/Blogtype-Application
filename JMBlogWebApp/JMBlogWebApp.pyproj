@@ -43,10 +43,19 @@
     <Compile Include="models\database_version.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="models\sqa_posts.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\sqa_users.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="services\pagination.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="services\pagination_factory.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="services\sqa_engine.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="services\user_authentication.py">

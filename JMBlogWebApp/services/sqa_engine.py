@@ -21,7 +21,6 @@ class SQAEngine():
         return self._current_session
 
     def close_session(self):
-        #False positive?
         self._current_session.commit()
         self._current_session.close()
 

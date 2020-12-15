@@ -8,43 +8,41 @@ class PostsDBRepository(PostsRepository):
         self._conn = db_connection
 
     def add_post(self, item):
-        self._conn.create_connection()
-        self._conn.execute("INSERT INTO POSTS \
-        (posts_id,\
-        creation_date,\
-        edit_date,\
-        author,\
-        title,\
-        post_content)\
-        VALUES(%s, %s, %s, %s, %s, %s)", (
-            str(item.post_id),
-            item.stamp.creation_time,
-            item.stamp.edit_time,
-            item.author,
-            item.title,
-            item.content))
+        self._conn.start_session()
 
-        self._conn.close_connection()
+        session = self._conn.get_session()
+
+        post_to_add = Posts()
+
+        post_to_add.posts_id = str(item.post_id)
+        post_to_add.creation_date = item.stamp.creation_time
+        post_to_add.edit_date = item.stamp.edit_time
+        post_to_add.author = item.author
+        post_to_add.title = item.title
+        post_to_add.post_content = item.content
+
+        session.add(post_to_add)
+
+        self._conn.close_session()
 
     def update_post(self, item):
-        self._conn.create_connection()
-        self._conn.execute("UPDATE POSTS SET\
-        creation_date = %s,\
-        edit_date = %s,\
-        title = %s,\
-        post_content = %s \
-        WHERE posts_id =%s;",
-                           (item.stamp.creation_time,
-                            item.stamp.edit_time,
-                            item.title,
-                            item.content,
-                            item.post_id))
+        self._conn.start_session()
 
-        self._conn.close_connection()
+        session = self._conn.get_session()
+
+        (session.query(Posts)
+         .filter(Posts.posts_id == item.post_id)
+         .update({Posts.title: item.title,
+                  Posts.post_content: item.content,
+                  Posts.creation_date: item.stamp.creation_time,
+                  Posts.edit_date: item.stamp.edit_time}))
+
+        self._conn.close_session()
 
     def get_all(self, filter_by=None):
         all_elements = []
         self._conn.start_session()
+
         session = self._conn.get_session()
 
         join_result = (session.query(Posts)
@@ -65,6 +63,7 @@ class PostsDBRepository(PostsRepository):
                 element.post_id = item.posts_id
                 element.stamp.creation_time = item.creation_date
                 element.stamp.edit_time = item.edit_date
+
                 all_elements.append(element)
 
         self._conn.close_session()
@@ -72,31 +71,41 @@ class PostsDBRepository(PostsRepository):
         return all_elements
 
     def get_by_id(self, index):
-        self._conn.create_connection()
-        query_result = self._conn.execute('SELECT\
-         posts_id\
-        ,creation_date\
-        ,edit_date\
-        ,user_name\
-        ,title\
-        ,post_content from posts inner join users on author = user_id\
-        where posts_id=%s;', (str(index),))
+        self._conn.start_session()
 
-        item = query_result.fetchone()
+        session = self._conn.get_session()
 
-        element = BlogPost(
-            item[4],
-            item[3],
-            item[5])
+        join_result = (session.query(Posts)
+                       .join(Users, Posts.author == Users.user_id)
+                       .filter(Posts.posts_id == index.hex)
+                       .values(Posts.posts_id,
+                               Posts.title,
+                               Users.user_name,
+                               Posts.post_content,
+                               Posts.creation_date,
+                               Posts.edit_date))
 
-        element.post_id = item[0]
-        element.stamp.creation_time = item[1]
-        element.stamp.edit_time = item[2]
+        item = next(join_result)
 
-        self._conn.close_connection()
-        return element
+        blog_post = BlogPost(item.title,
+                             item.user_name,
+                             item.post_content)
+
+        blog_post.post_id = item.posts_id
+        blog_post.stamp.creation_time = item.creation_date
+        blog_post.stamp.edit_time = item.edit_date
+
+        self._conn.close_session()
+
+        return blog_post
 
     def remove(self, index):
-        self._conn.create_connection()
-        self._conn.execute("DELETE FROM POSTS WHERE posts_id=%s;", (str(index),))
-        self._conn.close_connection()
+        self._conn.start_session()
+
+        session = self._conn.get_session()
+
+        (session.query(Posts)
+         .filter(Posts.posts_id == index.hex)
+         .delete(synchronize_session=False))
+
+        self._conn.close_session()

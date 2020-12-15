@@ -33,12 +33,13 @@ class UsersDBRepository(UsersRepository):
 
         session = self._db.get_session()
 
-        session.query(Users).filter(Users.user_id == user.user_id).update({
-            Users.user_name: user.user_name,
-            Users.user_email: user.user_email,
-            Users.user_password: user.user_password,
-            Users.user_created_at: user.user_timestamp.creation_time,
-            Users.user_modified_at: user.user_timestamp.edit_time})
+        (session.query(Users)
+         .filter(Users.user_id == user.user_id)
+         .update({Users.user_name: user.user_name,
+                  Users.user_email: user.user_email,
+                  Users.user_password: user.user_password,
+                  Users.user_created_at: user.user_timestamp.creation_time,
+                  Users.user_modified_at: user.user_timestamp.edit_time}))
 
         self._db.close_session()
 

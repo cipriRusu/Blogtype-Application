@@ -13,4 +13,4 @@ class Users(Base):
     user_password = Column(String)
     user_created_at = Column(DateTime)
     user_modified_at = Column(DateTime)
-    children = relationship("Posts")
+    children = relationship("Posts", back_populates='parent')

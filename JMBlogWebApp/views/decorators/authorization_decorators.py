@@ -22,21 +22,27 @@ def requres_login(func):
 def admin_or_owner_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if 'post_index' in kwargs:
-            found_post = kwargs['current_database'].get_by_id(kwargs['post_index'])
-            if 'logged_name' in session:
-                if (found_post.author == session['logged_name'] or
-                        session['logged_name'] == 'admin'):
-                    return func(*args, **kwargs)
-                return redirect(url_for('error_manager.error_redirect'))
-            return redirect(url_for('error_manager.error_redirect'))
 
-        if 'user_index' in kwargs:
-            found_user = kwargs['current_database'].get_user_by_id(kwargs['user_index'])
-            if 'logged_name' in session:
-                if (found_user.user_name == session['logged_name'] or
-                        session['logged_name'] == 'admin'):
-                    return func(*args, **kwargs)
-                return redirect(url_for('error_manager.error_redirect'))
-            return redirect(url_for('error_manager.error_redirect'))
+        if "logged_name" not in session:
+            return redirect(url_for("error_manager.error_redirect"))
+
+        if session["logged_name"] == "admin":
+            return func(*args, **kwargs)
+
+        if "post_index" in kwargs:
+
+            found_post = kwargs["current_database"].get_by_id(kwargs["post_index"])
+
+            if found_post.author == session["logged_name"]:
+                return func(*args, **kwargs)
+
+        if "user_index" in kwargs:
+
+            found_user = kwargs["current_database"].get_user_by_id(kwargs["user_index"])
+
+            if found_user.user_name == session["logged_name"]:
+                return func(*args, **kwargs)
+
+        return redirect(url_for("error_manager.error_redirect"))
+
     return wrapper

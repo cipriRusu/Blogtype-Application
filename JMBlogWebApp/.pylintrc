@@ -15,3 +15,6 @@ ignore-docstrings=yes
 
 # Ignore imports when computing similarities.
 ignore-imports=yes
+
+#Ignore no member for false positives
+disable=maybe-no-member

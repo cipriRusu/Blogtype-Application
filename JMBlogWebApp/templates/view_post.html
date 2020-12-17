@@ -5,21 +5,28 @@
           href="{{ url_for('static', filename='view_post_style.css') }}" />
     <script type="text/javascript"
             src="{{ url_for('static', filename='script.js') }}"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 {% endblock %}
-
 {% block body %}
-    <p class="ArticleTitle"> Article Title : {{ current.title }} </p>
-    <p class="ArticleAuthor"> Article Author : {{ current.author }}</p><br />
-    <p class="ArticleAuthor"> Created : {{ current.stamp.creation_time }}</p><br />
-    <p class="ArticleAuthor">
-        Modified :
-        {% if current.stamp.edit_time == None %}
-        <b>Never</b>
-        {% else %}
-        <b>{{ current.stamp.edit_time }}</b>
-        {% endif %}
-    <p class="ArticleContent"> {{ current.content }} </p><br />
+    <div>
+        <p class="h4"> Article Title : {{ current.title }} </p><br />
+        <p class="h5"> Article Author : {{ current.author }}</p><br />
+        <p> Created : {{ current.stamp.creation_time }}</p><br />
+        <p>
+            Modified :
+            {% if current.stamp.edit_time == None %}
+            <b>Never</b>
+            {% else %}
+            <b>{{ current.stamp.edit_time }}</b>
+            {% endif %}
+    </div>
+    <div class="container">
+        <div>
+            <img src="{{url_for('static', filename='default.png')}}">
+        </div>
+        <div>
+            <textarea> {{ current.content }} </textarea>
+        </div>
+    </div>
     {% if session['logged_name'] == current.author or session['logged_name'] == 'admin' %}
     <div class="FooterButtons">
         <div class="btn btn-default"><a href="{{ url_for('.update_item', post_index=current.post_id) }}">Edit</a></div>

@@ -1,46 +1,15 @@
-body
+.body
 {
     padding-left: 5%;
     padding-right: 5%;
 }
 
-body > ul
-{
-    list-style: none;
-    margin-top: 1em;
-    padding-left: 0;
-    padding-bottom: 0;
-}
-
-.ArticleGroup > a {
-    color: black;
-    display: block;
-    display: list-item;
-    text-decoration: none;
-    list-style-type: none;
-    border-left-color: aliceblue;
-}
-
-.ArticleGroup:hover {
-    box-shadow: 0 4px 4px 0;
-}
-
-.form-control
-{
-    width: 10%;
-}
-
 .MainTitle {
     background: border-box;
-    background-color: beige;
+    background-color: honeydew;
     padding: 1em;
     grid-column-start: 1;
     grid-column-end: 5;
-}
-
-.MainHeader > h1
-{
-    margin: 0;
 }
 
 .MainHeader {
@@ -50,7 +19,21 @@ body > ul
     border-radius: 5px;
 }
 
-nav > ul > li {
-    display: inline;
-    float: left;
+.container {
+    display:grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+.container > div
+{
+    display: grid;
+    justify-content: flex-start;
+}
+
+.thumbnail {
+    width: 150px;
+    height: 100px;
 }

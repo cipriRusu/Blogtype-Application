@@ -3,9 +3,3 @@ body {
     padding-left: 5%;
     padding-right: 5%;
 }
-
-nav > ul > li {
-    display: inline;
-    float: left;
-    margin-top: 0;
-}

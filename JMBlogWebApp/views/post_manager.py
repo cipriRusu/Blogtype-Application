@@ -5,7 +5,7 @@ from views.decorators import setup_decorators
 from views.decorators import inject_decorators
 from views.decorators import authorization_decorators
 
-post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template_folder='templates')
+post_manager = Blueprint('post_manager', __name__, url_prefix='/posts', template_folder='templates', static_folder='static')
 
 @post_manager.route('/', methods=["GET"])
 @setup_decorators.config_check

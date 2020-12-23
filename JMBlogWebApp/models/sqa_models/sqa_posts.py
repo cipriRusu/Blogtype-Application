@@ -11,4 +11,5 @@ class Posts(Base):
     author = Column(String, ForeignKey('users.user_name'))
     title = Column(String)
     post_content = Column(String)
+    image_path = Column(String)
     parent = relationship("Users", back_populates='children')

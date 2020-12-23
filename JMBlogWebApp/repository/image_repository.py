@@ -12,7 +12,7 @@ class ImageRepository(metaclass=ABCMeta):
         return NotImplemented
 
     @abc.abstractmethod
-    def add_image(self, added_image):
+    def add_image(self, blog_post, added_image):
         pass
 
     @abc.abstractmethod

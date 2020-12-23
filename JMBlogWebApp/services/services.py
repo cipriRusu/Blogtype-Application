@@ -4,6 +4,8 @@ from setup.db_connect import DbConnect
 from setup.db_setup import DbSetup
 from repository.posts_db_repository import PostsDBRepository
 from repository.users_db_repository import UsersDBRepository
+from repository.image_db_repository import ImageDbRepository
+from repository.image_in_memory_repository import ImageInMemoryRepository
 from repository.posts_in_memory_repository import PostsInMemoryRepository
 from repository.users_in_memory_repository import UsersInMemoryRepository
 from repository.in_memory_data import in_memory_posts as test_data_posts
@@ -13,7 +15,7 @@ from services.pagination_factory import PaginationFactory
 from services.sqa_engine import SQAEngine
 
 class Services():
-    IS_TEST = False
+    IS_TEST = True
     def __init__(self):
         pass
 
@@ -22,8 +24,10 @@ class Services():
     setup = DbSetup(connection)
     test_users_repository = UsersInMemoryRepository(test_data_users)
     test_posts_repository = PostsInMemoryRepository(test_data_posts, test_users_repository)
+    test_images_repository = ImageInMemoryRepository()
     sqa_engine = SQAEngine(db_configuration)
     posts_repository = PostsDBRepository(sqa_engine)
+    images_repository = ImageDbRepository()
     users_repository = UsersDBRepository(sqa_engine)
     database_login = UserAuthentication(users_repository)
     test_login = UserAuthentication(test_users_repository)
@@ -32,6 +36,7 @@ class Services():
     test = {service.DB_CONFIGURATION: db_configuration,
             service.DATA_SOURCE_POSTS: test_posts_repository,
             service.DATA_SOURCE_USERS: test_users_repository,
+            service.DATA_SOURCE_IMAGES: test_images_repository,
             service.CONNECT: connection,
             service.SETUP: setup,
             service.USER_LOGIN: test_login,
@@ -40,6 +45,7 @@ class Services():
     production = {service.DB_CONFIGURATION: db_configuration,
                   service.DATA_SOURCE_POSTS: posts_repository,
                   service.DATA_SOURCE_USERS: users_repository,
+                  service.DATA_SOURCE_IMAGES: images_repository,
                   service.CONNECT: connection,
                   service.SETUP: setup,
                   service.USER_LOGIN: database_login,

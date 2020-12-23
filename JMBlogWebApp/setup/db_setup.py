@@ -3,7 +3,7 @@ import setup.postgres_scripts as scripts
 from models.database_version import DatabaseVersion
 
 class DbSetup():
-    LATEST_VERSION = 3
+    LATEST_VERSION = 4
 
     def __init__(self, db_connection):
         self._connection = db_connection

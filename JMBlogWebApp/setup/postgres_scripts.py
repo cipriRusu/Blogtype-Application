@@ -44,6 +44,8 @@ end $$"
 UPDATE_POST_AUTHORS_DATATYPE = "alter table posts alter column \
 author type uuid using author::uuid"
 
+UPDATE_IMAGES_PATH_COLUMN = "alter table posts add column if not exists image_path varchar"
+
 ALL_SCRIPTS = [
     ID_GENERATOR_SCRIPT,
     CREATE_USERS_SCRIPT,
@@ -51,4 +53,5 @@ ALL_SCRIPTS = [
     CREATE_ADMIN_SCRIPT,
     TRANSFER_USERS_SCRIPT,
     UPDATE_POST_AUTHORS_COLUMN,
-    UPDATE_POST_AUTHORS_DATATYPE]
+    UPDATE_POST_AUTHORS_DATATYPE,
+    UPDATE_IMAGES_PATH_COLUMN]

@@ -52,6 +52,15 @@
     <Compile Include="models\sqa_models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="repository\image_db_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="repository\image_in_memory_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="repository\image_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="services\pagination.py">
       <SubType>Code</SubType>
     </Compile>
@@ -183,6 +192,8 @@
     <Folder Include="models\" />
     <Folder Include="exceptions\" />
     <Folder Include="models\sqa_models\" />
+    <Folder Include="images\" />
+    <Folder Include="static\images\" />
     <Folder Include="services\" />
     <Folder Include="tests\" />
     <Folder Include="setup\" />

@@ -21,7 +21,7 @@ class PostsInMemoryRepository(PostsRepository):
             if found_post.post_id == item.post_id:
                 updated_post = found_post
                 self._db.remove(found_post)
-                updated_post.update(item.title, item.content)
+                updated_post.update(item.title, item.content, item.img_path)
                 self._db.append(updated_post)
 
     def get_by_id(self, index):
@@ -30,7 +30,8 @@ class PostsInMemoryRepository(PostsRepository):
                 found_post = BlogPost(
                     element.title,
                     self._users_db.get_user_by_id(element.author).user_name,
-                    element.content)
+                    element.content,
+                    element.img_path)
 
                 found_post.stamp.creation_time = element.stamp.creation_time
                 found_post.stamp.edit_time = element.stamp.edit_time
@@ -51,7 +52,8 @@ class PostsInMemoryRepository(PostsRepository):
                 found_post = BlogPost(
                     post.title,
                     str_author_name,
-                    post.content)
+                    post.content,
+                    post.img_path)
 
                 found_post.stamp.creation_time = post.stamp.creation_time
                 found_post.stamp.edit_time = post.stamp.edit_time

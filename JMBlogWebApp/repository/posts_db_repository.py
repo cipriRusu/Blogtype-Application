@@ -35,7 +35,8 @@ class PostsDBRepository(PostsRepository):
          .update({Posts.title: item.title,
                   Posts.post_content: item.content,
                   Posts.creation_date: item.stamp.creation_time,
-                  Posts.edit_date: item.stamp.edit_time}))
+                  Posts.edit_date: item.stamp.edit_time,
+                  Posts.image_path: item.img_path}))
 
         self._conn.close_session()
 
@@ -52,13 +53,15 @@ class PostsDBRepository(PostsRepository):
                                Users.user_name,
                                Posts.post_content,
                                Posts.creation_date,
-                               Posts.edit_date))
+                               Posts.edit_date,
+                               Posts.image_path))
 
         for item in join_result:
             if (filter_by is None) or (filter_by == item.user_name):
                 element = BlogPost(item.title,
                                    item.user_name,
-                                   item.post_content)
+                                   item.post_content,
+                                   item.image_path)
 
                 element.post_id = item.posts_id
                 element.stamp.creation_time = item.creation_date
@@ -83,13 +86,15 @@ class PostsDBRepository(PostsRepository):
                                Users.user_name,
                                Posts.post_content,
                                Posts.creation_date,
-                               Posts.edit_date))
+                               Posts.edit_date,
+                               Posts.image_path))
 
         item = next(join_result)
 
         blog_post = BlogPost(item.title,
                              item.user_name,
-                             item.post_content)
+                             item.post_content,
+                             item.image_path)
 
         blog_post.post_id = item.posts_id
         blog_post.stamp.creation_time = item.creation_date

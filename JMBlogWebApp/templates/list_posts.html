@@ -31,18 +31,18 @@
     <div>
         {% for post in database.get_page() %}
         <div class="container panel-body">
-            <div>
+            <div class="headers">
                 <h5>Post Title: {{ post.title }}</h5>
                 <p>Post Author: {{ post.author }}</p>
                 <p>Post Preview: {{ post.preview }}</p>
             </div>
-            <div>
-                <img class="thumbnail" src="{{url_for('static', filename='default.png')}}">
+            <div class="grid-item">
+                <img class="thumbnail" src="{{ image.get_image(post) }}">
             </div>
-            <div>
+            <div class="grid-item">
                 <a class="btn btn-primary" href="{{ url_for('.content', post_index=post.post_id) }}">Go To Post</a>
             </div>
-            <div>
+            <div class="grid-item">
                 <small class="text-muted">Created on: {{ post.stamp.creation_time }}</small><br />
                 <small class="text-muted">Last edited on: {{ post.stamp.edit_time }}</small>
             </div>

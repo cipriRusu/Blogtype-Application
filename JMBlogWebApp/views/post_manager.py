@@ -74,24 +74,15 @@ def update_item(post_index,
                                image=image_source)
 
     if request.method == "POST":
-        remove_image = "remove-image" in request.form
-        update_image = "update-image" in request.form
-        update_post = "update-post" in request.form
-
         current = current_database.get_by_id(post_index)
 
-        if remove_image is True:
+        if "remove-image" in request.form:
             image_source.remove_image(current)
 
-        if update_image is True:
-            if request.files['image-file'].filename != '':
+        if "update-image" in request.form:
+            image_source.add_image(current, request.files['image-file'])
 
-                image_source.add_image(request.files['image-file'])
-
-                current.img_path = 'images/{}'.format(request.files['image-file'].filename)
-
-        if update_post is True:
-
+        if "update-post" in request.form:
             current.update(request.form['NameInput'],
                            request.form['ContentInput'],
                            current.img_path)

@@ -1,5 +1,4 @@
 ﻿{% extends "base_layout.html" %}
-
 {% block head %}
     <link rel="stylesheet"
           href="{{ url_for('static', filename='view_post_style.css') }}" />
@@ -21,7 +20,7 @@
     </div>
     <div class="container">
         <div>
-            <img src="{{url_for('static', filename='default.png')}}">
+            <img src="{{ image.get_image(current) }}" width="600" height="300">
         </div>
         <div>
             <textarea> {{ current.content }} </textarea>

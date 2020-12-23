@@ -3,11 +3,16 @@ from flask import url_for
 from repository.image_repository import ImageRepository
 from repository.in_memory_data import in_memory_photos
 
+LEGAL_EXTENSIONS = ['.jpg', '.jpeg', '.png']
+
 class ImageInMemoryRepository(ImageRepository):
     def __init__(self):
         pass
 
     def add_image(self, blog_post, added_image):
+        if added_image.filename[-4:].lower() not in LEGAL_EXTENSIONS:
+            raise Exception()
+
         if added_image.filename != '':
             current_pic = base64.b64encode(added_image.read())
             in_memory_photos['images/'+ added_image.filename] = current_pic.decode("utf-8")

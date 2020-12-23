@@ -1,5 +1,6 @@
 DATA_SOURCE_POSTS = "data"
 DATA_SOURCE_USERS = "users"
+DATA_SOURCE_IMAGES = "images"
 CONNECT = "conn"
 CONFIGURE = "config"
 SETUP = "setup"

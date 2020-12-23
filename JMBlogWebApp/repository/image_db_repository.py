@@ -13,7 +13,7 @@ class ImageDbRepository(ImageRepository):
 
     def remove_image(self, blog_post):
         if (blog_post.img_path is not None and
-            os.path.exists(os.path.join('static', blog_post.img_path))):
+                os.path.exists(os.path.join('static', blog_post.img_path))):
             os.remove(os.path.join('static', blog_post.img_path))
         blog_post.img_path = None
 

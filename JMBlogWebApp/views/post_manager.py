@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from setup import services_listing as services
 from models.blog_post import BlogPost
 from views.decorators import setup_decorators
@@ -76,16 +76,23 @@ def update_item(post_index,
     if request.method == "POST":
         current = current_database.get_by_id(post_index)
 
-        if "remove-image" in request.form:
-            image_source.remove_image(current)
-
-        if "update-image" in request.form:
-            image_source.add_image(current, request.files['image-file'])
+        try:
+             if "remove-image" in request.form:
+                 image_source.remove_image(current)
+        except:
+            flash("No image present. Nothing to remove")
+            return redirect(url_for('.update_item', post_index=current.post_id))
 
         if "update-post" in request.form:
             current.update(request.form['NameInput'],
                            request.form['ContentInput'],
                            current.img_path)
+        try:
+            if "update-image" in request.form:
+                image_source.add_image(current, request.files['image-file'])
+        except:
+            flash("Invalid file type! Make sure a valid file type is selected")
+            return redirect(url_for('.update_item', post_index=current.post_id))
 
         current_database.update_post(current)
         return redirect(url_for('.content', post_index=current.post_id))

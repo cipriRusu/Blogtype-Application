@@ -5,7 +5,7 @@ disable=missing-function-docstring, missing-module-docstring, missing-class-docs
 [SIMILARITIES]
 
 # Minimum lines number of a similarity.
-min-similarity-lines=6
+min-similarity-lines=8
 
 # Ignore comments when computing similarities.
 ignore-comments=yes

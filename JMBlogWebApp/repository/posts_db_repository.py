@@ -20,6 +20,7 @@ class PostsDBRepository(PostsRepository):
         post_to_add.author = item.author
         post_to_add.title = item.title
         post_to_add.post_content = item.content
+        post_to_add.image_path = item.img_path
 
         session.add(post_to_add)
 

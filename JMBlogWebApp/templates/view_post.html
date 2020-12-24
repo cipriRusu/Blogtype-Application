@@ -26,6 +26,15 @@
             <textarea> {{ current.content }} </textarea>
         </div>
     </div>
+    <div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p class="text-left">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
     {% if session['logged_name'] == current.author or session['logged_name'] == 'admin' %}
     <div class="FooterButtons">
         <div class="btn btn-default"><a href="{{ url_for('.update_item', post_index=current.post_id) }}">Edit</a></div>

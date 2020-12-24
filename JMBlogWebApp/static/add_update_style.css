@@ -1,16 +1,22 @@
-h1 {
-    margin: 0%;
+html, body {
+    height: 100%;
 }
 
-.SubmitButton:hover
-{
-    cursor:pointer;
+body {
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
-.Form-Field {
+.container {
+    margin: 0px;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-width: 0;
+    min-height: 0;
     resize: none;
 }
 
-.TitleField {
-    background-color: beige;
-}
+.TitleInput {resize: none;}
+
+.ContentInput {resize: none;}

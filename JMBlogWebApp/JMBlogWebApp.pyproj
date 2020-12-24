@@ -34,6 +34,12 @@
     <Compile Include="app.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="exceptions\fileformat_exception.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="exceptions\filepath_exception.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="exceptions\user_exception.py">
       <SubType>Code</SubType>
     </Compile>

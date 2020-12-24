@@ -1,3 +1,5 @@
+from exceptions.filepath_exception import FilePathException
+from exceptions.fileformat_exception import FileFormatException
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from setup import services_listing as services
 from models.blog_post import BlogPost
@@ -40,12 +42,23 @@ def content(post_index,
 @setup_decorators.config_check
 @inject_decorators.inject
 @authorization_decorators.requres_login
-def add_item(current_database: services.DATA_SOURCE_POSTS):
+def add_item(current_database: services.DATA_SOURCE_POSTS,
+             image_source: services.DATA_SOURCE_IMAGES):
+
     if request.method == "POST":
         to_add = BlogPost(
             request.form['NameInput'],
             session['logged_id'],
-            request.form['ContentInput'])
+            request.form['ContentInput'],
+            None)
+
+        try:
+            image_source.add_image(to_add, request.files['image-file'])
+        except FileFormatException:
+            flash('Illegal image type. No file uploaded')
+        except FilePathException:
+            pass
+
         current_database.add_post(to_add)
         return redirect(url_for('.content', post_index=to_add.post_id))
     return render_template("add_post.html")
@@ -76,22 +89,26 @@ def update_item(post_index,
     if request.method == "POST":
         current = current_database.get_by_id(post_index)
 
-        try:
-             if "remove-image" in request.form:
-                 image_source.remove_image(current)
-        except:
-            flash("No image present. Nothing to remove")
-            return redirect(url_for('.update_item', post_index=current.post_id))
-
         if "update-post" in request.form:
             current.update(request.form['NameInput'],
                            request.form['ContentInput'],
                            current.img_path)
+
+        try:
+            if "remove-image" in request.form:
+                image_source.remove_image(current)
+        except FilePathException:
+            flash("No image present. Nothing to remove")
+            return redirect(url_for('.update_item', post_index=current.post_id))
+
         try:
             if "update-image" in request.form:
                 image_source.add_image(current, request.files['image-file'])
-        except:
-            flash("Invalid file type! Make sure a valid file type is selected")
+        except FileFormatException:
+            flash("Invalid file type! Make sure a valid file format is selected")
+            return redirect(url_for('.update_item', post_index=current.post_id))
+        except FilePathException:
+            flash("No image found. Provide a valid file")
             return redirect(url_for('.update_item', post_index=current.post_id))
 
         current_database.update_post(current)

@@ -7,6 +7,8 @@ in_memory_photos = {}
 in_memory_photos['local1'] = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC\
 0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
 in_memory_photos['local2'] = "R0lGODdhAQABAPAAAP8AAAAAACwAAAAAAQABAAACAkQBADs="
+in_memory_photos['local3'] = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAD\
+UlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
 
 in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
                              , "Lorem Ipsum is simply dummy ,\
@@ -19,7 +21,7 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                              1960s with the release of Letraset sheets containing Lorem Ipsum \
                              passages,and more recently with desktop , publishing software like \
                              Aldus PageMaker including versions of Lorem Ipsum.\
-                             Specific content first post", 'local1'),
+                             Specific content first post", 'local2'),
 
                    BlogPost("SecondTitle", uuid.UUID('25447284-aa74-4fb6-b7a0-2bb955f2b2b1')\
                              , "Lorem Ipsum is simply \
@@ -32,7 +34,7 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                              It was popularised in the 1960s with the release of Letraset sheets , \
                              containing Lorem Ipsum passages, and more recently with desktop \
                              publishing software like Aldus PageMaker , including versions \
-                             of Lorem Ipsum.", 'local2'),
+                             of Lorem Ipsum.", 'local1'),
 
                    BlogPost("ThirdTitle", uuid.UUID('99ae0e65-372b-4f4a-be88-776d6a4d92bd')\
                              , "Lorem Ipsum is simply \
@@ -45,7 +47,7 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                              popularised in the 1960s with the release of Letraset sheets \
                              containing Lorem Ipsum passages, and more recently , with desktop \
                              publishing software like Aldus PageMaker including \
-                             versions of Lorem Ipsum.", 'local1'),
+                             versions of Lorem Ipsum.", 'local3'),
 
                    BlogPost("FourthTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
                             , "There are many variations of passages of Lorem Ipsum available,\
@@ -59,7 +61,7 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                             Latin words, combined with a handful of model sentence structures,\
                             to generate Lorem Ipsum which looks reasonable. The generated Lorem \
                             Ipsum is therefore always free from repetition, injected humour, \
-                            or non-characteristic words etc.", 'local2'),
+                            or non-characteristic words etc.", None),
 
                    BlogPost("FifthTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
                               , "There are many variations of passages of Lorem Ipsum available,\
@@ -73,7 +75,7 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Latin words, combined with a handful of model sentence structures,\
                               to generate Lorem Ipsum which looks reasonable. The generated Lorem \
                               Ipsum is therefore always free from repetition, injected humour, \
-                              or non-characteristic words etc.", 'local1'),
+                              or non-characteristic words etc.", None),
 
                    BlogPost("SixthTitle", uuid.UUID('25447284-aa74-4fb6-b7a0-2bb955f2b2b1')\
                               , "There are many variations of passages of Lorem Ipsum available,\
@@ -87,7 +89,7 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Latin words, combined with a handful of model sentence structures,\
                               to generate Lorem Ipsum which looks reasonable. The generated Lorem \
                               Ipsum is therefore always free from repetition, injected humour, \
-                              or non-characteristic words etc.", 'local2'),
+                              or non-characteristic words etc.", None),
 
                    BlogPost("SeventhTitle", uuid.UUID('99ae0e65-372b-4f4a-be88-776d6a4d92bd')\
                               , "There are many variations of passages of Lorem Ipsum available,\
@@ -101,7 +103,7 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Latin words, combined with a handful of model sentence structures,\
                               to generate Lorem Ipsum which looks reasonable. The generated Lorem \
                               Ipsum is therefore always free from repetition, injected humour, \
-                              or non-characteristic words etc.", 'local1'),
+                              or non-characteristic words etc.", None),
 
                    BlogPost("EightTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
                               , "There are many variations of passages of Lorem Ipsum available,\
@@ -115,7 +117,7 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Latin words, combined with a handful of model sentence structures,\
                               to generate Lorem Ipsum which looks reasonable. The generated Lorem \
                               Ipsum is therefore always free from repetition, injected humour, \
-                              or non-characteristic words etc.", 'local2'),
+                              or non-characteristic words etc.", None),
 
                    BlogPost("NinthTitle", uuid.UUID('25447284-aa74-4fb6-b7a0-2bb955f2b2b1')\
                               , "There are many variations of passages of Lorem Ipsum available,\
@@ -129,7 +131,7 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Latin words, combined with a handful of model sentence structures,\
                               to generate Lorem Ipsum which looks reasonable. The generated Lorem \
                               Ipsum is therefore always free from repetition, injected humour, \
-                              or non-characteristic words etc.", 'local1'),
+                              or non-characteristic words etc.", None),
 
                    BlogPost("TenthTitle", uuid.UUID('99ae0e65-372b-4f4a-be88-776d6a4d92bd')\
                               , "There are many variations of passages of Lorem Ipsum available,\
@@ -143,7 +145,7 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Latin words, combined with a handful of model sentence structures,\
                               to generate Lorem Ipsum which looks reasonable. The generated Lorem \
                               Ipsum is therefore always free from repetition, injected humour, \
-                              or non-characteristic words etc.", 'local2'),
+                              or non-characteristic words etc.", None),
 
                    BlogPost("EleventhTitle", uuid.UUID('99ae0e65-372b-4f4a-be88-776d6a4d92bd')\
                               , "There are many variations of passages of Lorem Ipsum available,\
@@ -157,7 +159,7 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               Latin words, combined with a handful of model sentence structures,\
                               to generate Lorem Ipsum which looks reasonable. The generated Lorem \
                               Ipsum is therefore always free from repetition, injected humour, \
-                              or non-characteristic words etc.", 'local1')]
+                              or non-characteristic words etc.", None)]
 
 in_memory_posts[0].post_id = uuid.UUID('f9c3a576-28bc-4b63-931d-04d6488d2f0d')
 in_memory_posts[0].stamp.creation_time = '2019-September-03 19:40:33'

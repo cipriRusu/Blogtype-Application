@@ -93,7 +93,6 @@ def update_item(post_index,
             current.update(request.form['NameInput'],
                            request.form['ContentInput'],
                            current.img_path)
-
         try:
             if "remove-image" in request.form:
                 image_source.remove_image(current)

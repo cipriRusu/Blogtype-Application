@@ -51,7 +51,6 @@ def add_item(current_database: services.DATA_SOURCE_POSTS,
             session['logged_id'],
             request.form['ContentInput'],
             None)
-
         try:
             if 'image-file' in request.files:
                 image_source.add_image(to_add, request.files['image-file'])
@@ -104,7 +103,8 @@ def update_item(post_index,
 
         try:
             if "update-image" in request.form:
-                image_source.add_image(current, request.files['image-file'])
+                if 'image-file' in request.files:
+                    image_source.add_image(current, request.files['image-file'])
         except FileFormatException:
             flash("Invalid file type! Make sure a valid file format is selected")
             return redirect(url_for('.update_item', post_index=current.post_id))

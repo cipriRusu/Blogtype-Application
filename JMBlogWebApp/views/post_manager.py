@@ -53,7 +53,8 @@ def add_item(current_database: services.DATA_SOURCE_POSTS,
             None)
 
         try:
-            image_source.add_image(to_add, request.files['image-file'])
+            if 'image-file' in request.files:
+                image_source.add_image(to_add, request.files['image-file'])
         except FileFormatException:
             flash('Illegal image type. No file uploaded')
         except FilePathException:

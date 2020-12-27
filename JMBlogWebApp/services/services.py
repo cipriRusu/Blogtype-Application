@@ -15,7 +15,7 @@ from services.pagination_factory import PaginationFactory
 from services.sqa_engine import SQAEngine
 
 class Services():
-    IS_TEST = True
+    IS_TEST = False
     def __init__(self):
         pass
 

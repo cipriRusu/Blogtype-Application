@@ -245,6 +245,7 @@
     </Content>
     <Content Include="templates\unauthorized.html" />
     <Content Include="templates\update_user.html" />
+    <Content Include="templates\user_statistics.html" />
     <Content Include="templates\view_post.html" />
     <Content Include="templates\list_posts.html" />
     <Content Include="templates\update_post.html" />

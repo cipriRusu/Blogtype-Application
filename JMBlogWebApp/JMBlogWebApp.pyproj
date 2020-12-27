@@ -184,6 +184,9 @@
     <Compile Include="views\post_manager.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="views\statistics_manager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="views\user_manager.py">
       <SubType>Code</SubType>
     </Compile>

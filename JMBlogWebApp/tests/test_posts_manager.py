@@ -244,14 +244,14 @@ def test_post_addition_adds_no_image_if_none_is_selected(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
 
     configured_app.post('/authentication/login',
-                         data=login_data,
-                         follow_redirects=True)
+                        data=login_data,
+                        follow_redirects=True)
 
     added_post = {"NameInput":"TestTitle", "ContentInput":"TestContent"}
 
-    response_data = configured_app.post('/posts/add', 
-                                         data=added_post, 
-                                         follow_redirects=True).data
+    response_data = configured_app.post('/posts/add',
+                                        data=added_post,
+                                        follow_redirects=True).data
 
     assert b'/images/default.png' in response_data
 
@@ -260,8 +260,8 @@ def test_post_loads_image_if_image_exists(configured_app):
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
 
-    response_data = configured_app.get('/posts/a656f973-5b82-462d-aff7-8d2c6c3e4fa2', 
-                                        follow_redirects=True).data
+    response_data = configured_app.get('/posts/a656f973-5b82-462d-aff7-8d2c6c3e4fa2',
+                                       follow_redirects=True).data
 
     assert in_memory_photos['local3'].encode('utf-8') in response_data
 
@@ -270,8 +270,8 @@ def test_post_loads_default_image_if_image_is_removed(configured_app):
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
 
-    response_data = configured_app.post('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23', 
-                                        data = {'remove-image': ''},
+    response_data = configured_app.post('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
+                                        data={'remove-image': ''},
                                         follow_redirects=True).data
 
     assert b'/images/default.png' in response_data
@@ -279,7 +279,7 @@ def test_post_loads_default_image_if_image_is_removed(configured_app):
 def test_post_changes_image_when_new_image_is_loaded(configured_app):
     login_data = {"NameInput": "ThirdAuthor", "PasswordInput": "tpass"}
 
-    post_data = {'update-image': '','image-file': ''}
+    post_data = {'update-image': '', 'image-file': ''}
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
 
@@ -306,7 +306,7 @@ def test_post_default_image_is_replaced_if_new_image_is_loaded(configured_app):
     assert encoded_image_data in response_data
 
 def test_post_flash_message_for_no_selected_image(configured_app):
-    login_data = {"NameInput": "admin", 
+    login_data = {"NameInput": "admin",
                   "PasswordInput": "adminpass"}
 
     post_data = {'update-image': '',
@@ -323,7 +323,7 @@ def test_post_flash_message_for_no_selected_image(configured_app):
     assert b'No image found. Provide a valid file' in response_data
 
 def test_post_flash_message_for_illegal_format_selected_as_image(configured_app):
-    login_data = {"NameInput": "admin", 
+    login_data = {"NameInput": "admin",
                   "PasswordInput": "adminpass"}
 
     post_data = {'update-image': '',
@@ -340,7 +340,7 @@ def test_post_flash_message_for_illegal_format_selected_as_image(configured_app)
     assert b'Invalid file type! Make sure a valid file format is selected' in response_data
 
 def test_post_flash_message_for_default_image_to_remove(configured_app):
-    login_data = {"NameInput": "admin", 
+    login_data = {"NameInput": "admin",
                   "PasswordInput": "adminpass"}
 
     post_data = {'remove-image': ''}

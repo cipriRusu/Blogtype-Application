@@ -70,6 +70,7 @@ class PostsDBRepository(PostsRepository):
 
                 all_elements.append(element)
 
+        all_elements.reverse()
         self._conn.close_session()
 
         return all_elements

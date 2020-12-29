@@ -58,6 +58,9 @@
     <Compile Include="models\sqa_models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="models\user_statistics.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="repository\image_db_repository.py">
       <SubType>Code</SubType>
     </Compile>
@@ -74,6 +77,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="services\sqa_engine.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="services\statistics.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="services\user_authentication.py">
@@ -227,6 +233,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="static\setup_style.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\user_statistics_style.css">
       <SubType>Code</SubType>
     </Content>
     <Content Include="static\view_post_style.css">

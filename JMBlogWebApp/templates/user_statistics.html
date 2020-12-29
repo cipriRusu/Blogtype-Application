@@ -1,11 +1,37 @@
-﻿<!DOCTYPE html>
+﻿{% extends "base_layout.html" %}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='user_statistics_style.css') }}" />
+{% endblock %}
+
+{% block body %}
 <body>
-    <h6>Stats</h6>
+    <h3>Posting Statistics</h3>
 </body>
-</html>
+<form method="get">
+    <label for="Users">Select by User:</label>
+    <select name="Users" class="form-control form-control-lg" id="users" onchange="this.form.submit()">
+        <option>{{ 'All Users' }}</option>
+        {% for user in users %}
+        {% if user.user_name == request.args["Users"] %}
+        <option selected="selected">{{ user.user_name }}</option>
+        {% else %}
+        <option>{{ user.user_name }}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
+</form>
+{% for year, months in stats.total_stats().items()|reverse %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <hr />
+        <div class="internal-container">
+            <p>Posting Year: {{ year }}</p>
+            {% for month, total_posts in months.items() %}
+            <p><b>{{ month }}</b> : {{total_posts}} Posts</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

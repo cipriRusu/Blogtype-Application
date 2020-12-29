@@ -21,7 +21,9 @@ class PostsInMemoryRepository(PostsRepository):
             if found_post.post_id == item.post_id:
                 updated_post = found_post
                 self._db.remove(found_post)
-                updated_post.update(item.title, item.content, item.img_path)
+                updated_post.update(item.title,
+                                    item.content,
+                                    item.img_path)
                 self._db.append(updated_post)
 
     def get_by_id(self, index):
@@ -34,7 +36,9 @@ class PostsInMemoryRepository(PostsRepository):
                     element.img_path)
 
                 found_post.stamp.creation_time = element.stamp.creation_time
-                found_post.stamp.edit_time = element.stamp.edit_time
+                found_post.stamp.edit_time = (element.stamp.edit_time
+                                              if found_post.stamp.edit_time
+                                              is not None else None)
                 found_post.post_id = element.post_id
                 return found_post
         raise Exception("no element found!")

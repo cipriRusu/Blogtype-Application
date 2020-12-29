@@ -1,4 +1,5 @@
 import uuid
+from datetime import datetime
 from models.blog_post import BlogPost
 from models.user import User
 
@@ -162,27 +163,59 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                               or non-characteristic words etc.", None)]
 
 in_memory_posts[0].post_id = uuid.UUID('f9c3a576-28bc-4b63-931d-04d6488d2f0d')
-in_memory_posts[0].stamp.creation_time = '2019-September-03 19:40:33'
+in_memory_posts[0].stamp.creation_time = (datetime.strptime('1997-February-03, \
+                                                            19:40:33', "%Y-%B-%d, \
+                                                            %H:%M:%S"))
+
 in_memory_posts[1].post_id = uuid.UUID('daca57d1-c180-4e0a-8394-f5c95a5d5f23')
-in_memory_posts[1].stamp.creation_time = '1991-March-02 12:30:44'
+in_memory_posts[1].stamp.creation_time = datetime.strptime('1997-March-02, 12:30:44',\
+                                                            "%Y-%B-%d, \
+                                                            %H:%M:%S")
+
 in_memory_posts[2].post_id = uuid.UUID('a656f973-5b82-462d-aff7-8d2c6c3e4fa2')
-in_memory_posts[2].stamp.creation_time = '2017-April-05 21:40:32'
+in_memory_posts[2].stamp.creation_time = datetime.strptime('1997-April-05, 21:40:32', \
+                                                            "%Y-%B-%d, \
+                                                            %H:%M:%S")
+
 in_memory_posts[3].post_id = uuid.UUID('fcd27650-ddee-479b-b029-af68c6f0ef90')
-in_memory_posts[3].stamp.creation_time = '2016-April-01 21:12:22'
+in_memory_posts[3].stamp.creation_time = datetime.strptime('2000-April-02, 20:12:22',\
+                                                           "%Y-%B-%d,\
+                                                           %H:%M:%S")
+
 in_memory_posts[4].post_id = uuid.UUID('0d816f70-0ed1-4cee-b156-112462e6ea52')
-in_memory_posts[4].stamp.creation_time = '2012-May-02 20:12:40'
+in_memory_posts[4].stamp.creation_time = datetime.strptime('2000-April-02, 20:20:40', \
+                                                            "%Y-%B-%d, \
+                                                            %H:%M:%S")
+
 in_memory_posts[5].post_id = uuid.UUID('c98026b6-08b2-45c9-981b-a6159124189d')
-in_memory_posts[5].stamp.creation_time = '2008-June-01 18:11:12'
+in_memory_posts[5].stamp.creation_time = datetime.strptime('2000-June-01, 18:11:12', \
+                                                            "%Y-%B-%d, \
+                                                            %H:%M:%S")
+
 in_memory_posts[6].post_id = uuid.UUID('2bb62474-43fb-4643-b38e-a333f3999254')
-in_memory_posts[6].stamp.creation_time = '2004-July-02 19:10:11'
+in_memory_posts[6].stamp.creation_time = datetime.strptime('2000-July-02, 19:10:11', \
+                                                            "%Y-%B-%d, \
+                                                            %H:%M:%S")
+
 in_memory_posts[7].post_id = uuid.UUID('3cb862a3-3bf7-44a2-83d8-7b7440588b68')
-in_memory_posts[7].stamp.creation_time = '2010-April-05 10:11:12'
+in_memory_posts[7].stamp.creation_time = datetime.strptime('2010-April-05, 10:11:12', \
+                                                            "%Y-%B-%d, \
+                                                            %H:%M:%S")
+
 in_memory_posts[8].post_id = uuid.UUID('f4968b20-92fc-4ef6-a9f7-e84bafec6b9e')
-in_memory_posts[8].stamp.creation_time = '2000-January-01 08:12:11'
+in_memory_posts[8].stamp.creation_time = datetime.strptime('2010-April-05, 20:12:11', \
+                                                            "%Y-%B-%d, \
+                                                            %H:%M:%S")
+
 in_memory_posts[9].post_id = uuid.UUID('1e260899-2bfb-4fc3-8175-17ecaf7c68e3')
-in_memory_posts[9].stamp.creation_time = '1992-May-05 19:01:11'
+in_memory_posts[9].stamp.creation_time = datetime.strptime('2010-May-03, 09:01:11', \
+                                                            "%Y-%B-%d, \
+                                                            %H:%M:%S")
+
 in_memory_posts[10].post_id = uuid.UUID('be3e1383-d296-4956-85d2-d0da74c78531')
-in_memory_posts[10].stamp.creation_time = '1991-October-03 11:13:00'
+in_memory_posts[10].stamp.creation_time = datetime.strptime('2010-May-05, 11:13:00', \
+                                                            "%Y-%B-%d, \
+                                                            %H:%M:%S")
 
 in_memory_users = [
     User('admin', 'admin@admin.com', 'adminpass'),

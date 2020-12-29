@@ -13,9 +13,10 @@ from repository.in_memory_data import in_memory_users as test_data_users
 from services.user_authentication import UserAuthentication
 from services.pagination_factory import PaginationFactory
 from services.sqa_engine import SQAEngine
+from services.statistics import Statistics
 
 class Services():
-    IS_TEST = False
+    IS_TEST = True
     def __init__(self):
         pass
 
@@ -32,6 +33,8 @@ class Services():
     database_login = UserAuthentication(users_repository)
     test_login = UserAuthentication(test_users_repository)
     pagination_factory = PaginationFactory()
+    statistics = Statistics(posts_repository)
+    test_statistics = Statistics(test_posts_repository)
 
     test = {service.DB_CONFIGURATION: db_configuration,
             service.DATA_SOURCE_POSTS: test_posts_repository,
@@ -40,7 +43,8 @@ class Services():
             service.CONNECT: connection,
             service.SETUP: setup,
             service.USER_LOGIN: test_login,
-            service.PAGINATION_FACTORY: pagination_factory}
+            service.PAGINATION_FACTORY: pagination_factory,
+            service.USER_STATISTICS: test_statistics}
 
     production = {service.DB_CONFIGURATION: db_configuration,
                   service.DATA_SOURCE_POSTS: posts_repository,
@@ -49,7 +53,8 @@ class Services():
                   service.CONNECT: connection,
                   service.SETUP: setup,
                   service.USER_LOGIN: database_login,
-                  service.PAGINATION_FACTORY: pagination_factory}
+                  service.PAGINATION_FACTORY: pagination_factory,
+                  service.USER_STATISTICS: statistics}
 
     @classmethod
     def is_service(cls, service_name):

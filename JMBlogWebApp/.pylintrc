@@ -18,6 +18,3 @@ ignore-imports=yes
 
 #Ignore no member for false positives
 disable=maybe-no-member
-
-Ignore too many arguments
-pylint: disable=too-many-arguments

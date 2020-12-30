@@ -75,7 +75,10 @@ def remove_item(post_index,
     to_be_removed = current_database.get_by_id(post_index)
 
     if to_be_removed.img_path is not None:
-        image_source.remove_image(to_be_removed)
+        try:
+            image_source.remove_image(to_be_removed)
+        except FilePathException:
+            pass
 
     current_database.remove(post_index)
     return redirect('/posts')

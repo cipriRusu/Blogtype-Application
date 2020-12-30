@@ -35,7 +35,7 @@ class ImageDbRepository(ImageRepository):
             raise FilePathException()
 
         os.remove(os.path.join('static', blog_post.img_path))
-        blog_post.img_path = None
+        blog_post.update(img_path=None)
 
     def get_image(self, blog_post):
         if (blog_post.img_path is None or not

@@ -157,6 +157,9 @@
     <Compile Include="tests\test_login_manager.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tests\test_statistics_manager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\test_user_manager.py">
       <SubType>Code</SubType>
     </Compile>

@@ -1,4 +1,5 @@
 ﻿import os
+import uuid
 from exceptions.filepath_exception import FilePathException
 from exceptions.fileformat_exception import FileFormatException
 from flask import url_for
@@ -7,7 +8,6 @@ from repository.image_repository import ImageRepository
 LEGAL_EXTENSIONS = ['.jpg', '.jpeg', '.png']
 
 class ImageDbRepository(ImageRepository):
-    COUNTER = 0
     def __init__(self):
         pass
 
@@ -21,12 +21,11 @@ class ImageDbRepository(ImageRepository):
         source_path = os.path.join('static/images', added_image.filename)
 
         if os.path.exists(source_path):
-            alternative_filename = str(ImageDbRepository.COUNTER) + added_image.filename
+            alternative_filename = str(uuid.uuid4())[:4] + '_' + added_image.filename
             source_path = os.path.join('static/images', alternative_filename)
             added_image.filename = alternative_filename
-            ImageDbRepository.COUNTER = ImageDbRepository.COUNTER + 1
         added_image.save(source_path)
-        blog_post.img_path = 'images/{}'.format(added_image.filename)
+        blog_post.update(img_path='images/{}'.format(added_image.filename))
 
     def remove_image(self, blog_post):
         if blog_post.img_path is None:

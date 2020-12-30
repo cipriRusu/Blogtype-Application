@@ -36,9 +36,7 @@ class PostsInMemoryRepository(PostsRepository):
                     element.img_path)
 
                 found_post.stamp.creation_time = element.stamp.creation_time
-                found_post.stamp.edit_time = (element.stamp.edit_time
-                                              if found_post.stamp.edit_time
-                                              is not None else None)
+                found_post.stamp.edit_time = element.stamp.edit_time
                 found_post.post_id = element.post_id
                 return found_post
         raise Exception("no element found!")

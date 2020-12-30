@@ -14,9 +14,9 @@ class BlogPost:
     def __eq__(self, other):
         return self.post_id == other.post_id
 
-    def update(self, title, content, img_path):
-        self.title = title
-        self.content = content
-        self.preview = content[0:30]
-        self.img_path = img_path
+    def update(self, title=None, content=None, img_path=None):
+        self.title = title if title is not None else self.title
+        self.content = content if content is not None else self.title
+        self.img_path = img_path if img_path is not None else self.img_path
+        self.preview = self.content[0:30]
         self.stamp.on_edit()

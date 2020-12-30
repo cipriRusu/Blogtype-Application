@@ -68,7 +68,15 @@ def add_item(current_database: services.DATA_SOURCE_POSTS,
 @inject_decorators.inject
 @authorization_decorators.requres_login
 @authorization_decorators.admin_or_owner_required
-def remove_item(post_index, current_database: services.DATA_SOURCE_POSTS):
+def remove_item(post_index, 
+                current_database: services.DATA_SOURCE_POSTS, 
+                image_source: services.DATA_SOURCE_IMAGES):
+
+    to_be_removed=current_database.get_by_id(post_index)
+
+    if to_be_removed.img_path is not None:
+        image_source.remove_image(to_be_removed)
+
     current_database.remove(post_index)
     return redirect('/posts')
 

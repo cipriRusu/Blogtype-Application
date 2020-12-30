@@ -68,11 +68,11 @@ def add_item(current_database: services.DATA_SOURCE_POSTS,
 @inject_decorators.inject
 @authorization_decorators.requres_login
 @authorization_decorators.admin_or_owner_required
-def remove_item(post_index, 
-                current_database: services.DATA_SOURCE_POSTS, 
+def remove_item(post_index,
+                current_database: services.DATA_SOURCE_POSTS,
                 image_source: services.DATA_SOURCE_IMAGES):
 
-    to_be_removed=current_database.get_by_id(post_index)
+    to_be_removed = current_database.get_by_id(post_index)
 
     if to_be_removed.img_path is not None:
         image_source.remove_image(to_be_removed)
@@ -107,7 +107,6 @@ def update_item(post_index,
         except FilePathException:
             flash("No image present. Nothing to remove")
             return redirect(url_for('.update_item', post_index=current.post_id))
-
         try:
             if "update-image" in request.form:
                 if 'image-file' in request.files:

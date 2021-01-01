@@ -1,3 +1,4 @@
+from sqlalchemy import desc
 from models.sqa_models.sqa_posts import Posts
 from models.sqa_models.sqa_users import Users
 from models.blog_post import BlogPost
@@ -70,8 +71,9 @@ class PostsDBRepository(PostsRepository):
 
                 all_elements.append(element)
 
-        all_elements.reverse()
         self._conn.close_session()
+
+        all_elements.reverse()
 
         return all_elements
 

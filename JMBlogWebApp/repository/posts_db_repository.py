@@ -1,4 +1,3 @@
-from sqlalchemy import desc
 from models.sqa_models.sqa_posts import Posts
 from models.sqa_models.sqa_users import Users
 from models.blog_post import BlogPost
@@ -17,7 +16,7 @@ class PostsDBRepository(PostsRepository):
 
         post_to_add.posts_id = str(item.post_id)
         post_to_add.creation_date = item.stamp.creation_time
-        post_to_add.edit_date = item.stamp.edit_time
+        post_to_add.edit_date = item.stamp.creation_time
         post_to_add.author = item.author
         post_to_add.title = item.title
         post_to_add.post_content = item.content
@@ -50,6 +49,7 @@ class PostsDBRepository(PostsRepository):
 
         join_result = (session.query(Posts)
                        .join(Users, Posts.author == Users.user_id)
+                       .order_by(Posts.edit_date)
                        .values(Posts.posts_id,
                                Posts.title,
                                Users.user_name,
@@ -72,8 +72,6 @@ class PostsDBRepository(PostsRepository):
                 all_elements.append(element)
 
         self._conn.close_session()
-
-        all_elements.reverse()
 
         return all_elements
 

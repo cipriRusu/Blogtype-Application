@@ -44,7 +44,11 @@
             </div>
             <div class="grid-item">
                 <small class="text-muted">Created on: {{ post.stamp.creation_time }}</small><br />
+                {% if post.stamp.creation_time != post.stamp.edit_time %}
                 <small class="text-muted">Last edited on: {{ post.stamp.edit_time }}</small>
+                {% else %}
+                <small class="text-muted">Never</small>
+                {% endif %}
             </div>
         </div>
         <hr />

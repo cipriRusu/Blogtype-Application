@@ -12,7 +12,7 @@
         <p> Created : {{ current.stamp.creation_time }}</p><br />
         <p>
             Modified :
-            {% if current.stamp.edit_time == None %}
+            {% if current.stamp.edit_time == current.stamp.creation_time %}
             <b>Never</b>
             {% else %}
             <b>{{ current.stamp.edit_time }}</b>

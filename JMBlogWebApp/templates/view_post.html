@@ -2,12 +2,10 @@
 {% block head %}
     <link rel="stylesheet"
           href="{{ url_for('static', filename='view_post_style.css') }}" />
-    <script type="text/javascript"
-            src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}
 {% block body %}
     <div>
-        <p class="h4"> Article Title : {{ current.title }} </p><br />
+        <p id="Article_Title" class="h4"> Article Title :</p><br />
         <p class="h5"> Article Author : {{ current.author }}</p><br />
         <p> Created : {{ current.stamp.creation_time }}</p><br />
         <p>
@@ -41,4 +39,5 @@
         <div class="btn btn-default" id="RemoveBtId"><a href="{{ url_for('.remove_item', post_index=current.post_id) }}" onclick="return OnRemoveClick()">Remove</a></div>
     </div>
     {% endif %}
+    <script type="text/javascript" src={{ url_for('static', filename='scripts/post_script.js') }}></script>
 {% endblock %}

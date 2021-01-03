@@ -5,23 +5,17 @@
 {% endblock %}
 {% block body %}
     <div>
-        <p id="Article_Title" class="h4"> Article Title :</p><br />
-        <p class="h5"> Article Author : {{ current.author }}</p><br />
-        <p> Created : {{ current.stamp.creation_time }}</p><br />
-        <p>
-            Modified :
-            {% if current.stamp.edit_time == current.stamp.creation_time %}
-            <b>Never</b>
-            {% else %}
-            <b>{{ current.stamp.edit_time }}</b>
-            {% endif %}
+        <p id="Article_Title" class="h4"> Article Title : </p><br />
+        <p id="Article_Author" class="h5"> Article Author : </p><br />
+        <p id="Created_Datetime"> Created : </p>
+        <p id="Edited_Datetime"> Edited: </p>
     </div>
     <div class="container">
         <div>
             <img src="{{ image.get_image(current) }}" width="600" height="300">
         </div>
         <div>
-            <textarea> {{ current.content }} </textarea>
+            <textarea id="Article_Content"></textarea>
         </div>
     </div>
     <div>

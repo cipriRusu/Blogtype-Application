@@ -6,11 +6,14 @@ from views import user_manager
 from views import login_manager
 from views import error_manager
 from views import statistics_manager
+from views import api_manager
 from views.decorators import inject_decorators
 from setup import services_listing as services
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 app.secret_key = os.urandom(10)
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+app.config['JSON_SORT_KEYS'] = False
 
 with app.app_context():
     app.register_blueprint(post_manager.post_manager)
@@ -19,6 +22,7 @@ with app.app_context():
     app.register_blueprint(login_manager.login_manager)
     app.register_blueprint(error_manager.error_manager)
     app.register_blueprint(statistics_manager.stat_manager)
+    app.register_blueprint(api_manager.api_manager)
 
     @app.before_first_request
     @inject_decorators.inject

@@ -20,3 +20,13 @@ class BlogPost:
         self.img_path = img_path
         self.preview = self.content[0:30]
         self.stamp.on_edit()
+
+    def to_dict(self):
+        return {'post_id': self.post_id,
+                'timestamp': {'creation_time': self.stamp.creation_time,
+                              'edit_time': self.stamp.edit_time},
+                'author': self.author,
+                'title': self.title,
+                'content': self.content,
+                'preview': self.preview,
+                'image_path': self.img_path}

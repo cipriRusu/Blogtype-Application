@@ -172,6 +172,9 @@
     <Compile Include="tests\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="views\api_manager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="views\decorators\authorization_decorators.py">
       <SubType>Code</SubType>
     </Compile>
@@ -213,6 +216,7 @@
     <Folder Include="images\" />
     <Folder Include="static\images\" />
     <Folder Include="services\" />
+    <Folder Include="static\scripts\" />
     <Folder Include="tests\" />
     <Folder Include="setup\" />
     <Folder Include="views\" />
@@ -235,6 +239,9 @@
     <Content Include="static\base_form_style.css">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="static\scripts\post_script.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="static\setup_style.css">
       <SubType>Code</SubType>
     </Content>
@@ -245,7 +252,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="static\list_posts_style.css" />
-    <Content Include="static\script.js" />
+    <Content Include="static\scripts\script.js" />
     <Content Include="templates\add_post.html" />
     <Content Include="templates\add_user.html">
       <SubType>Code</SubType>

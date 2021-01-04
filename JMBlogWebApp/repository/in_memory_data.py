@@ -3,6 +3,8 @@ from datetime import datetime
 from models.blog_post import BlogPost
 from models.user import User
 
+ENCODED_HEADER = 'data:image/jpeg;charset=utf-8;base64, '
+
 in_memory_photos = {}
 
 in_memory_photos['local1'] = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC\
@@ -22,7 +24,9 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                              1960s with the release of Letraset sheets containing Lorem Ipsum \
                              passages,and more recently with desktop , publishing software like \
                              Aldus PageMaker including versions of Lorem Ipsum.\
-                             Specific content first post", 'local2'),
+                             Specific content first post",
+                            ENCODED_HEADER +
+                            in_memory_photos['local2']),
 
                    BlogPost("SecondTitle", uuid.UUID('25447284-aa74-4fb6-b7a0-2bb955f2b2b1')\
                              , "Lorem Ipsum is simply \
@@ -35,7 +39,9 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                              It was popularised in the 1960s with the release of Letraset sheets , \
                              containing Lorem Ipsum passages, and more recently with desktop \
                              publishing software like Aldus PageMaker , including versions \
-                             of Lorem Ipsum.", 'local1'),
+                             of Lorem Ipsum.",
+                            ENCODED_HEADER +
+                            in_memory_photos['local1']),
 
                    BlogPost("ThirdTitle", uuid.UUID('99ae0e65-372b-4f4a-be88-776d6a4d92bd')\
                              , "Lorem Ipsum is simply \
@@ -48,7 +54,9 @@ in_memory_posts = [BlogPost("FirstTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3fa
                              popularised in the 1960s with the release of Letraset sheets \
                              containing Lorem Ipsum passages, and more recently , with desktop \
                              publishing software like Aldus PageMaker including \
-                             versions of Lorem Ipsum.", 'local3'),
+                             versions of Lorem Ipsum.",
+                            ENCODED_HEADER +
+                            in_memory_photos['local3']),
 
                    BlogPost("FourthTitle", uuid.UUID('6ee39856-2721-46c4-bda7-3faf8e4a60f5')\
                             , "There are many variations of passages of Lorem Ipsum available,\

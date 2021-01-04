@@ -25,7 +25,7 @@ class ImageDbRepository(ImageRepository):
             source_path = os.path.join('static/images', alternative_filename)
             added_image.filename = alternative_filename
         added_image.save(source_path)
-        blog_post.update(img_path='images/{}'.format(added_image.filename))
+        blog_post.update(img_path='/images/{}'.format(added_image.filename))
 
     def remove_image(self, blog_post):
         if blog_post.img_path is None:

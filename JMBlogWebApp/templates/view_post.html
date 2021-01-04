@@ -12,7 +12,7 @@
     </div>
     <div class="container">
         <div>
-            <img src="{{ image.get_image(current) }}" width="600" height="300">
+            <img id="Article_Image" width="600" height="300">
         </div>
         <div>
             <textarea id="Article_Content"></textarea>
@@ -27,11 +27,11 @@
         {% endif %}
         {% endwith %}
     </div>
-    {% if session['logged_name'] == current.author or session['logged_name'] == 'admin' %}
+    <!--{% if session['logged_name'] == current.author or session['logged_name'] == 'admin' %}-->
     <div class="FooterButtons">
         <div class="btn btn-default"><a href="{{ url_for('.update_item', post_index=current.post_id) }}">Edit</a></div>
         <div class="btn btn-default" id="RemoveBtId"><a href="{{ url_for('.remove_item', post_index=current.post_id) }}" onclick="return OnRemoveClick()">Remove</a></div>
     </div>
-    {% endif %}
+    <!--{% endif %}-->
     <script type="text/javascript" src={{ url_for('static', filename='scripts/post_script.js') }}></script>
 {% endblock %}

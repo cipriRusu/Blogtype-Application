@@ -14,6 +14,7 @@ app = Flask(__name__, static_url_path="", static_folder="static")
 app.secret_key = os.urandom(10)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app.config['JSON_SORT_KEYS'] = False
+app.config['LOGIN_KEY'] = 'N\x0f\x95\xa7\x0c:Pt\xfaZ'
 
 with app.app_context():
     app.register_blueprint(post_manager.post_manager)

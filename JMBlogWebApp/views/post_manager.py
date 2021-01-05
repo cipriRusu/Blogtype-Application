@@ -31,12 +31,9 @@ def index(current_users: services.DATA_SOURCE_USERS,
 @setup_decorators.config_check
 @inject_decorators.inject
 def content(post_index,
-            current: services.DATA_SOURCE_POSTS,
-            image_source: services.DATA_SOURCE_IMAGES):
-
+            current: services.DATA_SOURCE_POSTS):
     return render_template("view_post.html",
-                           current=current.get_by_id(post_index),
-                           image=image_source)
+                           current=current.get_by_id(post_index))
 
 @post_manager.route('/add', methods=["GET", "POST"])
 @setup_decorators.config_check

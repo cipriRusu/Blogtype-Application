@@ -35,7 +35,7 @@ def test_loading_returns_false_for_random_text(configured_app):
     assert b'RandomText' not in response
 
 def test_loading_cotains_static_value_post_page(configured_app):
-    response = configured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d').data
+    response = configured_app.get('/api/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d').data
     assert b'FirstTitle' in response
 
 def test_post_page_redirects_to_setup_page(unconfigured_app):
@@ -44,7 +44,7 @@ def test_post_page_redirects_to_setup_page(unconfigured_app):
     assert b'Connection Setup:' in response
 
 def test_loading_contains_dynamic_value_post_page(configured_app):
-    response = configured_app.get('/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d').data
+    response = configured_app.get('/api/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d').data
     assert b'Specific content first post' in response
 
 def test_logged_user_can_edit_own_post(configured_app):
@@ -253,14 +253,14 @@ def test_post_addition_adds_no_image_if_none_is_selected(configured_app):
                                         data=added_post,
                                         follow_redirects=True).data
 
-    assert b'/images/default.png' in response_data
+    assert in_memory_photos['local1'].encode('utf-8') in response_data
 
 def test_post_loads_image_if_image_exists(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
 
-    response_data = configured_app.get('/posts/a656f973-5b82-462d-aff7-8d2c6c3e4fa2',
+    response_data = configured_app.get('/api/posts/a656f973-5b82-462d-aff7-8d2c6c3e4fa2',
                                        follow_redirects=True).data
 
     assert in_memory_photos['local3'].encode('utf-8') in response_data
@@ -270,11 +270,13 @@ def test_post_loads_default_image_if_image_is_removed(configured_app):
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
 
-    response_data = configured_app.post('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
-                                        data={'remove-image': ''},
-                                        follow_redirects=True).data
+    edit_data=configured_app.post('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
+                                  data={'remove-image': ''},
+                                  follow_redirects=True).data
 
-    assert b'/images/default.png' in response_data
+    after_edit = configured_app.get('/api/posts/daca57d1-c180-4e0a-8394-f5c95a5d5f23').data
+
+    assert in_memory_photos['local1'].encode('utf-8') in after_edit
 
 def test_post_changes_image_when_new_image_is_loaded(configured_app):
     login_data = {"NameInput": "ThirdAuthor", "PasswordInput": "tpass"}

@@ -14,6 +14,7 @@ from services.user_authentication import UserAuthentication
 from services.pagination_factory import PaginationFactory
 from services.sqa_engine import SQAEngine
 from services.statistics import Statistics
+from services.token_management import TokenHandler
 
 class Services():
     IS_TEST = True
@@ -35,6 +36,7 @@ class Services():
     pagination_factory = PaginationFactory()
     statistics = Statistics(posts_repository)
     test_statistics = Statistics(test_posts_repository)
+    token_handler = TokenHandler()
 
     test = {service.DB_CONFIGURATION: db_configuration,
             service.DATA_SOURCE_POSTS: test_posts_repository,
@@ -44,7 +46,8 @@ class Services():
             service.SETUP: setup,
             service.USER_LOGIN: test_login,
             service.PAGINATION_FACTORY: pagination_factory,
-            service.USER_STATISTICS: test_statistics}
+            service.USER_STATISTICS: test_statistics,
+            service.TOKEN_HANDLING: token_handler}
 
     production = {service.DB_CONFIGURATION: db_configuration,
                   service.DATA_SOURCE_POSTS: posts_repository,
@@ -54,7 +57,8 @@ class Services():
                   service.SETUP: setup,
                   service.USER_LOGIN: database_login,
                   service.PAGINATION_FACTORY: pagination_factory,
-                  service.USER_STATISTICS: statistics}
+                  service.USER_STATISTICS: statistics,
+                  service.TOKEN_HANDLING: token_handler}
 
     @classmethod
     def is_service(cls, service_name):

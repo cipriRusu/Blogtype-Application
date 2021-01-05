@@ -1,3 +1,4 @@
+from exceptions.postnotfound_exception import PostNotFoundException
 from exceptions.user_exception  import UserException
 from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
@@ -39,7 +40,7 @@ class PostsInMemoryRepository(PostsRepository):
                 found_post.stamp.edit_time = element.stamp.edit_time
                 found_post.post_id = element.post_id
                 return found_post
-        raise Exception("no element found!")
+        raise PostNotFoundException()
 
     def get_all(self, filter_by=None):
         all_posts = []

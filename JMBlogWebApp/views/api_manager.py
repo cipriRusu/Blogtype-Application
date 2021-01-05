@@ -1,8 +1,7 @@
-import datetime
-import jwt
-from flask import Blueprint, jsonify, request, current_app
+from flask import Blueprint, jsonify, request
 from views.decorators import setup_decorators
 from views.decorators import inject_decorators
+from views.decorators import token_decorators
 from setup import services_listing as services
 
 api_manager = Blueprint('api_manager', __name__, url_prefix='/api',
@@ -20,27 +19,22 @@ def get_item(post_index,
 @api_manager.route('/posts/remove/<uuid:post_index>')
 @setup_decorators.config_check
 @inject_decorators.inject
+@token_decorators.token_required
 def remove_item(post_index, posts: services.DATA_SOURCE_POSTS):
-    token = None
-
-    if 'x-access-token' in request.headers:
-
-        token = request.headers['x-access-token']
-
-        data = jwt.decode(token, current_app.secret_key, algorithms=["HS256"])
-
+    posts.remove(post_index)
     return jsonify({'message' : 'Post was deleted successfully!'})
 
 @api_manager.route('/login', methods=["POST"])
 @setup_decorators.config_check
 @inject_decorators.inject
-def login(users: services.DATA_SOURCE_USERS):
-    auth = request.authorization
+def login(auth_manager: services.USER_LOGIN,
+          users: services.DATA_SOURCE_USERS,
+          token_manager: services.TOKEN_HANDLING):
 
-    user = users.get_by_name(auth.username)
+    if auth_manager.user_login(request.authorization.username,
+                               request.authorization.password):
 
-    token = jwt.encode({'user_id': user.user_id.hex,
-                        'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=1)},
-                       current_app.secret_key)
-
-    return jsonify({'token' : token})
+        found_user = users.get_by_name(request.authorization.username)
+        generated_token = token_manager.create_token(found_user)
+        return jsonify({'token': generated_token})
+    return jsonify({'token' : 'authorization failed'})

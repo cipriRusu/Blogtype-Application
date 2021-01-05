@@ -40,6 +40,9 @@
     <Compile Include="exceptions\filepath_exception.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="exceptions\postnotfound_exception.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="exceptions\user_exception.py">
       <SubType>Code</SubType>
     </Compile>
@@ -80,6 +83,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="services\statistics.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="services\token_management.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="services\user_authentication.py">
@@ -179,6 +185,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="views\decorators\setup_decorators.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="views\decorators\token_decorators.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="views\decorators\__init__.py">

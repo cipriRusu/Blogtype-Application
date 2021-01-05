@@ -270,9 +270,9 @@ def test_post_loads_default_image_if_image_is_removed(configured_app):
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
 
-    edit_data=configured_app.post('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
-                                  data={'remove-image': ''},
-                                  follow_redirects=True).data
+    print(configured_app.post('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
+                              data={'remove-image': ''},
+                              follow_redirects=True).data)
 
     after_edit = configured_app.get('/api/posts/daca57d1-c180-4e0a-8394-f5c95a5d5f23').data
 

@@ -25,6 +25,7 @@ def token_required(func):
 
             if data['user_name'] != 'admin' and data['user_name'] != current_post.author:
                 return jsonify({'message': 'Unauthorized operation!'})
+
         except PostNotFoundException:
             return jsonify({'message': 'Post already removed!'})
 

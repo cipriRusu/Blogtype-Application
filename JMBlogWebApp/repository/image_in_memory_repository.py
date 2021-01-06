@@ -1,7 +1,6 @@
 ﻿import base64
 from exceptions.fileformat_exception import FileFormatException
 from exceptions.filepath_exception import FilePathException
-from flask import url_for
 from repository.image_repository import ImageRepository
 from repository.in_memory_data import in_memory_photos
 
@@ -41,5 +40,5 @@ class ImageInMemoryRepository(ImageRepository):
 
     def get_image(self, blog_post):
         if blog_post.img_path is None or blog_post.img_path not in in_memory_photos:
-            return url_for('static', filename='images/default.png')
+            return "data:image/jpeg;charset=utf-8;base64, "+ in_memory_photos['default']
         return "data:image/jpeg;charset=utf-8;base64, "+ in_memory_photos[blog_post.img_path]

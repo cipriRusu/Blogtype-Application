@@ -6,7 +6,7 @@ from models.user import User
 ENCODED_HEADER = 'data:image/jpeg;charset=utf-8;base64, '
 
 in_memory_photos = {}
-
+in_memory_photos['default'] = "R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
 in_memory_photos['local1'] = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC\
 0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
 in_memory_photos['local2'] = "R0lGODdhAQABAPAAAP8AAAAAACwAAAAAAQABAAACAkQBADs="

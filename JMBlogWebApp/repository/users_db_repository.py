@@ -1,3 +1,4 @@
+import uuid
 from models.user import User
 from models.sqa_models.sqa_users import Users
 from repository.users_repository import UsersRepository
@@ -78,7 +79,7 @@ class UsersDBRepository(UsersRepository):
                         query_output.user_password)
 
             user.user_password = query_output.user_password
-            user.user_id = query_output.user_id
+            user.user_id = uuid.UUID(query_output.user_id)
             user.user_timestamp.creation_time = query_output.user_created_at
             user.user_timestamp.edit_time = query_output.user_modified_at
 
@@ -102,7 +103,7 @@ class UsersDBRepository(UsersRepository):
                         query_output.user_password)
 
             user.user_password = query_output.user_password
-            user.user_id = query_output.user_id
+            user.user_id = uuid.UUID(query_output.user_id)
             user.user_timestamp.creation_time = query_output.user_created_at
             user.user_timestamp.edit_time = query_output.user_modified_at
 

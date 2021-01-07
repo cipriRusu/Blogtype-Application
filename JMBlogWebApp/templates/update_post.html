@@ -1,50 +1,36 @@
 ﻿{% extends "base_layout.html" %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='view_post_style.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='view_post_style.css') }}" />
 {% endblock %}
 
 {% block body %}
-    <br />
-    <div><h1 class="TitleField">Edit Post</h1></div><br />
-    <div class="container">
-        <div>
-            <br />
-            <img src="{{ image.get_image(current) }}" width="600" height="300"><br /><br />
-            <div>
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                <p class="text-left">{{ message }}</p>
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
+<br />
+<div><h1 class="TitleField">Edit Post</h1></div>
+<br />
+<div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p class="text-left">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+<div class="form-group">
+    <form enctype="multipart/form-data" method="post">
+            <img src="{{ image.get_image(current) }}" width="600" height="300">
+            <div class="image-manipulation">
+                <input type="file" name="image-file">
+                <button class="btn btn-default">Update Picture</button>
+                <button class="btn btn-default">Remove Picture</button>
             </div>
-            <div class="form-group">
-                <form enctype="multipart/form-data" method="post">
-                    <button class="btn btn-default">Update Picture</button>
-                    <input type="hidden" name="update-image" />
-                    <input type="file" name="image-file">
-                </form>
-            </div>
-            <div class="form-group">
-                <form method="post">
-                    <input type="hidden" name="remove-image" />
-                    <button class="btn btn-default">Remove Picture</button>
-                </form>
-            </div>
-        </div>
-        <div>
-            <div class="form-group">
-                <form method="post">
-                    <input type="hidden" name="update-post" />
-                    <label typeof="string">Name : </label><br />
-                    <textarea class="Form-Field form-control" rows="1" name="NameInput">{{ current.title }}</textarea><br />
-                    <label typeof="string">Content : </label><br />
-                    <textarea class="Form-Field form-control" rows="10" name="ContentInput" style="overflow-y: auto; overflow-x: hidden; resize: none; ">{{ current.content }}</textarea><br />
-                    <button class="btn btn-default">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
+            <label typeof="string">Name : </label><br />
+            <textarea class="Form-Field form-control" rows="1" name="NameInput">{{ current.title }}</textarea><br />
+            <label typeof="string">Content : </label><br />
+            <textarea class="Form-Field form-control" rows="10" name="ContentInput" style="overflow-y: auto; overflow-x: hidden; resize: none; ">{{ current.content }}</textarea><br />
+            <button class="btn btn-default">Submit</button>
+        <br />
+    </form>
+</div>
 {% endblock %}

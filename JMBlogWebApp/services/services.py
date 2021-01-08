@@ -21,22 +21,30 @@ class Services():
     def __init__(self):
         pass
 
-    db_configuration = DbConfig()
-    connection = DbConnect(db_configuration)
-    setup = DbSetup(connection)
-    test_users_repository = UsersInMemoryRepository(test_data_users)
-    test_posts_repository = PostsInMemoryRepository(test_data_posts, test_users_repository)
     test_images_repository = ImageInMemoryRepository()
-    sqa_engine = SQAEngine(db_configuration)
-    posts_repository = PostsDBRepository(sqa_engine)
     images_repository = ImageDbRepository()
+    db_configuration = DbConfig()
+    token_handler = TokenHandler()
+    connection = DbConnect(db_configuration)
+    sqa_engine = SQAEngine(db_configuration)
+    setup = DbSetup(connection)
+
+    test_users_repository = UsersInMemoryRepository(test_data_users)
+
+    test_posts_repository = PostsInMemoryRepository(test_data_posts,
+                                                    test_users_repository,
+                                                    test_images_repository)
+
     users_repository = UsersDBRepository(sqa_engine)
+
+    posts_repository = PostsDBRepository(sqa_engine,
+                                         images_repository)
+
     database_login = UserAuthentication(users_repository)
     test_login = UserAuthentication(test_users_repository)
     pagination_factory = PaginationFactory()
     statistics = Statistics(posts_repository)
     test_statistics = Statistics(test_posts_repository)
-    token_handler = TokenHandler()
 
     test = {service.DB_CONFIGURATION: db_configuration,
             service.DATA_SOURCE_POSTS: test_posts_repository,

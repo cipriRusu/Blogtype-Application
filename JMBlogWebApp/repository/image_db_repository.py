@@ -18,14 +18,14 @@ class ImageDbRepository(ImageRepository):
         if added_image.filename[-4:].lower() not in LEGAL_EXTENSIONS:
             raise FileFormatException()
 
-        source_path = os.path.join('static/images', added_image.filename)
+        source_path = os.path.join('static/images', str(uuid.uuid4())[:4] + '_' + added_image.filename)
 
-        if os.path.exists(source_path):
-            alternative_filename = str(uuid.uuid4())[:4] + '_' + added_image.filename
-            source_path = os.path.join('static/images', alternative_filename)
-            added_image.filename = alternative_filename
         added_image.save(source_path)
+        
         blog_post.update(img_path='/images/{}'.format(added_image.filename))
+
+    def update_image(self, blog_post):
+        pass
 
     def remove_image(self, blog_post):
         if blog_post.img_path is None:

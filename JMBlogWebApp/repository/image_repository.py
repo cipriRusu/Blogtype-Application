@@ -16,6 +16,10 @@ class ImageRepository(metaclass=ABCMeta):
         pass
 
     @abc.abstractmethod
+    def update_image(self, blog_post):
+        pass
+
+    @abc.abstractmethod
     def remove_image(self, blog_post):
         pass
 

@@ -1,4 +1,5 @@
 ﻿import base64
+import uuid
 from exceptions.fileformat_exception import FileFormatException
 from exceptions.filepath_exception import FilePathException
 from repository.image_repository import ImageRepository
@@ -20,13 +21,21 @@ class ImageInMemoryRepository(ImageRepository):
 
         current_pic = base64.b64encode(added_image.read())
 
-        if '/images/'+ added_image.filename in in_memory_photos:
-            alternative_filename = str(ImageInMemoryRepository.COUNTER) + added_image.filename
-            added_image.filename = alternative_filename
-            ImageInMemoryRepository.COUNTER = ImageInMemoryRepository.COUNTER + 1
+        filename = str(uuid.uuid4())[:4] + '_' + added_image.filename
 
-        in_memory_photos['/images/'+ added_image.filename] = current_pic.decode("utf-8")
-        blog_post.img_path = '/images/{}'.format(added_image.filename)
+        in_memory_photos['images/' + filename] = current_pic.decode("utf-8")
+
+        blog_post.img_path = 'images/{}'.format(filename)
+
+    def update_image(self, old_post, new_post):
+
+        #TODO:update new post with old post data
+
+        uploaded_image = base64.b64encode(new_post.img_path.read())
+
+        new_post.author = old_post.author
+
+        return new_post
 
     def remove_image(self, blog_post):
         if blog_post.img_path == '':

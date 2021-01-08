@@ -4,9 +4,10 @@ from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
 
 class PostsInMemoryRepository(PostsRepository):
-    def __init__(self, db, users_db):
+    def __init__(self, db, users_db, images_db):
         self._db = db
         self._users_db = users_db
+        self._images_db = images_db
 
     def __iter__(self):
         for post in self._db:
@@ -17,15 +18,15 @@ class PostsInMemoryRepository(PostsRepository):
             if user.user_id == item.author:
                 self._db.append(item)
 
-    def update_post(self, item):
-        for found_post in self._db:
-            if found_post.post_id == item.post_id:
-                updated_post = found_post
-                self._db.remove(found_post)
-                updated_post.update(item.title,
-                                    item.content,
-                                    item.img_path)
-                self._db.append(updated_post)
+    def update_post(self, updated_post):
+        for post in self._db:
+            if post.post_id == updated_post.post_id:
+                older_post = post
+                self._db.remove(post)
+
+        updated_post = self._images_db.update_image(older_post, updated_post)
+
+        self._db.append(updated_post)
 
     def get_by_id(self, index):
         for element in self._db:

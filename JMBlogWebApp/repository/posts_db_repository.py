@@ -4,8 +4,9 @@ from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository
 
 class PostsDBRepository(PostsRepository):
-    def __init__(self, db_connection):
+    def __init__(self, db_connection, image_db):
         self._conn = db_connection
+        self._image_db = image_db
 
     def add_post(self, item):
         self._conn.start_session()

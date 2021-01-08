@@ -97,27 +97,11 @@ def update_item(post_index,
     if request.method == "POST":
         current = current_database.get_by_id(post_index)
 
-        if "update-post" in request.form:
-            current.update(request.form['NameInput'],
-                           request.form['ContentInput'],
-                           current.img_path)
-        try:
-            if "remove-image" in request.form:
-                image_source.remove_image(current)
-        except FilePathException:
-            flash("No image present. Nothing to remove")
-            return redirect(url_for('.update_item', post_index=current.post_id))
-        try:
-            if "update-image" in request.form:
-                if 'image-file' in request.files:
-                    image_source.add_image(current, request.files['image-file'])
-        except FileFormatException:
-            flash("Invalid file type! Make sure a valid file format is selected")
-            return redirect(url_for('.update_item', post_index=current.post_id))
-        except FilePathException:
-            flash("No image found. Provide a valid file")
-            return redirect(url_for('.update_item', post_index=current.post_id))
+        current.update(request.form['NameInput'],
+                       request.form['ContentInput'],
+                       '/images/{}'.request.files['image-file'])
 
         current_database.update_post(current)
+
         return redirect(url_for('.content', post_index=current.post_id))
     return Exception("Request type cannot be handled")

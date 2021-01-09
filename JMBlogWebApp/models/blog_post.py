@@ -16,7 +16,7 @@ class BlogPost:
 
     def update(self, title=None, content=None, img_path=None):
         self.title = title if title is not None else self.title
-        self.content = content if content is not None else self.title
+        self.content = content if content is not None else self.content
         self.img_path = img_path
         self.preview = self.content[0:30]
         self.stamp.on_edit()

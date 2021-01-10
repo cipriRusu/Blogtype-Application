@@ -8,6 +8,15 @@ api_manager = Blueprint('api_manager', __name__, url_prefix='/api',
                         template_folder='templates',
                         static_folder='static')
 
+@api_manager.route('/posts/', methods=["GET"])
+@setup_decorators.config_check
+@inject_decorators.inject
+def get_all(posts: services.DATA_SOURCE_POSTS):
+    all_json_posts = []
+    for post in posts:
+        all_json_posts.append(post.to_dict())
+    return jsonify(results=all_json_posts)
+
 @api_manager.route('/posts/<uuid:post_index>', methods=["GET"])
 @setup_decorators.config_check
 @inject_decorators.inject

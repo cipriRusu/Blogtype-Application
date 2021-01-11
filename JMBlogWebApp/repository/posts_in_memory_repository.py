@@ -16,16 +16,15 @@ class PostsInMemoryRepository(PostsRepository):
     def add_post(self, item):
         for user in self._users_db:
             if user.user_id == item.author:
+                item.stamp.edit_time = item.stamp.creation_time
+                self._images_db.add_image(item)
                 self._db.append(item)
 
     def update_post(self, updated_post):
         for post in self._db:
             if post.post_id == updated_post.post_id:
-                older_post = post
+                updated_post.author = post.author
                 self._db.remove(post)
-
-        updated_post = self._images_db.update_image(older_post, updated_post)
-
         self._db.append(updated_post)
 
     def get_by_id(self, index):
@@ -40,6 +39,7 @@ class PostsInMemoryRepository(PostsRepository):
                 found_post.stamp.creation_time = element.stamp.creation_time
                 found_post.stamp.edit_time = element.stamp.edit_time
                 found_post.post_id = element.post_id
+                found_post.img_path = self._images_db.get_image(found_post)
                 return found_post
         raise PostNotFoundException()
 
@@ -59,6 +59,7 @@ class PostsInMemoryRepository(PostsRepository):
                     post.content,
                     post.img_path)
 
+                found_post.img_path = self._images_db.get_image(found_post)
                 found_post.stamp.creation_time = post.stamp.creation_time
                 found_post.stamp.edit_time = post.stamp.edit_time
                 found_post.post_id = post.post_id

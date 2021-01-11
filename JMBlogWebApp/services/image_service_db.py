@@ -1,6 +1,7 @@
 import base64
 import os
 import uuid
+from flask import flash
 
 class ImageServiceDb():
     def __init__(self):
@@ -17,8 +18,9 @@ class ImageServiceDb():
         return current_file
 
     def remove_image(self, file_name):
-        
-        os.remove('static' + file_name)
-
+        if file_name == '/images/default.png':
+            flash('No image available, nothing to remove')
+        else:
+            os.remove('static' + file_name)
         return None
 

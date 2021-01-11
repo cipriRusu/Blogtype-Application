@@ -73,12 +73,6 @@
     <Compile Include="repository\image_repository.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="services\image_service_db.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="services\image_service_test.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="services\pagination.py">
       <SubType>Code</SubType>
     </Compile>

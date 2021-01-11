@@ -69,6 +69,7 @@ class PostsDBRepository(PostsRepository):
                 element.post_id = item.posts_id
                 element.stamp.creation_time = item.creation_date
                 element.stamp.edit_time = item.edit_date
+                element.img_path = self._image_db.get_image(element)
 
                 all_elements.append(element)
 
@@ -102,6 +103,7 @@ class PostsDBRepository(PostsRepository):
         blog_post.post_id = item.posts_id
         blog_post.stamp.creation_time = item.creation_date
         blog_post.stamp.edit_time = item.edit_date
+        blog_post.img_path = self._image_db.get_image(blog_post)
 
         self._conn.close_session()
 

@@ -1,6 +1,7 @@
 import base64
 import os
 import uuid
+from flask import flash
 from repository.in_memory_data import in_memory_photos
 
 class ImageServiceTest():
@@ -9,13 +10,23 @@ class ImageServiceTest():
 
     def upload_image(self, content):
 
-        current_pic = base64.b64encode(content.read())
+        uploaded = content.read()
 
-        filename = str(uuid.uuid4())[:4] + '_' + content.filename
+        if uploaded == b'':
+            flash('No file uploaded.')
+        else:
+            current_pic = base64.b64encode(uploaded)
 
-        in_memory_photos[filename] = current_pic.decode('utf-8')
+            filename = str(uuid.uuid4())[:4] + '_' + content.filename
+
+            in_memory_photos[filename] = current_pic.decode('utf-8')
        
-        return filename
+            return filename
 
     def remove_image(self, file_name):
-        pass
+        for key, value in in_memory_photos.items():
+            if value == file_name.split(" ")[1]:
+                if key != 'default':
+                    del[value]
+                else:
+                    flash('No image found. Nothing to remove')

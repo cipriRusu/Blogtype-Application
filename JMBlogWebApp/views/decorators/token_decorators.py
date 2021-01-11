@@ -15,7 +15,8 @@ def token_required(func):
         try:
             data = jwt.decode(token_string,
                               current_app.config['LOGIN_KEY'],
-                              algorithms=["HS256"])
+                              algorithms=["HS256"], 
+                              verify=False)
         except jwt.ExpiredSignatureError:
             return jsonify({'message': 'Token expired, please login again'})
 

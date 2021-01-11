@@ -20,9 +20,9 @@
 <div class="form-group">
     <form class="container" enctype="multipart/form-data" method="post">
         <div class="image-wrapper">
-            <img src="{{ image.get_image(current) }}" width="600" height="300">
+            <img src="{{ current.img_path }}"width="600" height="300">
             <div class="image-manipulation">
-                <input type="file" name="image-file">
+                <input type="file" name="Image-File">
                 <button class="btn btn-default" name="Update-Picture">Update Picture</button>
                 <button class="btn btn-default" name="Remove-Picture">Remove Picture</button>
             </div>
@@ -38,4 +38,5 @@
     </form>
     <br />
 </div>
+<script type="text/javascript" src={{ url_for('static', filename='scripts/update_post_script.js') }}></script>
 {% endblock %}

@@ -16,16 +16,14 @@ post_manager = Blueprint('post_manager', __name__, url_prefix='/posts',
 @inject_decorators.inject
 def index(current_users: services.DATA_SOURCE_USERS,
           current_database: services.DATA_SOURCE_POSTS,
-          pagination_factory: services.PAGINATION_FACTORY,
-          image_source: services.DATA_SOURCE_IMAGES):
+          pagination_factory: services.PAGINATION_FACTORY):
 
     pagination = pagination_factory.create_pagination(current_database,
                                                       request.args.get("Users"),
                                                       request.args.get("Page"))
     return render_template("list_posts.html",
                            database=pagination,
-                           users=current_users,
-                           image=image_source)
+                           users=current_users)
 
 @post_manager.route('/<uuid:post_index>')
 @setup_decorators.config_check
@@ -39,8 +37,7 @@ def content(post_index,
 @setup_decorators.config_check
 @inject_decorators.inject
 @authorization_decorators.requres_login
-def add_item(current_database: services.DATA_SOURCE_POSTS,
-             image_source: services.DATA_SOURCE_IMAGES):
+def add_item(current_database: services.DATA_SOURCE_POSTS):
 
     if request.method == "POST":
         to_add = BlogPost(
@@ -48,13 +45,6 @@ def add_item(current_database: services.DATA_SOURCE_POSTS,
             session['logged_id'],
             request.form['ContentInput'],
             None)
-        try:
-            if 'image-file' in request.files:
-                image_source.add_image(to_add, request.files['image-file'])
-        except FileFormatException:
-            flash('Illegal image type. No file uploaded')
-        except FilePathException:
-            pass
 
         current_database.add_post(to_add)
         return redirect(url_for('.content', post_index=to_add.post_id))
@@ -66,16 +56,9 @@ def add_item(current_database: services.DATA_SOURCE_POSTS,
 @authorization_decorators.requres_login
 @authorization_decorators.admin_or_owner_required
 def remove_item(post_index,
-                current_database: services.DATA_SOURCE_POSTS,
-                image_source: services.DATA_SOURCE_IMAGES):
+                current_database: services.DATA_SOURCE_POSTS):
 
     to_be_removed = current_database.get_by_id(post_index)
-
-    if to_be_removed.img_path is not None:
-        try:
-            image_source.remove_image(to_be_removed)
-        except FilePathException:
-            pass
 
     current_database.remove(post_index)
     return redirect('/posts')
@@ -87,19 +70,26 @@ def remove_item(post_index,
 @authorization_decorators.admin_or_owner_required
 def update_item(post_index,
                 current_database: services.DATA_SOURCE_POSTS,
-                image_source: services.DATA_SOURCE_IMAGES):
+                image_handler: services.IMAGE_HANDLING):
 
     if request.method == "GET":
         return render_template("update_post.html",
-                               current=current_database.get_by_id(post_index),
-                               image=image_source)
+                               current=current_database.get_by_id(post_index))
 
     if request.method == "POST":
         current = current_database.get_by_id(post_index)
 
+        image_path = current.img_path
+
+        if "Update-Picture" in request.form:
+            image_path = image_handler.upload_image(request.files['Image-File'])
+
+        if "Remove-Picture" in request.form:
+            image_path = image_handler.remove_image(current.img_path)
+
         current.update(request.form['NameInput'],
                        request.form['ContentInput'],
-                       '/images/{}'.request.files['image-file'])
+                       image_path)
 
         current_database.update_post(current)
 

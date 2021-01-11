@@ -73,6 +73,12 @@
     <Compile Include="repository\image_repository.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="services\image_service_db.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="services\image_service_test.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="services\pagination.py">
       <SubType>Code</SubType>
     </Compile>
@@ -155,6 +161,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="setup\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="static\scripts\list_posts_script.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\conftest.py">
@@ -251,7 +260,13 @@
     <Content Include="static\scripts\post_script.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="static\scripts\update_post_script.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="static\setup_style.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\update_post_style.css">
       <SubType>Code</SubType>
     </Content>
     <Content Include="static\user_statistics_style.css">

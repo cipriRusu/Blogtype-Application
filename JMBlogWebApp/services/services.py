@@ -15,14 +15,18 @@ from services.pagination_factory import PaginationFactory
 from services.sqa_engine import SQAEngine
 from services.statistics import Statistics
 from services.token_management import TokenHandler
+from services.image_service_test import ImageServiceTest
+from services.image_service_db import ImageServiceDb
 
 class Services():
-    IS_TEST = True
+    IS_TEST = False
     def __init__(self):
         pass
 
     test_images_repository = ImageInMemoryRepository()
     images_repository = ImageDbRepository()
+    image_service_test = ImageServiceTest()
+    image_service_db = ImageServiceDb()
     db_configuration = DbConfig()
     token_handler = TokenHandler()
     connection = DbConnect(db_configuration)
@@ -55,7 +59,8 @@ class Services():
             service.USER_LOGIN: test_login,
             service.PAGINATION_FACTORY: pagination_factory,
             service.USER_STATISTICS: test_statistics,
-            service.TOKEN_HANDLING: token_handler}
+            service.TOKEN_HANDLING: token_handler,
+            service.IMAGE_HANDLING: image_service_test}
 
     production = {service.DB_CONFIGURATION: db_configuration,
                   service.DATA_SOURCE_POSTS: posts_repository,
@@ -66,7 +71,8 @@ class Services():
                   service.USER_LOGIN: database_login,
                   service.PAGINATION_FACTORY: pagination_factory,
                   service.USER_STATISTICS: statistics,
-                  service.TOKEN_HANDLING: token_handler}
+                  service.TOKEN_HANDLING: token_handler,
+                  service.IMAGE_HANDLING: image_service_db}
 
     @classmethod
     def is_service(cls, service_name):

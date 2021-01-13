@@ -27,7 +27,7 @@ class PostsDBRepository(PostsRepository):
 
         self._conn.close_session()
 
-    def update_post(self, item):
+    def update_post(self, item, remove_image=False):
         self._conn.start_session()
 
         session = self._conn.get_session()

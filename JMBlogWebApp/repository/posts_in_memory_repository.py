@@ -20,10 +20,12 @@ class PostsInMemoryRepository(PostsRepository):
                 self._images_db.add_image(item)
                 self._db.append(item)
 
-    def update_post(self, updated_post):
+    def update_post(self, updated_post, remove_image=False):
         for post in self._db:
             if post.post_id == updated_post.post_id:
                 updated_post.author = post.author
+                updated_post.img_path = self._images_db.update_image(updated_post,
+                                                                    remove_image)
                 self._db.remove(post)
         self._db.append(updated_post)
 

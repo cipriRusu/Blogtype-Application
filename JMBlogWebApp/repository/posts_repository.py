@@ -15,8 +15,8 @@ class PostsRepository(metaclass=ABCMeta):
     def add_post(self, item):
         pass
 
-    @abc.abstractclassmethod
-    def update_post(cls, item):
+    @abc.abstractmethod
+    def update_post(cls, item, remove_image=False):
         pass
 
     @abc.abstractmethod

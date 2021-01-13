@@ -14,7 +14,7 @@ class ImageDbRepository(ImageRepository):
     def add_image(self, blog_post):
         pass
 
-    def update_image(self, blog_post):
+    def update_image(self, blog_post, remove_image=False):
         pass
 
     def remove_image(self, blog_post):

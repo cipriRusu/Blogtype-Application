@@ -9,4 +9,3 @@ USER_LOGIN = "user_login"
 PAGINATION_FACTORY = "pagination_factory"
 USER_STATISTICS = "user_statistics"
 TOKEN_HANDLING = "token_handler"
-

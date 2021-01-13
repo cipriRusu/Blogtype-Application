@@ -45,5 +45,5 @@ def login(auth_manager: services.USER_LOGIN,
 
         found_user = users.get_by_name(request.authorization.username)
         generated_token = token_manager.create_token(found_user)
-        return jsonify({'token': generated_token})
+        return jsonify({'token': generated_token.decode()})
     return jsonify({'token' : 'authorization failed'})

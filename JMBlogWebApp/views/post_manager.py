@@ -69,8 +69,7 @@ def remove_item(post_index,
 @authorization_decorators.requres_login
 @authorization_decorators.admin_or_owner_required
 def update_item(post_index,
-                current_database: services.DATA_SOURCE_POSTS,
-                image_handler: services.IMAGE_HANDLING):
+                current_database: services.DATA_SOURCE_POSTS):
 
     if request.method == "GET":
         return render_template("update_post.html",
@@ -79,19 +78,13 @@ def update_item(post_index,
     if request.method == "POST":
         current = current_database.get_by_id(post_index)
 
-        image_path = current.img_path
-
-        if "Update-Picture" in request.form:
-            image_path = image_handler.upload_image(request.files['Image-File'])
-
-        if "Remove-Picture" in request.form:
-            image_path = image_handler.remove_image(current.img_path)
-
         current.update(request.form['NameInput'],
                        request.form['ContentInput'],
-                       image_path)
+                       request.files['Image-File'])
 
-        current_database.update_post(current)
+        remove_file = True if 'Remove-Picture' in request.form else False
+
+        current_database.update_post(current, remove_file)
 
         return redirect(url_for('.content', post_index=current.post_id))
     return Exception("Request type cannot be handled")

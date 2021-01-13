@@ -82,9 +82,9 @@ def update_item(post_index,
                        request.form['ContentInput'],
                        request.files['Image-File'])
 
-        remove_file = True if 'Remove-Picture' in request.form else False
-
-        current_database.update_post(current, remove_file)
+        current_database.update_post(current,
+                                     bool('Remove-Picture' in
+                                          request.form))
 
         return redirect(url_for('.content', post_index=current.post_id))
     return Exception("Request type cannot be handled")

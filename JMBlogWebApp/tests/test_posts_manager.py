@@ -164,9 +164,14 @@ def test_pagination_for_added_post(configured_app):
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
 
-    added_post = {"NameInput":"TestTitle", "ContentInput":"TestContent"}
+    added_post = {"NameInput":"TestTitle",
+                  "ContentInput":"TestContent",
+                  'Image-File': (io.BytesIO(b'test_image_content'), "test.jpg")}
 
-    configured_app.post('/posts/add', data=added_post, follow_redirects=True)
+    configured_app.post('/posts/add',
+                        content_type='multipart/form-data',
+                        data=added_post,
+                        follow_redirects=True)
 
     post_page = configured_app.get('/posts/?Page=0', follow_redirects=True).data
 
@@ -239,7 +244,6 @@ def test_pagination_dissapears_if_no_further_posts_are_available(configured_app)
 
     assert b'Next' not in post_page and b'Previous' not in post_page
 
-
 def test_post_addition_adds_no_image_if_none_is_selected(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
 
@@ -247,13 +251,16 @@ def test_post_addition_adds_no_image_if_none_is_selected(configured_app):
                         data=login_data,
                         follow_redirects=True)
 
-    added_post = {"NameInput":"TestTitle", "ContentInput":"TestContent"}
+    added_post = {"NameInput":"TestTitle",
+                  "ContentInput":"TestContent",
+                  'Image-File': (io.BytesIO(b''), "")}
 
     response_data = configured_app.post('/posts/add',
+                                        content_type='multipart/form-data',
                                         data=added_post,
                                         follow_redirects=True).data
 
-    assert in_memory_photos['local1'].encode('utf-8') in response_data
+    assert in_memory_photos['default'] in response_data
 
 def test_post_loads_image_if_image_exists(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
@@ -294,8 +301,9 @@ def test_post_changes_image_when_new_image_is_loaded(configured_app):
 def test_post_default_image_is_replaced_if_new_image_is_loaded(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
 
-    post_data = {'update-image': '',
-                 'image-file': (io.BytesIO(b'test_image_content'), "test.jpg")}
+    post_data = {'NameInput': '',
+                 'ContentInput': '',
+                 'Image-File': (io.BytesIO(b'test_image_content'), "test.jpg")}
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
 
@@ -311,8 +319,9 @@ def test_post_flash_message_for_no_selected_image(configured_app):
     login_data = {"NameInput": "admin",
                   "PasswordInput": "adminpass"}
 
-    post_data = {'update-image': '',
-                 'image-file': (io.BytesIO(b'test_image_content'), '')}
+    post_data = {'NameInput': 'Test',
+                 'ContentInput': 'Test',
+                 'Image-File': (io.BytesIO(b''), "")}
 
     configured_app.post('/authentication/login',
                         data=login_data,
@@ -328,8 +337,9 @@ def test_post_flash_message_for_illegal_format_selected_as_image(configured_app)
     login_data = {"NameInput": "admin",
                   "PasswordInput": "adminpass"}
 
-    post_data = {'update-image': '',
-                 'image-file': (io.BytesIO(b'test_illegal_content'), 'illegal.exe')}
+    post_data = {'NameInput': 'TestName',
+                 'ContentInput': 'TestContent',
+                 'Image-File': (io.BytesIO(b'test_illegal_content'), 'illegal.exe')}
 
     configured_app.post('/authentication/login',
                         data=login_data,

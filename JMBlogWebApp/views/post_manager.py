@@ -1,6 +1,4 @@
-from exceptions.filepath_exception import FilePathException
-from exceptions.fileformat_exception import FileFormatException
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from setup import services_listing as services
 from models.blog_post import BlogPost
 from views.decorators import setup_decorators
@@ -44,7 +42,7 @@ def add_item(current_database: services.DATA_SOURCE_POSTS):
             request.form['NameInput'],
             session['logged_id'],
             request.form['ContentInput'],
-            None)
+            request.files['Image-File'])
 
         current_database.add_post(to_add)
         return redirect(url_for('.content', post_index=to_add.post_id))
@@ -57,9 +55,6 @@ def add_item(current_database: services.DATA_SOURCE_POSTS):
 @authorization_decorators.admin_or_owner_required
 def remove_item(post_index,
                 current_database: services.DATA_SOURCE_POSTS):
-
-    to_be_removed = current_database.get_by_id(post_index)
-
     current_database.remove(post_index)
     return redirect('/posts')
 

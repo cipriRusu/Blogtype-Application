@@ -8,7 +8,6 @@ LEGAL_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.img']
 
 class ImageInMemoryRepository(ImageRepository):
     def __init__(self):
-        #TODO:Refactor repeating code blocks
         pass
 
     def add_image(self, blog_post):
@@ -22,25 +21,22 @@ class ImageInMemoryRepository(ImageRepository):
         return filename
 
     def update_image(self, old_blogpost, blog_post, remove_image=False):
-        uploaded = blog_post.img_path.read()
-
         if remove_image is True:
-            if old_blogpost.img_path is not None:
-                del in_memory_photos[old_blogpost.img_path]
+            if old_blogpost.img_path is None:
+                flash('No image present. Nothing to remove')
                 return None
+            return self.remove_image(old_blogpost)
 
-        if uploaded == b'':
-            flash("No image found!")
-        current_pic = base64.b64encode(uploaded)
-        filename = str(uuid.uuid4())[:4] + '_' + blog_post.img_path.filename
-        in_memory_photos[filename] = current_pic.decode('utf-8')
-        return filename
+        if blog_post.img_path.filename == '':
+            flash('Invalid image or no image uploaded.')
+            return old_blogpost.img_path
+        return self.add_image(blog_post)
 
     def remove_image(self, blog_post):
         if blog_post.img_path is not None:
             del in_memory_photos[blog_post.img_path]
             return None
-        return None
+        return blog_post.img_path
 
     def get_image(self, blog_post):
         if blog_post.img_path is None or blog_post.img_path not in in_memory_photos:

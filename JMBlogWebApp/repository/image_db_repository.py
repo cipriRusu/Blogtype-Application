@@ -1,7 +1,4 @@
 ﻿import os
-import uuid
-from exceptions.filepath_exception import FilePathException
-from exceptions.fileformat_exception import FileFormatException
 from flask import url_for
 from repository.image_repository import ImageRepository
 
@@ -14,7 +11,7 @@ class ImageDbRepository(ImageRepository):
     def add_image(self, blog_post):
         pass
 
-    def update_image(self, blog_post, remove_image=False):
+    def update_image(self, old_blogpost, blog_post, remove_image=False):
         pass
 
     def remove_image(self, blog_post):

@@ -16,18 +16,19 @@ class PostsInMemoryRepository(PostsRepository):
     def add_post(self, item):
         for user in self._users_db:
             if user.user_id == item.author:
+                item.img_path = self._images_db.add_image(item)
                 item.stamp.edit_time = item.stamp.creation_time
-                self._images_db.add_image(item)
                 self._db.append(item)
 
-    def update_post(self, updated_post, remove_image=False):
+    def update_post(self, blog_post, remove_image=False):
         for post in self._db:
-            if post.post_id == updated_post.post_id:
-                updated_post.author = post.author
-                updated_post.img_path = self._images_db.update_image(updated_post,
-                                                                     remove_image)
+            if post.post_id == blog_post.post_id:
+                blog_post.author = post.author
+                blog_post.img_path = self._images_db.update_image(post,
+                                                                  blog_post,
+                                                                  remove_image)
                 self._db.remove(post)
-        self._db.append(updated_post)
+        self._db.append(blog_post)
 
     def get_by_id(self, index):
         for element in self._db:
@@ -72,4 +73,5 @@ class PostsInMemoryRepository(PostsRepository):
     def remove(self, index):
         for found_post in self._db:
             if found_post.post_id == index:
+                self._images_db.remove_image(found_post)
                 self._db.remove(found_post)

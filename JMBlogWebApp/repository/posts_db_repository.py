@@ -27,18 +27,18 @@ class PostsDBRepository(PostsRepository):
 
         self._conn.close_session()
 
-    def update_post(self, item, remove_image=False):
+    def update_post(self, blog_post, remove_image=False):
         self._conn.start_session()
 
         session = self._conn.get_session()
 
         (session.query(Posts)
-         .filter(Posts.posts_id == item.post_id)
-         .update({Posts.title: item.title,
-                  Posts.post_content: item.content,
-                  Posts.creation_date: item.stamp.creation_time,
-                  Posts.edit_date: item.stamp.edit_time,
-                  Posts.image_path: item.img_path}))
+         .filter(Posts.posts_id == blog_post.post_id)
+         .update({Posts.title: blog_post.title,
+                  Posts.post_content: blog_post.content,
+                  Posts.creation_date: blog_post.stamp.creation_time,
+                  Posts.edit_date: blog_post.stamp.edit_time,
+                  Posts.image_path: blog_post.img_path}))
 
         self._conn.close_session()
 

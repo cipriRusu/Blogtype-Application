@@ -24,9 +24,10 @@ class PostsInMemoryRepository(PostsRepository):
         for post in self._db:
             if post.post_id == blog_post.post_id:
                 blog_post.author = post.author
-                blog_post.img_path = self._images_db.update_image(post,
-                                                                  blog_post,
-                                                                  remove_image)
+                blog_post.img_path = (self._images_db
+                                      .update_image(post,
+                                                    blog_post,
+                                                    remove_image))
                 self._db.remove(post)
         self._db.append(blog_post)
 

@@ -253,14 +253,14 @@ def test_post_addition_adds_no_image_if_none_is_selected(configured_app):
 
     added_post = {"NameInput":"TestTitle",
                   "ContentInput":"TestContent",
-                  'Image-File': (io.BytesIO(b''), "")}
+                  'Image-File':(io.BytesIO(b'test_image_content'), "test.jpg")}
 
     response_data = configured_app.post('/posts/add',
                                         content_type='multipart/form-data',
                                         data=added_post,
                                         follow_redirects=True).data
 
-    assert in_memory_photos['default'] in response_data
+    assert in_memory_photos['default'].encode() in response_data
 
 def test_post_loads_image_if_image_exists(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
@@ -301,8 +301,8 @@ def test_post_changes_image_when_new_image_is_loaded(configured_app):
 def test_post_default_image_is_replaced_if_new_image_is_loaded(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
 
-    post_data = {'NameInput': '',
-                 'ContentInput': '',
+    post_data = {'NameInput': 'Test',
+                 'ContentInput': 'Test',
                  'Image-File': (io.BytesIO(b'test_image_content'), "test.jpg")}
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)

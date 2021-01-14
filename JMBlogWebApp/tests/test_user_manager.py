@@ -156,7 +156,9 @@ def test_add_user_allows_with_user_that_exists(configured_app):
                               data=login_data,
                               follow_redirects=True))
 
-    add_data = {"NameInput": "UpdatedTitleByUser", "ContentInput":"TestContentAdded"}
+    add_data = {"NameInput": "UpdatedTitleByUser",
+                "ContentInput":"TestContentAdded",
+                "Image-File": (io.BytesIO(b'test_image_content'), "test.jpg")}
 
     print(configured_app.post('/posts/add',
                               data=add_data,

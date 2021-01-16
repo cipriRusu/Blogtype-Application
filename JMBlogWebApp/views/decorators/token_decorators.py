@@ -18,7 +18,7 @@ def token_required(func):
                               algorithms=["HS256"],
                               verify=False)
         except jwt.ExpiredSignatureError:
-            return jsonify({'message': 'Token expired, please login again'})
+            return jsonify({'message': 'Token expired, please login again'}), 403
 
         try:
             if 'posts' in kwargs:
@@ -28,7 +28,7 @@ def token_required(func):
                 return jsonify({'message': 'Unauthorized operation!'})
 
         except PostNotFoundException:
-            return jsonify({'message': 'Post already removed!'})
+            return jsonify({'message': 'Post already removed!'}), 404
 
         return func(*args, **kwargs)
     return wrapper

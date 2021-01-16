@@ -8,7 +8,7 @@ def token_required(func):
     def wrapper(*args, **kwargs):
 
         if "Authorization" not in request.headers:
-            return jsonify({'message': 'Post removing failed!'})
+            return jsonify({'message': 'Post removing failed!'}), 403
 
         token_string = request.headers['Authorization'][7:]
 

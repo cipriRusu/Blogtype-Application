@@ -5,7 +5,7 @@ from repository.posts_repository import PostsRepository
 
 class PostsDBRepository(PostsRepository):
     def __init__(self, db_connection, image_db):
-        self._conn = db_connection
+        self._conn = db_connection  
         self._image_db = image_db
 
     def add_post(self, item):
@@ -38,7 +38,7 @@ class PostsDBRepository(PostsRepository):
                   Posts.post_content: blog_post.content,
                   Posts.creation_date: blog_post.stamp.creation_time,
                   Posts.edit_date: blog_post.stamp.edit_time,
-                  Posts.image_path: blog_post.img_path}))
+                  Posts.image_path: self._image_db.update_image(blog_post, remove_image)}))
 
         self._conn.close_session()
 
@@ -110,8 +110,10 @@ class PostsDBRepository(PostsRepository):
         return blog_post
 
     def remove(self, index):
-        self._conn.start_session()
+        post_to_remove = self.get_by_id(index)
+        self._image_db.remove_image(post_to_remove)
 
+        self._conn.start_session()
         session = self._conn.get_session()
 
         (session.query(Posts)

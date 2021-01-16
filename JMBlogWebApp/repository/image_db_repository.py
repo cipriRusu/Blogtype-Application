@@ -17,7 +17,7 @@ class ImageDbRepository(ImageRepository):
         source_path = os.path.join('static/images/', current_file)
         blog_post.uploaded_file.save(source_path)
 
-        if blog_post.img_path != None and blog_post.img_path != '/images/default.png':
+        if blog_post.img_path is not None and blog_post.img_path != '/images/default.png':
             if os.path.exists(os.path.join('static' + blog_post.img_path)):
                 os.remove(os.path.join('static' + blog_post.img_path))
         return current_file

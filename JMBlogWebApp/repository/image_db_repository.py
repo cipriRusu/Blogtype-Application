@@ -10,19 +10,35 @@ class ImageDbRepository(ImageRepository):
         pass
 
     def add_image(self, blog_post):
-        if blog_post.img_path.filename == '':
+        if blog_post.uploaded_file.filename == '':
             return None
-        current_file = str(uuid.uuid4())[:4] + '_' + blog_post.img_path.filename
+
+        current_file = str(uuid.uuid4())[:4] + '_' + blog_post.uploaded_file.filename
         source_path = os.path.join('static/images/', current_file)
-        blog_post.img_path.save(source_path)
+        blog_post.uploaded_file.save(source_path)
+
+        if blog_post.img_path != None and blog_post.img_path != '/images/default.png':
+            if os.path.exists(os.path.join('static' + blog_post.img_path)):
+                os.remove(os.path.join('static' + blog_post.img_path))
         return current_file
 
-    def update_image(self, old_blogpost, blog_post, remove_image=False):
-        pass
+    def update_image(self, blog_post, remove_image=False):
+        if remove_image:
+            if blog_post.img_path != '/images/default.png':
+                return self.remove_image(blog_post)
+            flash('No photo found, nothing to remove')
+            return None
+
+        updated_image = self.add_image(blog_post)
+
+        if updated_image is None:
+            flash('No image uploaded')
+            return blog_post.img_path[8:]
+        return updated_image
 
     def remove_image(self, blog_post):
-        os.remove(os.path.join('static', blog_post.img_path))
-        blog_post.update(img_path=None)
+        os.remove(os.path.join('static' + blog_post.img_path))
+        return None
 
     def get_image(self, blog_post):
         if (blog_post.img_path is None or not

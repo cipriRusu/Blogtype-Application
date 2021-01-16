@@ -362,4 +362,6 @@ MigrationBackup/
 FodyWeavers.xsd
 /JMBlogWebApp/database.ini
 
-JMBlogWebApp\static\images
+JMBlogWebApp/static/images*
+!JMBlogWebApp/static/images/default.png
+

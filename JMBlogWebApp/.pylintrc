@@ -1,9 +1,7 @@
 [MASTER]
-
 disable=missing-function-docstring, missing-module-docstring, missing-class-docstring, too-few-public-methods
 
 [SIMILARITIES]
-
 # Minimum lines number of a similarity.
 min-similarity-lines=8
 
@@ -18,3 +16,6 @@ ignore-imports=yes
 
 #Ignore no member for false positives
 disable=maybe-no-member
+
+[DESIGN]
+max-attributes=12

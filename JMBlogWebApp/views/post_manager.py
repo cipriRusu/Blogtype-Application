@@ -42,7 +42,9 @@ def add_item(current_database: services.DATA_SOURCE_POSTS):
             request.form['NameInput'],
             session['logged_id'],
             request.form['ContentInput'],
-            request.files['Image-File'])
+            None)
+
+        to_add.upload(request.files['Image-File'])
 
         current_database.add_post(to_add)
         return redirect(url_for('.content', post_index=to_add.post_id))
@@ -74,8 +76,9 @@ def update_item(post_index,
         current = current_database.get_by_id(post_index)
 
         current.update(request.form['NameInput'],
-                       request.form['ContentInput'],
-                       request.files['Image-File'])
+                       request.form['ContentInput'])
+
+        current.upload(request.files['Image-File'])
 
         current_database.update_post(current, bool('Remove-Picture' in request.form))
 

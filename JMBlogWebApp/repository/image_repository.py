@@ -16,7 +16,7 @@ class ImageRepository(metaclass=ABCMeta):
         pass
 
     @abc.abstractmethod
-    def update_image(self, old_blogpost, blog_post, remove_image=False):
+    def update_image(self, blog_post, remove_image=False):
         pass
 
     @abc.abstractmethod

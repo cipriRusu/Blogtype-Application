@@ -22,7 +22,10 @@ def get_all(posts: services.DATA_SOURCE_POSTS):
 @inject_decorators.inject
 def get_item(post_index,
              current: services.DATA_SOURCE_POSTS):
-    post = current.get_by_id(post_index)
+    try:
+        post = current.get_by_id(post_index)
+    except Exception:
+        return jsonify({"message": "Resource not available"}), 404
     return jsonify(post.to_dict())
 
 @api_manager.route('/posts/remove/<uuid:post_index>')
@@ -46,4 +49,4 @@ def login(auth_manager: services.USER_LOGIN,
         found_user = users.get_by_name(request.authorization.username)
         generated_token = token_manager.create_token(found_user)
         return jsonify({'token': generated_token.decode()})
-    return jsonify({'token' : 'authorization failed'})
+    return jsonify({'token' : 'authorization failed'}), 403

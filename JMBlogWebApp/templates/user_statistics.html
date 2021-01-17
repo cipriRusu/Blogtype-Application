@@ -21,7 +21,7 @@
         {% endfor %}
     </select>
 </form>
-{% for year, months in stats.total_stats().items()|reverse %}
+{% for year, months in stats.items()|reverse %}
 <div class="panel panel-default">
     <div class="panel-body">
         <hr />

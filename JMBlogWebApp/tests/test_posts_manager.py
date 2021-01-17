@@ -27,7 +27,7 @@ def test_browsing_to_posts_route_redirects_to_setup_automatically(unconfigured_a
     assert b'Connection Setup:' in response
 
 def test_loading_contains_dynamic_value(configured_app):
-    response = configured_app.get('/posts/?Page=2').data
+    response = configured_app.get('/posts/?Page=1').data
     assert b'FirstTitle' in response
 
 def test_loading_returns_false_for_random_text(configured_app):

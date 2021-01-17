@@ -1,13 +1,9 @@
 class UserStatistics():
     def __init__(self):
         self._all_posts = None
-        self._username = None
 
     def set_posts(self, all_posts):
         self._all_posts = all_posts
-
-    def set_name(self, username):
-        self._username = username
 
     def total_stats(self):
         total_stats = {}

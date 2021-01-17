@@ -61,9 +61,6 @@
     <Compile Include="models\sqa_models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="models\user_statistics.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="repository\image_db_repository.py">
       <SubType>Code</SubType>
     </Compile>

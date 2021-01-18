@@ -24,8 +24,8 @@
             <div class="image-manipulation">
                 <br />
                 <input type="file" name="Image-File">
-                <button class="btn btn-default" name="Update-Picture">Update Picture</button>
-                <button class="btn btn-default" name="Remove-Picture">Remove Picture</button>
+                <button id="picture-update" onclick="submitLimit()" class="btn btn-default" name="Update-Picture">Update Picture</button>
+                <button id="picture-remove" onclick="submitLimit()" class="btn btn-default" name="Remove-Picture">Remove Picture</button>
             </div>
         </div>
         <hr />
@@ -34,7 +34,7 @@
             <textarea class="Form-Field form-control" rows="1" name="NameInput">{{ current.title }}</textarea><br />
             <label typeof="string">Content : </label><br />
             <textarea class="Form-Field form-control" rows="10" name="ContentInput" style="overflow-y: auto; overflow-x: hidden; resize: none; ">{{ current.content }}</textarea><br />
-            <button class="btn btn-default">Submit</button>
+            <button id="submit-form" onclick="submitLimit()" class="btn btn-default">Submit</button>
         </div>
     </form>
     <br />

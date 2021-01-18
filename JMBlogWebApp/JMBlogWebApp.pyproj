@@ -154,9 +154,6 @@
     <Compile Include="setup\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="static\scripts\list_posts_script.js">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="tests\conftest.py">
       <SubType>Code</SubType>
     </Compile>

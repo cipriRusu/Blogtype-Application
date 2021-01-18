@@ -27,7 +27,7 @@ class PostsDBRepository(PostsRepository):
 
         self._conn.close_session()
 
-    def update_post(self, blog_post, remove_image=False):
+    def update_post(self, blog_post, remove_image=False, update_image=False):
         self._conn.start_session()
 
         session = self._conn.get_session()
@@ -38,7 +38,9 @@ class PostsDBRepository(PostsRepository):
                   Posts.post_content: blog_post.content,
                   Posts.creation_date: blog_post.stamp.creation_time,
                   Posts.edit_date: blog_post.stamp.edit_time,
-                  Posts.image_path: self._image_db.update_image(blog_post, remove_image)}))
+                  Posts.image_path: self._image_db.update_image(blog_post,
+                                                                remove_image,
+                                                                update_image)}))
 
         self._conn.close_session()
 

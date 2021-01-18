@@ -20,7 +20,7 @@ class ImageInMemoryRepository(ImageRepository):
         in_memory_photos[filename] = current_pic.decode('utf-8')
         return filename
 
-    def update_image(self, blog_post, remove_image=False):
+    def update_image(self, blog_post, remove_image=False, update_image=False):
         if remove_image:
             if blog_post.img_path.split()[1] != in_memory_photos['default']:
                 return self.remove_image(blog_post)
@@ -30,7 +30,8 @@ class ImageInMemoryRepository(ImageRepository):
         updated_image = self.add_image(blog_post)
 
         if updated_image is None:
-            flash('No image uploaded')
+            if update_image is True:
+                flash('No image uploaded')
             return blog_post.img_path[8:]
         return updated_image
 

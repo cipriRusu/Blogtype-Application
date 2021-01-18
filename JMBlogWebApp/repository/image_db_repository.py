@@ -22,11 +22,16 @@ class ImageDbRepository(ImageRepository):
                 os.remove(os.path.join('static' + blog_post.img_path))
         return current_file
 
-    def update_image(self, blog_post, remove_image=False):
+    def update_image(self, blog_post, remove_image=False, update_image=False):
         if remove_image:
             if blog_post.img_path != '/images/default.png':
                 return self.remove_image(blog_post)
             flash('No photo found, nothing to remove')
+            return None
+
+        if not update_image:
+            if blog_post.img_path != '/images/default.png':
+                return blog_post.img_path[8:]
             return None
 
         updated_image = self.add_image(blog_post)

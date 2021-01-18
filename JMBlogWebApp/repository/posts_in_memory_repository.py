@@ -20,11 +20,13 @@ class PostsInMemoryRepository(PostsRepository):
                 item.stamp.edit_time = item.stamp.creation_time
                 self._db.append(item)
 
-    def update_post(self, blog_post, remove_image=False):
+    def update_post(self, blog_post, remove_image=False, update_image=False):
         for post in self._db:
             if post.post_id == blog_post.post_id:
                 blog_post.author = post.author
-                blog_post.img_path = self._images_db.update_image(blog_post, remove_image)
+                blog_post.img_path = self._images_db.update_image(blog_post,
+                                                                  remove_image,
+                                                                  update_image)
                 self._db.remove(post)
         self._db.append(blog_post)
 

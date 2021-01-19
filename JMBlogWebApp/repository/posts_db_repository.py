@@ -1,3 +1,4 @@
+from exceptions.post_not_found_exception import PostNotFoundException
 from models.sqa_models.sqa_posts import Posts
 from models.sqa_models.sqa_users import Users
 from models.blog_post import BlogPost
@@ -95,7 +96,10 @@ class PostsDBRepository(PostsRepository):
                                Posts.edit_date,
                                Posts.image_path))
 
-        item = next(join_result)
+        try:
+            item = next(join_result)
+        except Exception:
+            raise PostNotFoundException
 
         blog_post = BlogPost(item.title,
                              item.user_name,

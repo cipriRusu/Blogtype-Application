@@ -1,3 +1,4 @@
+from exceptions.post_not_found_exception import PostNotFoundException
 from flask import Blueprint, jsonify, request
 from views.decorators import setup_decorators
 from views.decorators import inject_decorators
@@ -24,7 +25,7 @@ def get_item(post_index,
              current: services.DATA_SOURCE_POSTS):
     try:
         post = current.get_by_id(post_index)
-    except Exception:
+    except PostNotFoundException:
         return jsonify({"message": "Resource not available"}), 404
     return jsonify(post.to_dict())
 

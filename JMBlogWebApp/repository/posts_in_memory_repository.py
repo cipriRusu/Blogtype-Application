@@ -1,4 +1,4 @@
-from exceptions.postnotfound_exception import PostNotFoundException
+from exceptions.post_not_found_exception import PostNotFoundException
 from exceptions.user_exception  import UserException
 from models.blog_post import BlogPost
 from repository.posts_repository import PostsRepository

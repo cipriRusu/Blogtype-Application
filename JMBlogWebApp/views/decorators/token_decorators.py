@@ -1,5 +1,5 @@
 from functools import wraps
-from exceptions.postnotfound_exception import PostNotFoundException
+from exceptions.post_not_found_exception import PostNotFoundException
 import jwt
 from flask import request, jsonify, current_app
 

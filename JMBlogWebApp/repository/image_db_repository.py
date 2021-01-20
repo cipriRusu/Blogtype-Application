@@ -3,7 +3,7 @@ import uuid
 from flask import url_for, flash
 from repository.image_repository import ImageRepository
 
-LEGAL_EXTENSIONS = ['.jpg', '.jpeg', '.png']
+LEGAL_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.img']
 
 class ImageDbRepository(ImageRepository):
     def __init__(self):
@@ -11,6 +11,11 @@ class ImageDbRepository(ImageRepository):
 
     def add_image(self, blog_post):
         if blog_post.uploaded_file.filename == '':
+            return None
+
+        if (os.path.splitext(blog_post.uploaded_file.filename)[1].lower()
+                not in LEGAL_EXTENSIONS):
+            flash('Invalid file type! Make sure a valid file format is selected')
             return None
 
         current_file = str(uuid.uuid4())[:4] + '_' + blog_post.uploaded_file.filename

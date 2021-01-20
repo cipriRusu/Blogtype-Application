@@ -1,5 +1,6 @@
 ﻿import base64
 import uuid
+import os
 from flask import flash
 from repository.image_repository import ImageRepository
 from repository.in_memory_data import in_memory_photos
@@ -15,6 +16,12 @@ class ImageInMemoryRepository(ImageRepository):
 
         if uploaded == b'':
             return None
+
+        if (os.path.splitext(blog_post.uploaded_file.filename)[1].lower()
+                not in LEGAL_EXTENSIONS):
+            flash('Invalid file type! Make sure a valid file format is selected')
+            return None
+
         current_pic = base64.b64encode(uploaded)
         filename = str(uuid.uuid4())[:4] + '_' + blog_post.uploaded_file.filename
         in_memory_photos[filename] = current_pic.decode('utf-8')

@@ -1,38 +1,43 @@
 ﻿{% extends "base_layout.html" %}
 {% block head %}
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='view_post_style.css') }}" />
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='view_post_style.css') }}" />
 <meta name="id" content="{{ current.post_id }}" />
 {% endblock %}
 {% block body %}
+<div>
+    <p id="Article_Title" class="h4"> Article Title : </p><br />
+    <p id="Article_Author" class="h5"> Article Author : </p><br />
+    <p id="Created_Datetime"> Created : </p>
+    <p id="Edited_Datetime"> Edited: </p>
+</div>
+<div class="container">
     <div>
-        <p id="Article_Title" onclick='loadData({{ current.post_id|string }})' class="h4"> Article Title : </p><br />
-        <p id="Article_Author" class="h5"> Article Author : </p><br />
-        <p id="Created_Datetime"> Created : </p>
-        <p id="Edited_Datetime"> Edited: </p>
-    </div>
-    <div class="container">
-        <div>
-            <img id="Article_Image" width="600" height="300">
-        </div>
-        <div>
-            <textarea id="Article_Content"></textarea>
-        </div>
+        <img id="Article_Image" width="600" height="300">
     </div>
     <div>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-        <p class="text-left">{{ message }}</p>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
+        <textarea id="Article_Content"></textarea>
     </div>
-    {% if session['logged_name'] == current.author or session['logged_name'] == 'admin' %}
-    <div class="FooterButtons">
-        <div class="btn btn-default"><a href="{{ url_for('.update_item', post_index=current.post_id) }}">Edit</a></div>
-        <div class="btn btn-default" id="RemoveBtId"><a href="{{ url_for('.remove_item', post_index=current.post_id) }}" onclick="return OnRemoveClick()">Remove</a></div>
-    </div>
+</div>
+<div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p class="text-left">{{ message }}</p>
+    {% endfor %}
     {% endif %}
-    <script type="text/javascript" src={{ url_for('static', filename='scripts/post_script.js') }}></script>
+    {% endwith %}
+</div>
+    {% if session['logged_name'] == current.author or session['logged_name'] == 'admin' %}
+<div class="FooterButtons">
+    <div class="btn btn-default"><a href="{{ url_for('.update_item', post_index=current.post_id) }}">Edit</a></div>
+    <div class="btn btn-default" id="RemoveBtId"><a href="{{ url_for('.remove_item', post_index=current.post_id) }}" onclick="return OnRemoveClick()">Remove</a></div>
+</div>
+    {% endif %}
+{% block javascript %}
+<script type="text/javascript" src={{ url_for('static', filename='scripts/post_script.js') }}></script>
+<script>
+    getPostData(location.origin + '/api/posts/' + '{{ current.post_id }}')
+</script>
+{% endblock %}
 {% endblock %}

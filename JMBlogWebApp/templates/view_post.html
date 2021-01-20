@@ -2,10 +2,11 @@
 {% block head %}
     <link rel="stylesheet"
           href="{{ url_for('static', filename='view_post_style.css') }}" />
+<meta name="id" content="{{ current.post_id }}" />
 {% endblock %}
 {% block body %}
     <div>
-        <p id="Article_Title" class="h4"> Article Title : </p><br />
+        <p id="Article_Title" onclick='loadData({{ current.post_id|string }})' class="h4"> Article Title : </p><br />
         <p id="Article_Author" class="h5"> Article Author : </p><br />
         <p id="Created_Datetime"> Created : </p>
         <p id="Edited_Datetime"> Edited: </p>

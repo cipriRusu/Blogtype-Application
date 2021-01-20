@@ -297,9 +297,9 @@ def test_post_changes_image_when_new_image_is_loaded(configured_app):
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
 
-    response_data = configured_app.post('/posts/update/2bb62474-43fb-4643-b38e-a333f3999254',
-                                      data=post_data,
-                                      follow_redirects=True).data
+    configured_app.post('/posts/update/2bb62474-43fb-4643-b38e-a333f3999254',
+                        data=post_data,
+                        follow_redirects=True).data
 
     encoded_image_data = base64.b64encode(b'test_image_content')
 
@@ -316,9 +316,9 @@ def test_post_default_image_is_replaced_if_new_image_is_loaded(configured_app):
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
 
-    response_data=configured_app.post('/posts/update/3cb862a3-3bf7-44a2-83d8-7b7440588b68',
-                                      data=post_data,
-                                      follow_redirects=True).data
+    configured_app.post('/posts/update/3cb862a3-3bf7-44a2-83d8-7b7440588b68',
+                        data=post_data,
+                        follow_redirects=True).data
 
     encoded_image_data = base64.b64encode(b'test_image_content')
 

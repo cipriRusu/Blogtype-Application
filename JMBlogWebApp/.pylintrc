@@ -1,5 +1,5 @@
 [MASTER]
-disable=missing-function-docstring, missing-module-docstring, missing-class-docstring, too-few-public-methods, too-many-arguments
+disable=missing-function-docstring, missing-module-docstring, missing-class-docstring, too-few-public-methods, too-many-arguments, expression-not-assigned
 
 [SIMILARITIES]
 # Minimum lines number of a similarity.

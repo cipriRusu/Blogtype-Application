@@ -1,6 +1,7 @@
 import io
 import base64
 from repository.in_memory_data import in_memory_photos
+from repository.in_memory_data import in_memory_posts
 
 def test_root_redirects(configured_app):
     response = configured_app.get('/').status_code
@@ -255,12 +256,16 @@ def test_post_addition_adds_no_image_if_none_is_selected(configured_app):
                   "ContentInput":"TestContent",
                   'Image-File':(io.BytesIO(b''), '')}
 
-    response_data = configured_app.post('/posts/add',
-                                        content_type='multipart/form-data',
-                                        data=added_post,
-                                        follow_redirects=True).data
+    configured_app.post('/posts/add',
+                        content_type='multipart/form-data',
+                        data=added_post,
+                        follow_redirects=True).data
 
-    assert in_memory_photos['default'].encode() in response_data
+    added_post_id = str(in_memory_posts[-1].post_id)
+
+    added_post_json = configured_app.get('/api/posts/' + added_post_id).data
+
+    assert in_memory_photos['default'].encode('utf-8') in added_post_json
 
 def test_post_loads_image_if_image_exists(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}

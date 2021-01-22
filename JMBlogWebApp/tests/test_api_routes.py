@@ -3,14 +3,14 @@ import json
 
 def test_get_valid_code_for_valid_login(configured_app):
     credentials = base64.b64encode(b"admin:adminpass").decode('utf-8')
-    login_token_code = (configured_app.post('/api/login',
+    login_token_code = (configured_app.post('/api/authentication/login',
                                             headers={"authorization": "Basic " + credentials})
                         .status_code)
     assert login_token_code == 200
 
 def test_get_valid_code_for_invalid_login(configured_app):
     credentials = base64.b64encode(b"invalid:invalid").decode('utf-8')
-    login_token_code = (configured_app.post('/api/login',
+    login_token_code = (configured_app.post('/api/authentication/login',
                                             headers={"authorization": "Basic " + credentials})
                         .status_code)
     assert login_token_code == 403
@@ -55,7 +55,7 @@ def test_post_remove_returns_error_message_if_unauthenticated(configured_app):
 def test_post_remove_works_normally_with_valid_authentication(configured_app):
     credentials = base64.b64encode(b"admin:adminpass").decode('utf-8')
 
-    login_token = (json.loads(configured_app.post('/api/login',
+    login_token = (json.loads(configured_app.post('/api/authentication/login',
                                                   headers={"authorization": "Basic " + credentials})
                               .data).get('token'))
 
@@ -67,7 +67,7 @@ def test_post_remove_works_normally_with_valid_authentication(configured_app):
 def test_post_remove_fails_with_invalid_authentication(configured_app):
     credentials = base64.b64encode(b"FirstAuthor:fpass").decode('utf-8')
 
-    login_token = (json.loads(configured_app.post('/api/login',
+    login_token = (json.loads(configured_app.post('/api/authentication/login',
                                                   headers={"authorization": "Basic " + credentials})
                               .data).get('token'))
 

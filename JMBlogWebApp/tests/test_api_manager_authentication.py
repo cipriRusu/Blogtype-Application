@@ -13,4 +13,3 @@ def test_get_valid_code_for_invalid_login(configured_app):
                                             headers={"authorization": "Basic " + credentials})
                         .status_code)
     assert login_token_code == 403
-

@@ -37,7 +37,7 @@
 {% block javascript %}
 <script type="text/javascript" src={{ url_for('static', filename='scripts/post_script.js') }}></script>
 <script>
-    getPostData(location.origin + '/api/posts/' + '{{ current.post_id }}')
+    getPostData(location.origin + '/api/posts/{{ current.post_id }}')
 </script>
 {% endblock %}
 {% endblock %}

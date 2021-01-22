@@ -6,7 +6,8 @@ from views import user_manager
 from views import login_manager
 from views import error_manager
 from views import statistics_manager
-from views import api_manager
+from views import api_manager_posts
+from views import api_manager_authentication
 from views.decorators import inject_decorators
 from setup import services_listing as services
 
@@ -23,7 +24,8 @@ with app.app_context():
     app.register_blueprint(login_manager.login_manager)
     app.register_blueprint(error_manager.error_manager)
     app.register_blueprint(statistics_manager.stat_manager)
-    app.register_blueprint(api_manager.api_manager)
+    app.register_blueprint(api_manager_posts.api_manager_posts)
+    app.register_blueprint(api_manager_authentication.api_manager_authentication)
 
     @app.before_first_request
     @inject_decorators.inject

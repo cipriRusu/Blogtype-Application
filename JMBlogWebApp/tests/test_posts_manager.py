@@ -1,7 +1,6 @@
 import io
 import base64
 from repository.in_memory_data import in_memory_photos
-from repository.in_memory_data import in_memory_posts
 
 def test_root_redirects(configured_app):
     response = configured_app.get('/').status_code
@@ -261,9 +260,7 @@ def test_post_addition_adds_no_image_if_none_is_selected(configured_app):
                         data=added_post,
                         follow_redirects=True).data
 
-    added_post_id = str(in_memory_posts[-1].post_id)
-
-    added_post_json = configured_app.get('/api/posts/' + added_post_id).data
+    added_post_json = configured_app.get('/posts/', follow_redirects=True).data
 
     assert in_memory_photos['default'].encode('utf-8') in added_post_json
 
@@ -272,7 +269,7 @@ def test_post_loads_image_if_image_exists(configured_app):
 
     configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
 
-    response_data = configured_app.get('/api/posts/a656f973-5b82-462d-aff7-8d2c6c3e4fa2',
+    response_data = configured_app.get('/posts/?Page=2',
                                        follow_redirects=True).data
 
     assert in_memory_photos['local3'].encode('utf-8') in response_data
@@ -289,7 +286,7 @@ def test_post_loads_default_image_if_image_is_removed(configured_app):
                                     'Image-File': (io.BytesIO(b''), "")},
                               follow_redirects=True).data)
 
-    after_edit = configured_app.get('/api/posts/daca57d1-c180-4e0a-8394-f5c95a5d5f23').data
+    after_edit = configured_app.get('/posts/').data
 
     assert in_memory_photos['default'].encode('utf-8') in after_edit
 
@@ -308,7 +305,7 @@ def test_post_changes_image_when_new_image_is_loaded(configured_app):
 
     encoded_image_data = base64.b64encode(b'test_image_content')
 
-    response_json_data = configured_app.get('/api/posts/2bb62474-43fb-4643-b38e-a333f3999254').data
+    response_json_data = configured_app.get('/posts/').data
 
     assert encoded_image_data in response_json_data
 
@@ -327,9 +324,7 @@ def test_post_default_image_is_replaced_if_new_image_is_loaded(configured_app):
 
     encoded_image_data = base64.b64encode(b'test_image_content')
 
-    returned_json_after_edit = (configured_app
-                                .get('/api/posts/3cb862a3-3bf7-44a2-83d8-7b7440588b68')
-                                .data)
+    returned_json_after_edit = configured_app.get('/posts/').data
     assert encoded_image_data in returned_json_after_edit
 
 def test_post_flash_message_for_no_selected_image(configured_app):

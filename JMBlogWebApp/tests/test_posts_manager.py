@@ -290,6 +290,22 @@ def test_post_loads_default_image_if_image_is_removed(configured_app):
 
     assert in_memory_photos['default'].encode('utf-8') in after_edit
 
+def test_post_calls_appropriate_id_for_image_remove(configured_app):
+    login_data = {"NameInput": "SecondAuthor", "PasswordInput": "spass"}
+
+    configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
+
+    post_response = configured_app.post('/posts/update/daca57d1-c180-4e0a-8394-f5c95a5d5f23',
+                                        data={'Remove-Image': '',
+                                              'NameInput': 'Test',
+                                              'ContentInput': 'Test',
+                                              'Image-File': (io.BytesIO(b''), "")},
+                                        follow_redirects=True).data
+
+    api_path = b'getPostData(location.origin + \'/api/posts/daca57d1-c180-4e0a-8394-f5c95a5d5f23\')';
+
+    assert api_path in post_response
+
 def test_post_changes_image_when_new_image_is_loaded(configured_app):
     login_data = {"NameInput": "ThirdAuthor", "PasswordInput": "tpass"}
 
@@ -305,9 +321,26 @@ def test_post_changes_image_when_new_image_is_loaded(configured_app):
 
     encoded_image_data = base64.b64encode(b'test_image_content')
 
-    response_json_data = configured_app.get('/posts/').data
+    response = configured_app.get('/posts/').data
 
-    assert encoded_image_data in response_json_data
+    assert encoded_image_data in response
+
+def test_post_calls_appropriate_id_for_image_upload(configured_app):
+    login_data = {"NameInput": "ThirdAuthor", "PasswordInput": "tpass"}
+
+    post_data = {'NameInput': 'Test',
+                 'ContentInput': 'Test',
+                 'Image-File': (io.BytesIO(b'test_image_content'), "test.jpg")}
+
+    configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
+
+    response = configured_app.post('/posts/update/2bb62474-43fb-4643-b38e-a333f3999254',
+                                   data=post_data,
+                                   follow_redirects=True).data
+
+    api_path = b'getPostData(location.origin + \'/api/posts/2bb62474-43fb-4643-b38e-a333f3999254\')';
+
+    assert api_path in response
 
 def test_post_default_image_is_replaced_if_new_image_is_loaded(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
@@ -324,8 +357,26 @@ def test_post_default_image_is_replaced_if_new_image_is_loaded(configured_app):
 
     encoded_image_data = base64.b64encode(b'test_image_content')
 
-    returned_json_after_edit = configured_app.get('/posts/').data
-    assert encoded_image_data in returned_json_after_edit
+    returned_posts_data = configured_app.get('/posts/').data
+
+    assert encoded_image_data in returned_posts_data
+
+def test_post_calls_appropriate_id_for_new_image_upload(configured_app):
+    login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
+
+    post_data = {'NameInput': 'Test',
+                 'ContentInput': 'Test',
+                 'Image-File': (io.BytesIO(b'test_image_content'), "test.jpg")}
+
+    configured_app.post('/authentication/login', data=login_data, follow_redirects=True)
+
+    response = configured_app.post('/posts/update/3cb862a3-3bf7-44a2-83d8-7b7440588b68',
+                                   data=post_data,
+                                   follow_redirects=True).data
+
+    api_path = b'getPostData(location.origin + \'/api/posts/3cb862a3-3bf7-44a2-83d8-7b7440588b68\')';
+
+    assert api_path in response
 
 def test_post_flash_message_for_no_selected_image(configured_app):
     login_data = {"NameInput": "admin",

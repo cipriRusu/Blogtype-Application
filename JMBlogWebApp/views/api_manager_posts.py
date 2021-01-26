@@ -5,18 +5,20 @@ from views.decorators import inject_decorators
 from views.decorators import token_decorators
 from setup import services_listing as services
 
-api_manager_posts = Blueprint('api_manager_posts', __name__, url_prefix='/api/posts/',
+api_manager_posts = Blueprint('api_manager_posts', __name__, 
+                              url_prefix='/api/posts/',
                               template_folder='templates',
                               static_folder='static')
 
 @api_manager_posts.route('/', methods=["GET"])
 @setup_decorators.config_check
 @inject_decorators.inject
-def get_all(posts: services.DATA_SOURCE_POSTS):
+def get_all(posts: services.DATA_SOURCE_POSTS, 
+            users: services.DATA_SOURCE_USERS):
     all_json_posts = []
     for post in posts:
         all_json_posts.append(post.to_dict())
-    return jsonify(results=all_json_posts)
+    return jsonify(all_json_posts)
 
 @api_manager_posts.route('/<uuid:post_index>', methods=["GET"])
 @setup_decorators.config_check

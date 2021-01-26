@@ -13,12 +13,8 @@ api_manager_posts = Blueprint('api_manager_posts', __name__,
 @api_manager_posts.route('/', methods=["GET"])
 @setup_decorators.config_check
 @inject_decorators.inject
-def get_all(posts: services.DATA_SOURCE_POSTS, 
-            users: services.DATA_SOURCE_USERS):
-    all_json_posts = []
-    for post in posts:
-        all_json_posts.append(post.to_dict())
-    return jsonify(all_json_posts)
+def get_all(posts: services.DATA_SOURCE_POSTS):
+    return jsonify([item.to_dict() for item in posts.get_all()])
 
 @api_manager_posts.route('/<uuid:post_index>', methods=["GET"])
 @setup_decorators.config_check

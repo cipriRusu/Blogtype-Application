@@ -1,5 +1,6 @@
 import os
 from flask import Flask, redirect
+from flask_cors import CORS
 from views import post_manager
 from views import setup_manager
 from views import user_manager
@@ -12,6 +13,7 @@ from views.decorators import inject_decorators
 from setup import services_listing as services
 
 app = Flask(__name__, static_url_path="", static_folder="static")
+CORS(app)
 app.secret_key = os.urandom(10)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app.config['JSON_SORT_KEYS'] = False

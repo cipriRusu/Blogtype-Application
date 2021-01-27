@@ -10,16 +10,16 @@ const PostListingComponent = () => {
         .then(data => updateData(data))
     return (
         <Accordion>{values.map((value, index) =>
-            <Card>
+            <Card key={index}>
                 <Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-                    <p>{value.author}</p>
-                    <p>{value.title}</p>
+                    <p>Post author: {value.author}</p>
+                    <p>Post title: {value.title}</p>
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey={index + 1}>
                     <Card.Body>
-                        <p>{value.author}</p>
-                        <p>{value.title}</p>
-                        <p>{value.preview}</p>
+                        <p>Post author: {value.author}</p>
+                        <p>Post title: {value.title}</p>
+                        <p>Post preview: {value.preview}</p>
                     </Card.Body>
                 </Accordion.Collapse>
             </Card>

@@ -35,7 +35,8 @@ def test_loading_returns_false_for_random_text(configured_app):
     assert b'RandomText' not in response
 
 def test_loading_cotains_static_value_post_page(configured_app):
-    response = configured_app.get('/api/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d').data
+    response = configured_app.get('/posts//posts/?Page=0',
+                                  follow_redirects=True).data
     assert b'FirstTitle' in response
 
 def test_post_page_redirects_to_setup_page(unconfigured_app):
@@ -44,8 +45,9 @@ def test_post_page_redirects_to_setup_page(unconfigured_app):
     assert b'Connection Setup:' in response
 
 def test_loading_contains_dynamic_value_post_page(configured_app):
-    response = configured_app.get('/api/posts/f9c3a576-28bc-4b63-931d-04d6488d2f0d').data
-    assert b'Specific content first post' in response
+    response = configured_app.get('/posts/?Page=0',
+                                  follow_redirects=True).data
+    assert b'Test' in response
 
 def test_logged_user_can_edit_own_post(configured_app):
     login_data = {"NameInput": "FirstAuthor", "PasswordInput": "fpass"}
@@ -302,7 +304,7 @@ def test_post_calls_appropriate_id_for_image_remove(configured_app):
                                               'Image-File': (io.BytesIO(b''), "")},
                                         follow_redirects=True).data
 
-    api_path = b'getPostData(location.origin + \'/api/posts/daca57d1-c180-4e0a-8394-f5c95a5d5f23\')';
+    api_path = (b'getPostData(location.origin + \'/api/posts/daca57d1-c180-4e0a-8394-f5c95a5d5f23\')')
 
     assert api_path in post_response
 
@@ -338,7 +340,7 @@ def test_post_calls_appropriate_id_for_image_upload(configured_app):
                                    data=post_data,
                                    follow_redirects=True).data
 
-    api_path = b'getPostData(location.origin + \'/api/posts/2bb62474-43fb-4643-b38e-a333f3999254\')';
+    api_path = b'getPostData(location.origin + \'/api/posts/2bb62474-43fb-4643-b38e-a333f3999254\')'
 
     assert api_path in response
 
@@ -374,7 +376,7 @@ def test_post_calls_appropriate_id_for_new_image_upload(configured_app):
                                    data=post_data,
                                    follow_redirects=True).data
 
-    api_path = b'getPostData(location.origin + \'/api/posts/3cb862a3-3bf7-44a2-83d8-7b7440588b68\')';
+    api_path = b'getPostData(location.origin + \'/api/posts/3cb862a3-3bf7-44a2-83d8-7b7440588b68\')'
 
     assert api_path in response
 

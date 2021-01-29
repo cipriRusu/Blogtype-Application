@@ -13,6 +13,9 @@ function App() {
                 <NavComponent />
                 <TitleComponent />
                 <Switch>
+                    <Route path="/post" component={PostComponent}></Route>
+                </Switch>
+                <Switch>
                     <Route path="/posts" component={PostListingComponent}></Route>
                 </Switch>
             </Router>

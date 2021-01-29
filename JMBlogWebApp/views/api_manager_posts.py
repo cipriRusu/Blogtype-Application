@@ -5,7 +5,7 @@ from views.decorators import inject_decorators
 from views.decorators import token_decorators
 from setup import services_listing as services
 
-api_manager_posts = Blueprint('api_manager_posts', __name__, 
+api_manager_posts = Blueprint('api_manager_posts', __name__,
                               url_prefix='/api/posts/',
                               template_folder='templates',
                               static_folder='static')

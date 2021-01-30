@@ -1,22 +1,23 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import TitleComponent from './components/TitleComponent'
-import PostListingComponent from './components/PostListingComponent'
-import PostComponent from './components/PostComponent.js';
-import NavComponent from './components/NavComponent'
+import Title from './components/Title'
+import PostListing from './components/PostListing'
+import Post from './components/Post.js';
+import Navigation from './components/Navigation'
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
     return (
         <div>
             <Router>
-                <NavComponent />
-                <TitleComponent />
+                <Navigation />
+                <Title />
                 <Switch>
-                    <Route path="/post" component={PostComponent}></Route>
+                    <Route path="/post" component={Post}></Route>
                 </Switch>
                 <Switch>
-                    <Route path="/posts" component={PostListingComponent}></Route>
+                <Route path="/posts" component={PostListing}></Route>
                 </Switch>
             </Router>
         </div>

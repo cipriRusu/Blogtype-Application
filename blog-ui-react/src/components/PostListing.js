@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
-import Card from 'react-bootstrap/Card'
-import Media from 'react-bootstrap/Media'
-import Button from 'react-bootstrap/Button'
-import { useHistory } from "react-router-dom";
 import usePostsData from './usePostsData'
-import Post from './Post'
+import PostListed from './PostListed'
 
 const PostListing = () => {
     const all_posts = usePostsData([]);
-    return (all_posts.map(post => <Post post={post}/>))
+    return (
+    <Accordion>
+        {all_posts.map((post, index) => (<PostListed post={post} count={index}/>))}
+    </Accordion>
+    )
 }
 
 export default PostListing

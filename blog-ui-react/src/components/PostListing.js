@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import usePostsData from './usePostsData'
 import PostListed from './PostListed'
 
 const PostListing = () => {
-    const all_posts = usePostsData([]);
+    const post_data = usePostsData('http://localhost:4449/api/posts/');
     return (
     <Accordion>
-        {all_posts.map((post, index) => (<PostListed post={post} count={index}/>))}
+        {post_data.map((post, index) => (<PostListed post={post} count={index}/>))}
     </Accordion>
     )
 }

@@ -8,20 +8,19 @@ import { Link } from 'react-router-dom';
 const PostListed = (props) => {
     return (
     <Card>
-        <Accordion.Toggle as={Card.Header} eventKey={props.count + 1} style={{ padding: "0px", paddingLeft: "10px", paddingTop: "20px", paddingBottom: "20px"}}>
-            <p style={{ margin: "0px"}}>Post author: {props.post.author}</p>
-            <p style={{ margin: "0px"}}>Post title: {props.post.title}</p>
+        <Accordion.Toggle as={Card.Header} eventKey={props.count + 1}>
+            <p>Post author: {props.post.author}</p>
+            <p>Post title: {props.post.title}</p>
             </Accordion.Toggle>
-            <Accordion.Collapse eventKey={props.count + 1} style={{ paddingLeft: "10px"}}>
-                <div style={{ paddingTop: "20px", paddingBottom: "20px"}}>
+            <Accordion.Collapse eventKey={props.count + 1}>
+                <div>
                     <Media>
                         <Media.Body>
-                            <p style={{ margin: "0px"}}>Post author: {props.post.author}</p>
-                            <p style={{ margin: "0px"}}>Post title: {props.post.title}</p>
-                            <p style={{ margin: "0px"}}>Post preview: {props.post.preview}</p>
+                            <p>Post author: {props.post.author}</p>
+                            <p>Post title: {props.post.title}</p>
+                            <p>Post preview: {props.post.preview}</p>
                         </Media.Body>
                         <img
-                        style={{ marginRight: "20px"}}
                         width={160}
                         height={100}
                         src={props.post.image_path}

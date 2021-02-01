@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import Media from 'react-bootstrap/Media'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom';
 
 const PostListed = (props) => {
     return (
@@ -27,7 +28,9 @@ const PostListed = (props) => {
                         alt="Generic placeholder"
                         />
                     </Media>
-                    <Button type="button" outline variant="secondary" size="sm">Go To Post</Button>
+                    <Link to={`/posts/${props.post.post_id}`}>
+                        <Button type="button" outline variant="secondary" size="sm">Go To Post</Button>
+                    </Link>
                 </div>
             </Accordion.Collapse>
     </Card>)

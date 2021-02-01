@@ -1,6 +1,5 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Title from './components/Title'
 import PostListing from './components/PostListing'
 import Post from './components/Post.js';
 import Navigation from './components/Navigation'
@@ -10,7 +9,6 @@ function App() {
     return (
             <Router>
                 <Navigation />
-                <Title />
                 <Switch>
                     <Route path="/posts" exact component={PostListing}></Route>
                     <Route path="/posts/:id" exact component={Post}></Route>

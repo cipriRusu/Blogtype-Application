@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-function usePostsData(){
+function usePostsData(currentRoute){
     const[allData, setData] = useState([]);
+    console.log(currentRoute)
 
     useEffect(() => {
         let mounted = true;
-        fetch('http://localhost:4449/api/posts/')
+        fetch(currentRoute)
             .then(response => response.json())
             .then(data => {
                 if (mounted) {

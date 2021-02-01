@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const Navigation = () => {
     return (
-        <Navbar fixed="top">
+        <Navbar bg="dark" variant="dark" fixed="static-top">
             <Nav.Link><Link to='/posts'>Posts</Link></Nav.Link>
             <Nav.Link><Link to='/users'> Users</Link></Nav.Link>
             <Nav.Link><Link to='/stats'> Statstics</Link></Nav.Link>

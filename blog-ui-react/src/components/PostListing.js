@@ -11,9 +11,10 @@ const PostListing = () => {
     
     React.useEffect(() => dispatch(GetDataAction('http://localhost:4449/api/posts/')),[]);
 
-    console.log(all_data)
-
-    return (<Accordion></Accordion>)
+    return (
+    <Accordion>
+        {all_data.map((post, index) => (<PostListed post={post} count={index}/>))}
+    </Accordion>)
 }
 
 export default PostListing

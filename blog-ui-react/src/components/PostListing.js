@@ -1,15 +1,19 @@
-import React from 'react'
-import Accordion from 'react-bootstrap/Accordion'
-import usePostsData from './usePostsData'
-import PostListed from './PostListed'
+import React from 'react';
+import Accordion from 'react-bootstrap/Accordion';
+import PostListed from './PostListed';
+import { useSelector, useDispatch } from 'react-redux';
+import { GetDataAction } from './actions/GetDataAction';
 
 const PostListing = () => {
-    const post_data = usePostsData('http://localhost:4449/api/posts/');
-    return (
-    <Accordion>
-        {post_data.map((post, index) => (<PostListed post={post} count={index}/>))}
-    </Accordion>
-    )
+    const all_data = useSelector(state => state.all_data)
+
+    const dispatch = useDispatch();
+    
+    React.useEffect(() => dispatch(GetDataAction('http://localhost:4449/api/posts/')),[]);
+
+    console.log(all_data)
+
+    return (<Accordion></Accordion>)
 }
 
 export default PostListing

@@ -1,10 +1,11 @@
 import React from 'react'
 import usePostsData from './usePostsData'
+import './PostStyle.sass'
 
 const Post = ({ match }) => {
 	const post_data = usePostsData(`http://localhost:4449/api/posts/${match.params.id}`);
 	return (
-	<div>
+	<div className="PostContainer">
 		<h3>Post Title: {post_data.title}</h3>
 		<h4>Post Author: {post_data.author}</h4>
 		<hr/>

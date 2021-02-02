@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './PostListedStyle.sass';
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import Media from 'react-bootstrap/Media'
@@ -13,7 +14,7 @@ const PostListed = (props) => {
             <p>Post title: {props.post.title}</p>
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={props.count + 1}>
-                <div>
+                <div class="MediaContainer">
                     <Media>
                         <Media.Body>
                             <p>Post author: {props.post.author}</p>
@@ -27,7 +28,7 @@ const PostListed = (props) => {
                         alt="Generic placeholder"
                         />
                     </Media>
-                    <Link to={`/posts/${props.post.post_id}`}>
+                    <Link className="Postlink" to={`/posts/${props.post.post_id}`}>
                         <Button type="button" outline variant="secondary" size="sm">Go To Post</Button>
                     </Link>
                 </div>

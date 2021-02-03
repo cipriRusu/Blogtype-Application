@@ -1,9 +1,15 @@
 import React from 'react'
-import usePostsData from './usePostsData'
+import { useSelector, useDispatch } from 'react-redux';
 import './PostStyle.sass'
+import { GetPostDataAction } from './actions/GetPostDataAction';
 
 const Post = ({ match }) => {
-	const post_data = usePostsData(`http://localhost:4449/api/posts/${match.params.id}`);
+	const post_data = useSelector(state => state.post_data)
+
+	const dispatch = useDispatch();
+
+	React.useEffect(() => dispatch(GetPostDataAction(`http://localhost:4449/api/posts/${match.params.id}`)),[]);
+
 	return (
 	<div className="PostContainer">
 		<div className="PostHeaderContainer">

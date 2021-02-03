@@ -13,7 +13,7 @@ const PostListing = () => {
 
     return (
     <Accordion>
-        {all_data.map((post, index) => (<PostListed post={post} count={index}/>))}
+        {all_data.posts.map((post, index) => (<PostListed post={post} count={index}/>))}
     </Accordion>)
 }
 

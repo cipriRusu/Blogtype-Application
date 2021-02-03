@@ -17,7 +17,7 @@ const Post = ({ match }) => {
 			<h4>Post Author: {post_data.author}</h4>
 		</div>
 		<div className="PostContentContainer">
-			<p>{post_data.content}</p>
+			<p>{post_data.post.content}</p>
 		</div>
 	</div>)
 }
